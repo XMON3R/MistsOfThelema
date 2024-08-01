@@ -1,0 +1,10 @@
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\bin\Debug\MistsOfThelema.exe.config
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\bin\Debug\MistsOfThelema.exe
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\bin\Debug\MistsOfThelema.pdb
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.AssemblyReference.cache
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.Form1.resources
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.Properties.Resources.resources
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.GenerateResource.cache
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.exe
+C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
