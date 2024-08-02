@@ -22,5 +22,42 @@ namespace MistsOfThelema
         public static bool IsRight = false;
 
         public static bool IsInteracting = false;
+
+
+        public static int X { get; set; } = 50; 
+        public static int Y { get; set; } = 50; 
+        public static int Speed { get; set; } = 5;
+
+        public static void KeyDown(Keys key)
+        {
+            if (key == Up) IsUp = true;
+            if (key == Down) IsDown = true;
+            if (key == Left) IsLeft = true;
+            if (key == Right) IsRight = true;
+            if (key == Interact) IsInteracting = true;
+        }
+
+        public static void KeyUp(Keys key)
+        {
+            if (key == Up) IsUp = false;
+            if (key == Down) IsDown = false;
+            if (key == Left) IsLeft = false;
+            if (key == Right) IsRight = false;
+            if (key == Interact) IsInteracting = false;
+        }
+
+        public static void UpdatePosition()
+        {
+            if (IsUp) Y -= Speed;
+            if (IsDown) Y += Speed;
+            if (IsLeft) X -= Speed;
+            if (IsRight) X += Speed;
+        }
+
+        public static void Reset()
+        {
+            IsUp = IsDown = IsLeft = IsRight = IsInteracting = false;
+        }
     }
 }
+
