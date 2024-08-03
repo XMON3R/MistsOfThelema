@@ -8,3 +8,14 @@ C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelem
 C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.CoreCompileInputs.cache
 C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.exe
 C:\Users\Dell\Desktop\mistsOfThelema\code\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
+C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.exe.config
+C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.exe
+C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.pdb
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.AssemblyReference.cache
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Form1.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Properties.Resources.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Scene1.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.GenerateResource.cache
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.CoreCompileInputs.cache
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.exe
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
