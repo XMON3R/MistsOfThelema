@@ -19,3 +19,16 @@ C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.GenerateReso
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.CoreCompileInputs.cache
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.exe
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\bin\Debug\MistsOfThelema.exe.config
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\bin\Debug\MistsOfThelema.exe
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\bin\Debug\MistsOfThelema.pdb
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.AssemblyReference.cache
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.Properties.Resources.resources
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.Scene1.resources
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.GenerateResource.cache
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.CoreCompileInputs.cache
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.exe
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.cPlayer.resources
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.npc.resources
+C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.TitleScreen.resources
