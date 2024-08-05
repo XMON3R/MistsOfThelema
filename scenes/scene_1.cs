@@ -12,6 +12,8 @@ namespace MistsOfThelema
     public partial class Scene1 : Form
     {
         private PictureBox pictureBox1;
+        private Houses houses2;
+        private npc npc1;
         private cPlayer cPlayer1;
 
         public Scene1()
@@ -21,20 +23,19 @@ namespace MistsOfThelema
 
         private void InitializeComponent()
         {
-            this.DoubleBuffered = true;
-
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cPlayer1 = new MistsOfThelema.cPlayer();
+            this.houses2 = new MistsOfThelema.Houses();
+            this.npc1 = new MistsOfThelema.npc();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.InitialImage = global::MistsOfThelema.Properties.Resources.defPlayer;
-            this.pictureBox1.Location = new System.Drawing.Point(189, 299);
+            this.pictureBox1.Location = new System.Drawing.Point(194, 322);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(94, 130);
             this.pictureBox1.TabIndex = 1;
@@ -52,17 +53,39 @@ namespace MistsOfThelema
             this.cPlayer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             this.cPlayer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
             // 
+            // houses2
+            // 
+            this.houses2.BackColor = System.Drawing.Color.Transparent;
+            this.houses2.Location = new System.Drawing.Point(558, 485);
+            this.houses2.Name = "houses2";
+            this.houses2.Size = new System.Drawing.Size(89, 47);
+            this.houses2.TabIndex = 3;
+            this.houses2.Load += new System.EventHandler(this.houses2_Load);
+            // 
+            // npc1
+            // 
+            this.npc1.BackColor = System.Drawing.Color.Transparent;
+            this.npc1.Location = new System.Drawing.Point(982, 522);
+            this.npc1.Name = "npc1";
+            this.npc1.Size = new System.Drawing.Size(103, 113);
+            this.npc1.TabIndex = 4;
+            // 
             // Scene1
             // 
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
+            this.Controls.Add(this.npc1);
+            this.Controls.Add(this.houses2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cPlayer1);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1440, 1080);
+            this.MinimumSize = new System.Drawing.Size(1440, 1080);
             this.Name = "Scene1";
             this.Load += new System.EventHandler(this.Scene1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -122,6 +145,11 @@ namespace MistsOfThelema
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void houses2_Load(object sender, EventArgs e)
         {
 
         }

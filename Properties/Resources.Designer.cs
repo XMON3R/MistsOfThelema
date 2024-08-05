@@ -63,6 +63,26 @@ namespace MistsOfThelema.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap basicHouse {
+            get {
+                object obj = ResourceManager.GetObject("basicHouse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basicVillager {
+            get {
+                object obj = ResourceManager.GetObject("basicVillager", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap defPlayer {
             get {
                 object obj = ResourceManager.GetObject("defPlayer", resourceCulture);

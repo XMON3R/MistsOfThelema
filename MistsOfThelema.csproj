@@ -48,6 +48,9 @@
   <ItemGroup>
     <Compile Include="core.cs" />
     <Compile Include="DialogLoader.cs" />
+    <Compile Include="Houses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="InvItem.cs" />
     <Compile Include="scenes\TitleScreen.cs">
       <SubType>Form</SubType>
@@ -69,6 +72,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="cPlayer.resx">
       <DependentUpon>cPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Houses.resx">
+      <DependentUpon>Houses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="scenes\TitleScreen.resx">
       <DependentUpon>TitleScreen.cs</DependentUpon>
@@ -106,7 +112,10 @@
     <None Include="resources\defPlayer.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resources\basicHouse.png" />
+    <Content Include="resources\basicVillager.png" />
     <Content Include="resources\dialog\intro.txt" />
+    <Content Include="resources\shopkeeper.png" />
     <Content Include="resources\thelemaC.png" />
     <Content Include="resources\thelemac_qbY_icon.ico" />
     <Content Include="resources\thelemaW.png" />

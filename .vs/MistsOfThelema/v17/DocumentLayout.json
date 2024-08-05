@@ -3,24 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\houses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:houses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\cplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:cplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\cplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:cplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\houses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:houses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\dialogloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:dialogloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\titlescreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:scenes\\scene_1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|c:\\users\\pc.desktop-u953urb\\mistsofthelema\\cplayer.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}",
+      "RelativeMoniker": "D:0:0:{F63FE9C1-7088-4E53-A85B-1A62DF672418}|MistsOfThelema.csproj|solutionrelative:cplayer.resx||{FF4D6ACA-9352-4A5F-821E-F4D6EBDCAB11}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +54,136 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "npc.cs",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\npc.cs",
+              "RelativeDocumentMoniker": "npc.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\npc.cs",
+              "RelativeToolTip": "npc.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCsAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T19:04:29.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "npc.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\npc.cs",
+              "RelativeDocumentMoniker": "npc.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\npc.cs [N\u00E1vrh]",
+              "RelativeToolTip": "npc.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:55:52.126Z",
+              "EditorCaption": " [N\u00E1vrh]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TitleScreen.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs",
+              "RelativeDocumentMoniker": "scenes\\TitleScreen.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs [N\u00E1vrh]",
+              "RelativeToolTip": "scenes\\TitleScreen.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:50:30.08Z",
+              "EditorCaption": " [N\u00E1vrh]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "cPlayer.resx",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.resx",
+              "RelativeDocumentMoniker": "cPlayer.resx",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.resx",
+              "RelativeToolTip": "cPlayer.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2024-08-05T18:39:38.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "cPlayer.cs",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.cs",
+              "RelativeDocumentMoniker": "cPlayer.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.cs",
+              "RelativeToolTip": "cPlayer.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAwwFQAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:20:11.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Houses.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Houses.cs",
+              "RelativeDocumentMoniker": "Houses.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Houses.cs [N\u00E1vrh]",
+              "RelativeToolTip": "Houses.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:23:52.57Z",
+              "EditorCaption": " [N\u00E1vrh]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "cPlayer.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.cs",
+              "RelativeDocumentMoniker": "cPlayer.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\cPlayer.cs [N\u00E1vrh]",
+              "RelativeToolTip": "cPlayer.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:20:07.254Z",
+              "EditorCaption": " [N\u00E1vrh]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Houses.cs",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Houses.cs",
+              "RelativeDocumentMoniker": "Houses.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Houses.cs",
+              "RelativeToolTip": "Houses.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAArwCsAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T18:19:48.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "scene_1.cs",
+              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\scene_1.cs",
+              "RelativeDocumentMoniker": "scenes\\scene_1.cs",
+              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\scene_1.cs",
+              "RelativeToolTip": "scenes\\scene_1.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAawCwAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T16:55:51.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "DialogLoader.cs",
               "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\DialogLoader.cs",
               "RelativeDocumentMoniker": "DialogLoader.cs",
               "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\DialogLoader.cs",
               "RelativeToolTip": "DialogLoader.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-04T17:42:38.857Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "scene_1.cs [N\u00E1vrh]",
               "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\scene_1.cs",
               "RelativeDocumentMoniker": "scenes\\scene_1.cs",
@@ -55,43 +191,6 @@
               "RelativeToolTip": "scenes\\scene_1.cs [N\u00E1vrh]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-04T17:26:49.234Z",
-              "EditorCaption": " [N\u00E1vrh]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T14:27:15.924Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TitleScreen.cs",
-              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs",
-              "RelativeDocumentMoniker": "scenes\\TitleScreen.cs",
-              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs",
-              "RelativeToolTip": "scenes\\TitleScreen.cs",
-              "ViewState": "AQIAAG8AAAAAAAAAAAAUwIIAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-04T12:15:03.169Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TitleScreen.cs [N\u00E1vrh]",
-              "DocumentMoniker": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs",
-              "RelativeDocumentMoniker": "scenes\\TitleScreen.cs",
-              "ToolTip": "C:\\Users\\Pc.DESKTOP-U953URB\\MistsOfThelema\\scenes\\TitleScreen.cs [N\u00E1vrh]",
-              "RelativeToolTip": "scenes\\TitleScreen.cs [N\u00E1vrh]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-04T12:14:57.02Z",
               "EditorCaption": " [N\u00E1vrh]"
             }
           ]
