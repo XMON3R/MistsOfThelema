@@ -27,6 +27,7 @@ namespace MistsOfThelema
         public static int X { get; set; } = 50; 
         public static int Y { get; set; } = 50; 
         public static int Speed { get; set; } = 5;
+        public static int HP { get; set; } = 100;
 
         public static void KeyDown(Keys key)
         {

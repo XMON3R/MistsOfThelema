@@ -12,7 +12,6 @@ C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.exe.config
 C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.exe
 C:\skolaMFF\AAASkola\MistsOfThelema\bin\Debug\MistsOfThelema.pdb
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.AssemblyReference.cache
-C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Form1.resources
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Properties.Resources.resources
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Scene1.resources
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.csproj.GenerateResource.cache
@@ -32,3 +31,6 @@ C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.pdb
 C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.cPlayer.resources
 C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.npc.resources
 C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.TitleScreen.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.cPlayer.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.TitleScreen.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.npc.resources

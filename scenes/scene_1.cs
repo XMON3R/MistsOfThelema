@@ -21,11 +21,14 @@ namespace MistsOfThelema
 
         private void InitializeComponent()
         {
+            this.DoubleBuffered = true;
+
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cPlayer1 = new MistsOfThelema.cPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+
             // 
             // pictureBox1
             // 
@@ -51,10 +54,9 @@ namespace MistsOfThelema
             // 
             // Scene1
             // 
-            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cPlayer1);

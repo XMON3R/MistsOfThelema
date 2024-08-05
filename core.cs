@@ -14,9 +14,18 @@ namespace MistsOfThelema
         public readonly static Keys KeyLeft = Keys.A;
         public readonly static Keys KeyRight = Keys.D;
 
+        public readonly static Keys Interact = Keys.F;
+        public readonly static Keys Inventory = Keys.I;
+
+        public readonly static Keys Help = Keys.H;
+
         public static bool IsUp = false;
         public static bool IsDown = false;
         public static bool IsLeft = false;
         public static bool IsRight = false;
+
+        public static bool IsInteracting = false;
+        public static bool IsInventory = false;
+        public static bool IsHelp = false;  
     }
 }
