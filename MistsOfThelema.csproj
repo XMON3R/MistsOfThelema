@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="core.cs" />
     <Compile Include="DialogLoader.cs" />
+    <Compile Include="InvItem.cs" />
     <Compile Include="scenes\TitleScreen.cs">
       <SubType>Form</SubType>
     </Compile>

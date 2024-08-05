@@ -21,8 +21,6 @@ namespace MistsOfThelema
         public static int speed { get; set; } = 5;
         public static int HP { get; set; } = 100;
 
-        
-
         int[] borderCoord = {-40,1322,204,914};
 
         private void InitializeComponent()
@@ -92,7 +90,7 @@ namespace MistsOfThelema
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            
         }
 
         public cPlayer()
@@ -132,6 +130,52 @@ namespace MistsOfThelema
 
         private void MoveOnlyWithingBorders()
         {
+
+            int newTop = Top;
+            int newLeft = Left;
+
+            //vertical
+            if (Core.IsUp && Top > borderCoord[2])
+            {
+                newTop -= speed;
+                if (newTop < borderCoord[2])
+                {
+                    newTop = borderCoord[2];
+                }
+            }
+
+            if (Core.IsDown && Top < borderCoord[3])
+            {
+                newTop += speed;
+                if (newTop > borderCoord[3])
+                {
+                    newTop = borderCoord[3];
+                }
+            }
+
+            //horizontal
+            if (Core.IsLeft && Left > borderCoord[0])
+            {
+                newLeft -= speed;
+                if (newLeft < borderCoord[0])
+                {
+                    newLeft = borderCoord[0];
+                }
+            }
+
+            if (Core.IsRight && Left < borderCoord[1])
+            {
+                newLeft += speed;
+                if (newLeft > borderCoord[1])
+                {
+                    newLeft = borderCoord[1];
+                }
+            }
+
+            Top = newTop;
+            Left = newLeft;
+
+            /*
             if (Top >= borderCoord[2] && Top <= borderCoord[3])
             {
                 if (Core.IsUp)
@@ -164,7 +208,8 @@ namespace MistsOfThelema
             else if (Left > borderCoord[1])
             {
                 Left = borderCoord[1];
-            }
+            }            
+            */
         }
 
         private void locationInfo_TextChanged(object sender, EventArgs e)
