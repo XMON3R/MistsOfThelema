@@ -36,3 +36,4 @@ C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.TitleScreen.resourc
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.npc.resources
 C:\Users\Pc.DESKTOP-U953URB\MistsOfThelema\obj\Debug\MistsOfThelema.Houses.resources
 C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Houses.resources
+C:\skolaMFF\AAASkola\MistsOfThelema\obj\Debug\MistsOfThelema.Scene2.resources

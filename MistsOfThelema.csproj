@@ -51,7 +51,11 @@
     <Compile Include="Houses.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="interactable.cs" />
     <Compile Include="InvItem.cs" />
+    <Compile Include="scenes\scene_2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="scenes\TitleScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Houses.resx">
       <DependentUpon>Houses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="scenes\scene_2.resx">
+      <DependentUpon>scene_2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="scenes\TitleScreen.resx">
       <DependentUpon>TitleScreen.cs</DependentUpon>

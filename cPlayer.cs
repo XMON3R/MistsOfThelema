@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -14,14 +15,18 @@ namespace MistsOfThelema
         private System.ComponentModel.IContainer components;
         private TextBox hpInfo;
         private ContextMenuStrip contextMenuStrip1;
-        private TextBox locationInfo;
         private ContextMenuStrip contextMenuStrip2;
         private PictureBox player;
+        private Timer timer1;
+
+        //new for intersect
+        public event EventHandler PlayerMoved;
 
         public static int speed { get; set; } = 5;
         public static int HP { get; set; } = 100;
 
-        int[] borderCoord = {-40,1322,204,914};
+        //int[] borderCoord = {-40,1322,204,914};
+        int[] borderCoord = { 5, 1350, 224, 914 };
 
         private void InitializeComponent()
         {
@@ -30,8 +35,8 @@ namespace MistsOfThelema
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.hpInfo = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.locationInfo = new System.Windows.Forms.TextBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +59,7 @@ namespace MistsOfThelema
             // 
             // hpInfo
             // 
-            this.hpInfo.Location = new System.Drawing.Point(3, 111);
+            this.hpInfo.Location = new System.Drawing.Point(3, 3);
             this.hpInfo.Name = "hpInfo";
             this.hpInfo.Size = new System.Drawing.Size(55, 20);
             this.hpInfo.TabIndex = 1;
@@ -66,15 +71,6 @@ namespace MistsOfThelema
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // locationInfo
-            // 
-            this.locationInfo.Location = new System.Drawing.Point(3, 85);
-            this.locationInfo.Name = "locationInfo";
-            this.locationInfo.ReadOnly = true;
-            this.locationInfo.Size = new System.Drawing.Size(58, 20);
-            this.locationInfo.TabIndex = 2;
-            this.locationInfo.TabStop = false;
-            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Name = "contextMenuStrip2";
@@ -83,11 +79,10 @@ namespace MistsOfThelema
             // cPlayer
             // 
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.locationInfo);
             this.Controls.Add(this.hpInfo);
             this.Controls.Add(this.player);
             this.Name = "cPlayer";
-            this.Size = new System.Drawing.Size(63, 134);
+            this.Size = new System.Drawing.Size(66, 85);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -98,6 +93,12 @@ namespace MistsOfThelema
         {
             InitializeComponent();
         }
+
+        public Rectangle GetBounds()
+        {
+            return this.Bounds;
+        }
+
 
         private void playerClick(object sender, EventArgs e)
         {
@@ -126,7 +127,8 @@ namespace MistsOfThelema
 
         private void UpdateLoc()
         {
-            locationInfo.Text = $"X: {Left}, Y: {Top}";
+            //locationInfo.Text = GetBounds().ToString();
+            //locationInfo.Text = $"X: {Left}, Y: {Top}";
         }
 
         private void MoveOnlyWithingBorders()

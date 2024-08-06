@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace MistsOfThelema
 {
-    internal class Houses: UserControl
+    internal class Houses: UserControl, IInteractable
     {
+        public string InstanceName { get; set; }
         private PictureBox housik;
         public event EventHandler PlayerInteracted;
 
@@ -42,9 +44,15 @@ namespace MistsOfThelema
 
         }
 
-        public Houses()             ///KURVA DOPRDELE DŮLEŽITÉ!
+        public Houses(string name)             ///KURVA DOPRDELE DŮLEŽITÉ!
         {
+            InstanceName = name;
             InitializeComponent();
+        }
+
+        public Rectangle GetBounds()
+        {
+            return this.Bounds;
         }
 
         private void housik_Click(object sender, EventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,10 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
-    internal class npc : UserControl
+    internal class npc : UserControl, IInteractable
     {
         private PictureBox pictureBox1;
+        public string InstanceName { get; set; }
 
         private void InitializeComponent()
         {
@@ -39,9 +41,15 @@ namespace MistsOfThelema
 
         }
 
-        public npc()
+        public npc(string name)
         {
+            InstanceName = name;
             InitializeComponent();
+        }
+
+        public Rectangle GetBounds()
+        {
+            return this.Bounds;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
