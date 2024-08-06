@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,12 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
+    public interface IInteractable
+    {
+        string InstanceName { get; }
+        Rectangle GetBounds();
+    }
+
     internal class Core
     {
         public readonly static Keys KeyUp = Keys.W;
@@ -14,7 +21,7 @@ namespace MistsOfThelema
         public readonly static Keys KeyLeft = Keys.A;
         public readonly static Keys KeyRight = Keys.D;
 
-        public readonly static Keys Interact = Keys.F;
+        public readonly static Keys Interact = Keys.E;
         public readonly static Keys Inventory = Keys.I;
 
         public readonly static Keys Help = Keys.H;

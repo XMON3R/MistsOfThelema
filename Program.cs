@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +18,12 @@ namespace MistsOfThelema
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Scene1());
+
+            //Application.Run(new TitleScreen());
+
+            //cPlayer cPlayer = new cPlayer();
+            //Application.Run(new Scene2(cPlayer));
+
 
             Application.Run(new TitleScreen());
         }

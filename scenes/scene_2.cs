@@ -11,50 +11,55 @@ namespace MistsOfThelema
 {
     public partial class Scene2 : Form
     {
+        private cPlayer cPlayer1;
+        private cPlayer player_s2;
 
-    public Scene2()
+        /*
+        public Scene2()
         {
             InitializeComponent();
+            //cPlayer1.PlayerMoved += CPlayer1_PlayerMoved;
+        }
+        */
+
+        
+        public Scene2(cPlayer player)
+        {
+            InitializeComponent();
+            this.player_s2 = player;
             //cPlayer1.PlayerMoved += CPlayer1_PlayerMoved;
         }
 
         private void InitializeComponent()
         {
-            // this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene2));
-           // ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.cPlayer1 = new MistsOfThelema.cPlayer();
             this.SuspendLayout();
             // 
             // cPlayer1
             // 
-            /*
             this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.cPlayer1.Location = new System.Drawing.Point(34, 841);
+            this.cPlayer1.Location = new System.Drawing.Point(45, 345);
             this.cPlayer1.Name = "cPlayer1";
-            this.cPlayer1.Size = new System.Drawing.Size(61, 86);
+            this.cPlayer1.Size = new System.Drawing.Size(146, 116);
             this.cPlayer1.TabIndex = 0;
-            this.cPlayer1.Load += new System.EventHandler(this.cPlayer1_Load_1);
-            this.cPlayer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
-            this.cPlayer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
-            */
             // 
             // Scene2
             // 
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
+            this.BackgroundImage = global::MistsOfThelema.Properties.Resources.fireHome;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
+            this.Controls.Add(this.cPlayer1);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1440, 1080);
             this.MinimumSize = new System.Drawing.Size(1440, 1038);
-            this.Name = "Scene1";
-            //this.Load += new System.EventHandler(this.Scene1_Load);
-            //((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Name = "Scene2";
+            this.Text = "Scene2";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

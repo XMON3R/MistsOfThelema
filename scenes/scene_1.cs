@@ -172,6 +172,14 @@ namespace MistsOfThelema
                 Core.IsLeft = true;
             if (e.KeyCode == Core.KeyRight)
                 Core.IsRight = true;
+
+            if (e.KeyCode == Core.Interact)
+                Core.IsInteracting = true;
+
+            if(Core.IsInteracting)
+            {
+                HandleInteraction();
+            }
         }
 
         private void OnKeyUp(object sender, KeyEventArgs e)
@@ -184,6 +192,9 @@ namespace MistsOfThelema
                 Core.IsLeft = false;
             if (e.KeyCode == Core.KeyRight)
                 Core.IsRight = false;
+
+            if (e.KeyCode == Core.Interact)
+                Core.IsInteracting = false;
 
         }
 
@@ -201,6 +212,7 @@ namespace MistsOfThelema
                 Rectangle playerBounds = cPlayer1.GetBounds();
                 Rectangle interactableBounds = interactable.GetBounds();
 
+                //ensures that player does not need to get inside objects in order to interact
                 Rectangle expandedBounds = ExpandBoundsByRadius(interactableBounds, 30);
 
                 if (playerBounds.IntersectsWith(expandedBounds))
@@ -241,6 +253,33 @@ namespace MistsOfThelema
                 bounds.Width + 2 * radius,
                 bounds.Height + 2 * radius
             );
+        }
+
+        private void HandleInteraction()
+        {
+            foreach (var interactable in interactables)
+            {
+                Rectangle playerBounds = cPlayer1.GetBounds();
+                Rectangle interactableBounds = interactable.GetBounds();
+
+                Rectangle expandedBounds = ExpandBoundsByRadius(interactableBounds, 50);
+
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Your House")
+                {
+                    TransitionToScene2();
+                    break;
+                }
+            }
+        }
+
+        private void TransitionToScene2()
+        {
+            this.Hide();
+            Scene2 newScene = new Scene2(cPlayer1);
+            newScene.Show();
+            /*
+            newScene.ShowDialog();
+            this.Show(); */
         }
 
 

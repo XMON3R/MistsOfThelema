@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
-    internal class cPlayer : UserControl
+    public class cPlayer : UserControl
     {
         private Timer timerUpdate;
         private System.ComponentModel.IContainer components;

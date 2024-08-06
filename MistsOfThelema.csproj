@@ -51,7 +51,6 @@
     <Compile Include="Houses.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="interactable.cs" />
     <Compile Include="InvItem.cs" />
     <Compile Include="scenes\scene_2.cs">
       <SubType>Form</SubType>
@@ -122,6 +121,7 @@
     <Content Include="resources\basicHouse.png" />
     <Content Include="resources\basicVillager.png" />
     <Content Include="resources\dialog\intro.txt" />
+    <Content Include="resources\fireHome.png" />
     <Content Include="resources\shopkeeper.png" />
     <Content Include="resources\thelemaC.png" />
     <Content Include="resources\thelemac_qbY_icon.ico" />
