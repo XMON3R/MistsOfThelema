@@ -10,6 +10,7 @@ namespace MistsOfThelema
     internal class Houses: UserControl
     {
         private PictureBox housik;
+        public event EventHandler PlayerInteracted;
 
         private void InitializeComponent()
         {
@@ -20,9 +21,9 @@ namespace MistsOfThelema
             // housik
             // 
             this.housik.Image = global::MistsOfThelema.Properties.Resources.basicHouse;
-            this.housik.Location = new System.Drawing.Point(-67, -106);
+            this.housik.Location = new System.Drawing.Point(-348, -281);
             this.housik.Name = "housik";
-            this.housik.Size = new System.Drawing.Size(253, 251);
+            this.housik.Size = new System.Drawing.Size(1021, 650);
             this.housik.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.housik.TabIndex = 0;
             this.housik.TabStop = false;
@@ -33,11 +34,11 @@ namespace MistsOfThelema
             // 
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.housik);
+            this.DoubleBuffered = true;
             this.Name = "Houses";
-            this.Size = new System.Drawing.Size(120, 95);
+            this.Size = new System.Drawing.Size(235, 114);
             ((System.ComponentModel.ISupportInitialize)(this.housik)).EndInit();
             this.ResumeLayout(false);
-            this.DoubleBuffered = true;  // To help with transparency issues
 
         }
 

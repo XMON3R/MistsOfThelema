@@ -37,11 +37,10 @@ namespace MistsOfThelema
             // 
             // player
             // 
-            this.player.Dock = System.Windows.Forms.DockStyle.Fill;
             this.player.Image = global::MistsOfThelema.Properties.Resources.defPlayer;
-            this.player.Location = new System.Drawing.Point(0, 0);
+            this.player.Location = new System.Drawing.Point(-34, -19);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(150, 150);
+            this.player.Size = new System.Drawing.Size(140, 150);
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.player.TabIndex = 0;
             this.player.TabStop = false;
@@ -55,12 +54,12 @@ namespace MistsOfThelema
             // 
             // hpInfo
             // 
-            this.hpInfo.Location = new System.Drawing.Point(21, 113);
+            this.hpInfo.Location = new System.Drawing.Point(3, 111);
             this.hpInfo.Name = "hpInfo";
-            this.hpInfo.Size = new System.Drawing.Size(100, 20);
+            this.hpInfo.Size = new System.Drawing.Size(55, 20);
             this.hpInfo.TabIndex = 1;
-            this.hpInfo.Visible = false;
             this.hpInfo.TabStop = false;
+            this.hpInfo.Visible = false;
             // 
             // contextMenuStrip1
             // 
@@ -69,11 +68,11 @@ namespace MistsOfThelema
             // 
             // locationInfo
             // 
-            this.locationInfo.Location = new System.Drawing.Point(21, 0);
+            this.locationInfo.Location = new System.Drawing.Point(3, 85);
             this.locationInfo.Name = "locationInfo";
-            this.locationInfo.Size = new System.Drawing.Size(100, 20);
-            this.locationInfo.TabIndex = 2;
             this.locationInfo.ReadOnly = true;
+            this.locationInfo.Size = new System.Drawing.Size(58, 20);
+            this.locationInfo.TabIndex = 2;
             this.locationInfo.TabStop = false;
             // 
             // contextMenuStrip2
@@ -83,14 +82,16 @@ namespace MistsOfThelema
             // 
             // cPlayer
             // 
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.locationInfo);
             this.Controls.Add(this.hpInfo);
             this.Controls.Add(this.player);
             this.Name = "cPlayer";
+            this.Size = new System.Drawing.Size(63, 134);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-            
+
         }
 
         public cPlayer()

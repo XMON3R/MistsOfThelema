@@ -21,9 +21,9 @@ namespace MistsOfThelema
             // 
             this.pictureBox1.Image = global::MistsOfThelema.Properties.Resources.basicVillager;
             this.pictureBox1.InitialImage = global::MistsOfThelema.Properties.Resources.defPlayer;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(-36, -19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(114, 130);
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -33,7 +33,7 @@ namespace MistsOfThelema
             // 
             this.Controls.Add(this.pictureBox1);
             this.Name = "npc";
-            this.Size = new System.Drawing.Size(103, 113);
+            this.Size = new System.Drawing.Size(70, 88);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

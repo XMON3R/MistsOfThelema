@@ -12,8 +12,9 @@ namespace MistsOfThelema
     public partial class Scene1 : Form
     {
         private PictureBox pictureBox1;
-        private Houses houses2;
         private npc npc1;
+        private Houses playerExitHouse;
+        private Label interactLabel;
         private cPlayer cPlayer1;
 
         public Scene1()
@@ -25,9 +26,10 @@ namespace MistsOfThelema
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cPlayer1 = new MistsOfThelema.cPlayer();
-            this.houses2 = new MistsOfThelema.Houses();
+            this.playerExitHouse = new MistsOfThelema.Houses();
             this.npc1 = new MistsOfThelema.npc();
+            this.cPlayer1 = new MistsOfThelema.cPlayer();
+            this.interactLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,33 +44,44 @@ namespace MistsOfThelema
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // playerExitHouse
+            // 
+            this.playerExitHouse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.playerExitHouse.BackColor = System.Drawing.Color.Transparent;
+            this.playerExitHouse.Location = new System.Drawing.Point(1131, 292);
+            this.playerExitHouse.Name = "playerExitHouse";
+            this.playerExitHouse.Size = new System.Drawing.Size(225, 109);
+            this.playerExitHouse.TabIndex = 5;
+            // 
+            // npc1
+            // 
+            this.npc1.BackColor = System.Drawing.Color.Transparent;
+            this.npc1.Location = new System.Drawing.Point(986, 523);
+            this.npc1.Name = "npc1";
+            this.npc1.Size = new System.Drawing.Size(70, 88);
+            this.npc1.TabIndex = 4;
+            // 
             // cPlayer1
             // 
             this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.cPlayer1.Location = new System.Drawing.Point(12, 279);
+            this.cPlayer1.Location = new System.Drawing.Point(34, 841);
             this.cPlayer1.Name = "cPlayer1";
-            this.cPlayer1.Size = new System.Drawing.Size(150, 150);
+            this.cPlayer1.Size = new System.Drawing.Size(61, 123);
             this.cPlayer1.TabIndex = 0;
             this.cPlayer1.Load += new System.EventHandler(this.cPlayer1_Load_1);
             this.cPlayer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             this.cPlayer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
             // 
-            // houses2
+            // interactLabel
             // 
-            this.houses2.BackColor = System.Drawing.Color.Transparent;
-            this.houses2.Location = new System.Drawing.Point(558, 485);
-            this.houses2.Name = "houses2";
-            this.houses2.Size = new System.Drawing.Size(89, 47);
-            this.houses2.TabIndex = 3;
-            this.houses2.Load += new System.EventHandler(this.houses2_Load);
-            // 
-            // npc1
-            // 
-            this.npc1.BackColor = System.Drawing.Color.Transparent;
-            this.npc1.Location = new System.Drawing.Point(982, 522);
-            this.npc1.Name = "npc1";
-            this.npc1.Size = new System.Drawing.Size(103, 113);
-            this.npc1.TabIndex = 4;
+            this.interactLabel.AutoSize = true;
+            this.interactLabel.Location = new System.Drawing.Point(700, 176);
+            this.interactLabel.Name = "interactLabel";
+            this.interactLabel.Size = new System.Drawing.Size(152, 13);
+            this.interactLabel.TabIndex = 6;
+            this.interactLabel.Text = "Interact with ------ by pressing E";
+            this.interactLabel.Click += new System.EventHandler(this.label1_Click);
+            this.interactLabel.Visible = false;
             // 
             // Scene1
             // 
@@ -76,20 +89,22 @@ namespace MistsOfThelema
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
-            this.Controls.Add(this.npc1);
-            this.Controls.Add(this.houses2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.interactLabel);
             this.Controls.Add(this.cPlayer1);
+            this.Controls.Add(this.npc1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.playerExitHouse);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1440, 1080);
-            this.MinimumSize = new System.Drawing.Size(1440, 1080);
+            this.MinimumSize = new System.Drawing.Size(1440, 1038);
             this.Name = "Scene1";
             this.Load += new System.EventHandler(this.Scene1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -150,6 +165,11 @@ namespace MistsOfThelema
         }
 
         private void houses2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
