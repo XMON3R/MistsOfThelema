@@ -24,7 +24,7 @@ namespace MistsOfThelema
         public readonly static Keys Interact = Keys.E;
         public readonly static Keys Inventory = Keys.I;
 
-        public readonly static Keys Help = Keys.H;
+        //public readonly static Keys Help = Keys.H;
 
         public static bool IsUp = false;
         public static bool IsDown = false;
@@ -33,6 +33,6 @@ namespace MistsOfThelema
 
         public static bool IsInteracting = false;
         public static bool IsInventory = false;
-        public static bool IsHelp = false;  
+        //public static bool IsHelp = false;  
     }
 }

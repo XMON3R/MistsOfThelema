@@ -124,22 +124,25 @@
   <data name="townbase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\townbase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="townProto" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\townProto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="defPlayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\defPlayer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="basicVillager" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\basicVillager.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="thelemaW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\thelemaW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="townProto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\townProto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fireHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\fireHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="thelemaC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\thelemaC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="fireHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\fireHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="thelemaW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\thelemaW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defPlayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\defPlayer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shopkeeper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shopkeeper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -102,7 +102,6 @@
     <Compile Include="scenes\scene_1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NOTinUseplayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="cPlayer.resx">

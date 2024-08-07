@@ -24,17 +24,18 @@ namespace MistsOfThelema
         public int UsableTimes { get; set; }
         public int Value { get; private set; }
 
-        public Coin(string name, string description, int id, int value)
+        public Coin(string name, string description, int id, int value, int usableTimes)
         {
             Name = name;
             Description = description;
             Id = id;
+            UsableTimes = usableTimes;
             Value = value;
         }
 
         public void Use()
         {
-            // Coins cannot be used directly, but can be traded with NPCs
+            //extension
         }
     }
 
@@ -46,15 +47,16 @@ namespace MistsOfThelema
         public int UsableTimes { get; set; }
         public int HealAmount { get; private set; }
 
-        public Apple(string name, string description, int id, int healA)
+        public Apple(string name, string description, int id, int healA, int usableTimes)
         {
             Name = name;
             Description = description;
             Id = id;
             HealAmount = healA;
+            UsableTimes = usableTimes;
         }
 
-        public void Use()
+        public void Use() //extension
         {
             cPlayer.HP += HealAmount;
             if (cPlayer.HP > 100)
@@ -71,16 +73,17 @@ namespace MistsOfThelema
         public string Description { get; private set; }
         public int UsableTimes { get; set; }
 
-        public Knife(string name, string description, int id)
+        public Knife(string name, string description, int id, int usableTimes)
         {
             Name = name;
             Description = description;
             Id = id;
+            UsableTimes = usableTimes;
         }
 
         public void Use()
         {
-            // Coins cannot be used directly, but can be traded with NPCs
+            //extension
         }
     }
 

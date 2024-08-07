@@ -38,12 +38,10 @@ namespace MistsOfThelema
             this.Size = new System.Drawing.Size(70, 88);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
         }
 
-        public npc(string name)
+        public npc()
         {
-            InstanceName = name;
             InitializeComponent();
         }
 

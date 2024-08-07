@@ -12,7 +12,6 @@ namespace MistsOfThelema
     {
         public string InstanceName { get; set; }
         private PictureBox housik;
-        public event EventHandler PlayerInteracted;
 
         private void InitializeComponent()
         {
@@ -44,9 +43,8 @@ namespace MistsOfThelema
 
         }
 
-        public Houses(string name)             ///KURVA DOPRDELE DŮLEŽITÉ!
+        public Houses()            
         {
-            InstanceName = name;
             InitializeComponent();
         }
 

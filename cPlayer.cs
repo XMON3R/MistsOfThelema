@@ -20,13 +20,14 @@ namespace MistsOfThelema
         private Timer timer1;
 
         //new for intersect
-        public event EventHandler PlayerMoved;
+        //public event EventHandler PlayerMoved;
 
         public static int speed { get; set; } = 5;
         public static int HP { get; set; } = 100;
+        public List<IgameItem> Inventory {  get; private set; } 
 
         //int[] borderCoord = {-40,1322,204,914};
-        int[] borderCoord = { 5, 1350, 224, 914 };
+        int[] borderCoord = { 5, 1365, 224, 965 };
 
         private void InitializeComponent()
         {
@@ -59,11 +60,15 @@ namespace MistsOfThelema
             // 
             // hpInfo
             // 
+            this.hpInfo.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.hpInfo.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.hpInfo.ForeColor = System.Drawing.SystemColors.Window;
             this.hpInfo.Location = new System.Drawing.Point(3, 3);
             this.hpInfo.Name = "hpInfo";
             this.hpInfo.Size = new System.Drawing.Size(55, 20);
             this.hpInfo.TabIndex = 1;
             this.hpInfo.TabStop = false;
+            this.hpInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.hpInfo.Visible = false;
             // 
             // contextMenuStrip1
@@ -92,6 +97,26 @@ namespace MistsOfThelema
         public cPlayer()
         {
             InitializeComponent();
+            HP = 100;
+            Inventory = new List<IgameItem>();
+        }
+
+        public void AddItem(IgameItem item1)
+        {
+            Inventory.Add(item1);
+        }
+
+        public void UseItem(int itemId)
+        {
+            var item = Inventory.FirstOrDefault(i => i.Id == itemId);
+            if (item != null)
+            {
+                item.Use();
+                if (item.UsableTimes <= 0)
+                {
+                    Inventory.Remove(item);
+                }
+            }
         }
 
         public Rectangle GetBounds()
@@ -177,42 +202,6 @@ namespace MistsOfThelema
 
             Top = newTop;
             Left = newLeft;
-
-            /*
-            if (Top >= borderCoord[2] && Top <= borderCoord[3])
-            {
-                if (Core.IsUp)
-                    Top -= speed;
-                if (Core.IsDown)
-                    Top += speed;
-            }
-            else if (Top < borderCoord[2])
-            {
-                Top = borderCoord[2];
-            }
-            else if (Top > borderCoord[3])
-            {
-                Top = borderCoord[3];
-            }
-
-            if (Left >= borderCoord[0] && Left <= borderCoord[1])
-            {
-                if (Core.IsRight)
-                    Left += speed;
-                if (Core.IsLeft)
-                    Left -= speed;
-            }
-
-            else if (Left < borderCoord[0])
-            {
-                Left = borderCoord[0];
-            }
-
-            else if (Left > borderCoord[1])
-            {
-                Left = borderCoord[1];
-            }            
-            */
         }
 
         private void locationInfo_TextChanged(object sender, EventArgs e)

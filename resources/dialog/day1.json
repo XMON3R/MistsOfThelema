@@ -4,11 +4,11 @@
             "text": "Hello, traveler! What brings you to these parts?",
             "choices": {
                 "1": {
-                    "text": "Just passing through.",
+                    "text": "Bought a house here. I am Simel",
                     "next": "response1"
                 },
                 "2": {
-                    "text": "Looking for an adventure.",
+                    "text": "Looking for bussiness.",
                     "next": "response2"
                 },
                 "3": {
@@ -18,15 +18,129 @@
             }
         },
         "response1": {
-            "text": "Safe travels, friend!",
+            "text": "Nice to have a new friendly face around here!",
             "choices": {}
         },
         "response2": {
-            "text": "There are many quests to be had! Seek out the village elder.",
+            "text": "There are many things to do, but you better settle in and check tommorow...",
             "choices": {}
         },
         "response3": {
-            "text": "No need to be rude. Watch your back.",
+            "text": "No need to be rude. Watch your back though.",
+            "choices": {}
+        }
+    },
+
+    "Shopkeeper": {
+        "intro": {
+            "text": "Greetings, welcome to my humble shop. Sadly, we are closed today.",
+            "choices": {
+                "1": {
+                    "text": "Why is the shop closed?",
+                    "next": "response1"
+                },
+                "2": {
+                    "text": "Go to hell.",
+                    "next": "response2"
+                },
+                "3": {
+                    "text": "I love your shop!",
+                    "next": "response3"
+                }
+            }
+        },
+        "response1": {
+            "text": "Sadly, there was a thief around today, better watch out! Come tommorow.",
+            "choices": {}
+        },
+        "response2": {
+            "text": "Nice to meet you too, barbarian.",
+            "choices": {}
+        },
+        "response3": {
+            "text": "Thanks! Come tommorow to check our wares...",
+            "choices": {}
+        }
+    },
+
+    "Weird man": {
+        "intro": {
+            "text": "The True Will is the key to unlocking the deepest secrets of the cosmos...",
+            "choices": {
+                "1": {
+                    "text": "...",
+                    "next": "response1"
+                },
+                "2": {
+                    "text": "Thelema?",
+                    "next": "response2"
+                },
+                "3": {
+                    "text": "What is your opinion of The Book of the Law?",
+                    "next": "response3"
+                }
+            }
+        },
+        "response1": {
+            "text": "it’s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
+            "choices": {}
+        },
+        "response2": {
+            "text": "What a pleasant surprise.",
+            "choices": {}
+        },
+        "response3": {
+            "text": "The Book of the Law is the ultimate revelation...",
+            "choices": {}
+        }
+    },
+
+    "dayEnd": {
+        "intro": {
+            "text": "You wake up at the end of the day. What will happen tonight?",
+            "choices": {
+                "1": {
+                    "text": "Killer in the house",
+                    "next": "killerInHouse"
+                },
+                "2": {
+                    "text": "Peaceful sleep",
+                    "next": "peacefulSleep"
+                },
+                "3": {
+                    "text": "Pay or die",
+                    "next": "payOrDie"
+                }
+            }
+        },
+        "killerInHouse": {
+            "text": "You wake up to the sound of footsteps. There's a killer in the house!",
+            "choices": {
+                "knife": {
+                    "text": "KNIFE",
+                    "next": "killerResolved"
+                }
+            }
+        },
+        "peacefulSleep": {
+            "text": "You sleep peacefully through the night.",
+            "choices": {}
+        },
+        "payOrDie": {
+            "text": "A menacing voice demands that you pay up or face the consequences!",
+            "choices": {
+                "coin": {
+                    "text": "COIN",
+                    "next": "payResolved"
+                }
+            }
+        },
+        "killerResolved": {
+            "text": "You overpowered the killer and became victorious. He did not expect you to resist.",
+            "choices": {}
+        },
+        "payResolved": {
+            "text": "You paid and avoided the threat. The spirit, satisfied, disappeared swiftly.",
             "choices": {}
         }
     }

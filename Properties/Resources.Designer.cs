@@ -103,6 +103,16 @@ namespace MistsOfThelema.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap shopkeeper {
+            get {
+                object obj = ResourceManager.GetObject("shopkeeper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap thelemaC {
             get {
                 object obj = ResourceManager.GetObject("thelemaC", resourceCulture);
