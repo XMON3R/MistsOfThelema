@@ -128,7 +128,7 @@ namespace MistsOfThelema
             // npc1
             // 
             this.npc1.BackColor = System.Drawing.Color.Transparent;
-            this.npc1.InstanceName = "Teo";
+            this.npc1.InstanceName = "Theo";
             this.npc1.Location = new System.Drawing.Point(986, 523);
             this.npc1.Name = "npc1";
             this.npc1.Size = new System.Drawing.Size(70, 88);
@@ -191,17 +191,14 @@ namespace MistsOfThelema
         }
 
         // Method to display a dialog node
-        private void DisplayDialog(DialogNode node)
+        private void DisplayDialog(string NpcName, DialogNode node)
         {
+            //tester
             dialogLabel.Visible = true;
             dialogLabel.Text = "ahoj";
 
-
             dialogLabel.Text = node.text;
 
-            
-
-            // Remove old choice buttons if any
             foreach (var button in choiceButtons)
             {
                 this.Controls.Remove(button);
@@ -216,7 +213,7 @@ namespace MistsOfThelema
                 choiceButton.Text = choice.Value.text;
                 choiceButton.Location = new Point(dialogLabel.Left, yPosition);
                 choiceButton.AutoSize = true;
-                choiceButton.Click += (sender, args) => OnChoiceSelected(choice.Value.next);
+                choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.next);
                 this.Controls.Add(choiceButton);
                 choiceButtons.Add(choiceButton);
                 yPosition += choiceButton.Height + 5;
@@ -224,25 +221,26 @@ namespace MistsOfThelema
         }
 
         // Method to handle player's choice
-        private void OnChoiceSelected(string nextNodeId)
+        private void OnChoiceSelected(string NpcName, string nextNodeId)
         {
             if (!string.IsNullOrEmpty(nextNodeId))
             {
-                DialogNode nextNode = diaLoad.GetDialogNode("Theo-Player", nextNodeId);
+                DialogNode nextNode = diaLoad.GetDialogNode(NpcName, nextNodeId);
                 if (nextNode != null)
                 {
-                    DisplayDialog(nextNode);
+                    DisplayDialog(NpcName, nextNode);
                 }
             }
         }
 
         // Start a conversation with Theo
-        private void StartConversationWithTheo()
+        private void StartConversationWith(string NpcName, DialogLoader dl)
         {
-            DialogNode introNode = diaLoad.GetDialogNode("Theo-Player", "intro");
+            //DialogNode introNode = dl.GetDialogNode("Theo-Player", "intro");
+            DialogNode introNode = dl.GetDialogNode(NpcName, "intro");
             if (introNode != null)
             {
-                DisplayDialog(introNode);
+                DisplayDialog(NpcName,introNode);
             }
         }
 
@@ -362,10 +360,16 @@ namespace MistsOfThelema
                     break;
                 }
 
-                if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Teo")
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable is npc && interactable.InstanceName != "Shopkeeper")
                 {
-                    StartConversationWithTheo();
+                    //StartConversationWith("Theo", diaLoad);
+                    StartConversationWith(interactable.InstanceName, diaLoad);
                     break;
+                }
+
+                if(playerBounds.IntersectsWith(expandedBounds) && interactable is Houses)
+                {
+                    //somehow interact with house -> maybe stealing, introduce karma system for kills and stolen goods
                 }
             }
         }
