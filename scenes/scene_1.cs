@@ -21,6 +21,9 @@ namespace MistsOfThelema
         private Label label2;
         private cPlayer cPlayer1;
 
+        private DialogLoader diaLoad;
+        private List<Button> choiceButtons = new List<Button>();
+        private Label dialogLabel;
         private List<IInteractable> interactables; /*= new List<IInteractable>
         {
         new Houses("House1"),
@@ -29,11 +32,21 @@ namespace MistsOfThelema
         new npc("Merchant")
         };*/
 
-    public Scene1()
+        /* 
+         this.npc1 = new MistsOfThelema.npc("Theo");)¨7
+        this.playerExitHouse = new MistsOfThelema.Houses("your");
+        */
+
+        public Scene1()
         {
             InitializeComponent();
             InitializeInteractables();
             //cPlayer1.PlayerMoved += CPlayer1_PlayerMoved;
+
+            diaLoad = new DialogLoader();
+            diaLoad.LoadDialogFromJson("..\\..\\resources\\dialog\\day1.json");
+
+            choiceButtons = new List<Button>();
         }
 
         private void InitializeComponent()
@@ -44,10 +57,11 @@ namespace MistsOfThelema
             this.interactLabel = new System.Windows.Forms.Label();
             this.collisionTimer = new System.Windows.Forms.Timer(this.components);
             this.cPlayer1 = new MistsOfThelema.cPlayer();
-            this.npc1 = new MistsOfThelema.npc("Teo");
-            this.playerExitHouse = new MistsOfThelema.Houses("your hut");
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.npc1 = new MistsOfThelema.npc("Theo");
+            this.playerExitHouse = new MistsOfThelema.Houses("your");
+            this.dialogLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,25 +102,8 @@ namespace MistsOfThelema
             this.cPlayer1.TabIndex = 0;
             this.cPlayer1.Load += new System.EventHandler(this.cPlayer1_Load_1);
             this.cPlayer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
+            this.cPlayer1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnKeyPress);
             this.cPlayer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
-            // 
-            // npc1
-            // 
-            this.npc1.BackColor = System.Drawing.Color.Transparent;
-            this.npc1.Location = new System.Drawing.Point(986, 523);
-            this.npc1.Name = "npc1";
-            this.npc1.Size = new System.Drawing.Size(70, 88);
-            this.npc1.TabIndex = 4;
-            // 
-            // playerExitHouse
-            // 
-            this.playerExitHouse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.playerExitHouse.BackColor = System.Drawing.Color.Transparent;
-            this.playerExitHouse.Location = new System.Drawing.Point(1131, 292);
-            this.playerExitHouse.Name = "playerExitHouse";
-            this.playerExitHouse.Size = new System.Drawing.Size(225, 109);
-            this.playerExitHouse.TabIndex = 5;
-            this.playerExitHouse.InstanceName = "Your House";
             // 
             // label1
             // 
@@ -126,12 +123,41 @@ namespace MistsOfThelema
             this.label2.TabIndex = 8;
             this.label2.Text = "no info yet";
             // 
+            // npc1
+            // 
+            this.npc1.BackColor = System.Drawing.Color.Transparent;
+            this.npc1.InstanceName = "Teo";
+            this.npc1.Location = new System.Drawing.Point(986, 523);
+            this.npc1.Name = "npc1";
+            this.npc1.Size = new System.Drawing.Size(70, 88);
+            this.npc1.TabIndex = 4;
+            // 
+            // playerExitHouse
+            // 
+            this.playerExitHouse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.playerExitHouse.BackColor = System.Drawing.Color.Transparent;
+            this.playerExitHouse.InstanceName = "Your House";
+            this.playerExitHouse.Location = new System.Drawing.Point(1131, 292);
+            this.playerExitHouse.Name = "playerExitHouse";
+            this.playerExitHouse.Size = new System.Drawing.Size(225, 109);
+            this.playerExitHouse.TabIndex = 5;
+            // 
+            // dialogLabel
+            // 
+            this.dialogLabel.AutoSize = true;
+            this.dialogLabel.Location = new System.Drawing.Point(663, 822);
+            this.dialogLabel.Name = "dialogLabel";
+            this.dialogLabel.Size = new System.Drawing.Size(61, 13);
+            this.dialogLabel.TabIndex = 9;
+            this.dialogLabel.Text = "dialogLabel";
+            // 
             // Scene1
             // 
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
+            this.Controls.Add(this.dialogLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.interactLabel);
@@ -162,6 +188,61 @@ namespace MistsOfThelema
             };
         }
 
+        // Method to display a dialog node
+        private void DisplayDialog(DialogNode node)
+        {
+            dialogLabel.Visible = true;
+            // dialogLabel.Text = node.Text;
+            dialogLabel.Text = "ahoj";
+
+            /*
+
+            // Remove old choice buttons if any
+            foreach (var button in choiceButtons)
+            {
+                this.Controls.Remove(button);
+            }
+            choiceButtons.Clear();
+
+            int yPosition = dialogLabel.Bottom + 10;
+
+            foreach (var choice in node.Choices)
+            {
+                Button choiceButton = new Button();
+                choiceButton.Text = choice.Value.Text;
+                choiceButton.Location = new Point(dialogLabel.Left, yPosition);
+                choiceButton.AutoSize = true;
+                choiceButton.Click += (sender, args) => OnChoiceSelected(choice.Value.Next);
+                this.Controls.Add(choiceButton);
+                choiceButtons.Add(choiceButton);
+                yPosition += choiceButton.Height + 5;
+            }*/
+        }
+
+        // Method to handle player's choice
+        private void OnChoiceSelected(string nextNodeId)
+        {
+            if (!string.IsNullOrEmpty(nextNodeId))
+            {
+                DialogNode nextNode = diaLoad.GetDialogNode("Theo-Player", nextNodeId);
+                if (nextNode != null)
+                {
+                    DisplayDialog(nextNode);
+                }
+            }
+        }
+
+        // Start a conversation with Theo
+        private void StartConversationWithTheo()
+        {
+            DialogNode introNode = diaLoad.GetDialogNode("Theo-Player", "intro");
+            if (introNode != null)
+            {
+                DisplayDialog(introNode);
+            }
+        }
+
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Core.KeyUp)
@@ -176,10 +257,10 @@ namespace MistsOfThelema
             if (e.KeyCode == Core.Interact)
                 Core.IsInteracting = true;
 
-            if(Core.IsInteracting)
+           /* if(Core.IsInteracting)
             {
                 HandleInteraction();
-            }
+            }*/
         }
 
         private void OnKeyUp(object sender, KeyEventArgs e)
@@ -198,6 +279,13 @@ namespace MistsOfThelema
 
         }
 
+        private void OnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Core.IsInteracting)
+            {
+                HandleInteraction();
+            }
+        }
 
         //private void CPlayer1_PlayerMoved(object sender, Rectangle playerBounds)
         private void CheckCollision()
@@ -267,6 +355,12 @@ namespace MistsOfThelema
                 if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Your House")
                 {
                     TransitionToScene2();
+                    break;
+                }
+
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Teo")
+                {
+                    StartConversationWithTheo();
                     break;
                 }
             }

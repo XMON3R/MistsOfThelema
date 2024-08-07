@@ -21,8 +21,9 @@
         }
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.PictureBox gameLogo;
-        private System.Windows.Forms.TextBox introBox;
+        private System.Windows.Forms.Label introBox;
         private System.Windows.Forms.Button go;
+        private System.Windows.Forms.PictureBox smallerLogo;
     }
 }
 

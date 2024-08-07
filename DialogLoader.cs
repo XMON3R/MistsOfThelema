@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//install nu package
+using System.Text.Json;
+
 namespace MistsOfThelema
 {
     /*
@@ -18,7 +21,8 @@ namespace MistsOfThelema
         }
     }*/
 
-    internal class DialogLoader
+    /*
+    public class DialogLoader
     {
         public DialogLoader() { }
 
@@ -43,4 +47,63 @@ namespace MistsOfThelema
             }
         }
     }
+    */
+
+    public class DialogLoader
+    {
+        public Dictionary<string, Dictionary<string, DialogNode>> Dialogs { get; private set; }
+
+        public DialogLoader()
+        {
+            Dialogs = new Dictionary<string, Dictionary<string, DialogNode>>();
+        }
+
+        public string LoadSingleDialog(string filePath)
+        {
+            string dialogContent = "";
+
+            // Get the absolute path to the file
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string endPath = Path.Combine(basePath, filePath);
+
+            try
+            {
+                dialogContent = File.ReadAllText(endPath);
+                return dialogContent;
+            }
+            catch //(Exception ex)
+            {
+                dialogContent = filePath + " XXXXX " + basePath + " XXXXX " + endPath + " XXXXX " + "Sorry, there seems to be a problem loading this dialog, please contact the dev team.";
+                return dialogContent;
+            }
+        }
+
+        public void LoadDialogFromJson(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+            Dialogs = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, DialogNode>>>(json);
+        }
+
+        public DialogNode GetDialogNode(string conversationId, string nodeId)
+        {
+            if (Dialogs.ContainsKey(conversationId) && Dialogs[conversationId].ContainsKey(nodeId))
+            {
+                return Dialogs[conversationId][nodeId];
+            }
+            return null;
+        }
+    }
+
+    public class DialogNode
+    {
+        public string Text { get; set; }
+        public Dictionary<string, DialogChoice> Choices { get; set; }
+    }
+
+    public class DialogChoice
+    {
+        public string Text { get; set; }
+        public string Next { get; set; }
+    }
+
 }

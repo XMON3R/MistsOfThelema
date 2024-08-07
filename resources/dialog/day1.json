@@ -1,0 +1,33 @@
+{
+    "Theo-Player": {
+        "intro": {
+            "text": "Hello, traveler! What brings you to these parts?",
+            "choices": {
+                "1": {
+                    "text": "Just passing through.",
+                    "next": "response1"
+                },
+                "2": {
+                    "text": "Looking for an adventure.",
+                    "next": "response2"
+                },
+                "3": {
+                    "text": "None of your business.",
+                    "next": "response3"
+                }
+            }
+        },
+        "response1": {
+            "text": "Safe travels, friend!",
+            "choices": {}
+        },
+        "response2": {
+            "text": "There are many quests to be had! Seek out the village elder.",
+            "choices": {}
+        },
+        "response3": {
+            "text": "No need to be rude. Watch your back.",
+            "choices": {}
+        }
+    }
+}
