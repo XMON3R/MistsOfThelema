@@ -47,6 +47,8 @@ namespace MistsOfThelema
             diaLoad.LoadDialogFromJson("..\\..\\resources\\dialog\\day1.json");
 
             choiceButtons = new List<Button>();
+
+            bool already_talked = false;
         }
 
         private void InitializeComponent()
@@ -192,10 +194,12 @@ namespace MistsOfThelema
         private void DisplayDialog(DialogNode node)
         {
             dialogLabel.Visible = true;
-            // dialogLabel.Text = node.Text;
             dialogLabel.Text = "ahoj";
 
-            /*
+
+            dialogLabel.Text = node.text;
+
+            
 
             // Remove old choice buttons if any
             foreach (var button in choiceButtons)
@@ -206,17 +210,17 @@ namespace MistsOfThelema
 
             int yPosition = dialogLabel.Bottom + 10;
 
-            foreach (var choice in node.Choices)
+            foreach (var choice in node.choices)
             {
                 Button choiceButton = new Button();
-                choiceButton.Text = choice.Value.Text;
+                choiceButton.Text = choice.Value.text;
                 choiceButton.Location = new Point(dialogLabel.Left, yPosition);
                 choiceButton.AutoSize = true;
-                choiceButton.Click += (sender, args) => OnChoiceSelected(choice.Value.Next);
+                choiceButton.Click += (sender, args) => OnChoiceSelected(choice.Value.next);
                 this.Controls.Add(choiceButton);
                 choiceButtons.Add(choiceButton);
                 yPosition += choiceButton.Height + 5;
-            }*/
+            }
         }
 
         // Method to handle player's choice

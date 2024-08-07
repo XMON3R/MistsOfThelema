@@ -80,13 +80,31 @@ namespace MistsOfThelema
 
         public void LoadDialogFromJson(string filePath)
         {
-            string json = File.ReadAllText(filePath);
-            Dialogs = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, DialogNode>>>(json);
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                Dialogs = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, DialogNode>>>(json);
+            }
+
+            catch 
+            {
+                Dialogs = null;
+            }
         }
 
+        /*
         public DialogNode GetDialogNode(string conversationId, string nodeId)
         {
             if (Dialogs.ContainsKey(conversationId) && Dialogs[conversationId].ContainsKey(nodeId))
+            {
+                return Dialogs[conversationId][nodeId];
+            }
+            return null;
+        }*/
+
+        public DialogNode GetDialogNode(string conversationId, string nodeId)
+        {
+            if (Dialogs != null && Dialogs.ContainsKey(conversationId) && Dialogs[conversationId].ContainsKey(nodeId))
             {
                 return Dialogs[conversationId][nodeId];
             }
@@ -96,14 +114,14 @@ namespace MistsOfThelema
 
     public class DialogNode
     {
-        public string Text { get; set; }
-        public Dictionary<string, DialogChoice> Choices { get; set; }
+        public string text { get; set; }
+        public Dictionary<string, DialogChoice> choices { get; set; }
     }
 
     public class DialogChoice
     {
-        public string Text { get; set; }
-        public string Next { get; set; }
+        public string text { get; set; }
+        public string next { get; set; }
     }
 
 }
