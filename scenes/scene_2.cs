@@ -191,7 +191,8 @@ namespace MistsOfThelema
             }
             else
             {
-                ScenarioTextLabel.Text += " No choices available.";
+                exitGameTimer.Start();
+                //ScenarioTextLabel.Text += " No choices available.";
             }
         }
 
