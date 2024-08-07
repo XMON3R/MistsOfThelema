@@ -17,14 +17,6 @@ namespace MistsOfThelema
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Scene1());
-
-            //Application.Run(new TitleScreen());
-
-            //cPlayer cPlayer = new cPlayer();
-            //Application.Run(new Scene2(cPlayer));
-
-
             Application.Run(new TitleScreen());
         }
     }

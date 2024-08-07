@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace MistsOfThelema
 {
@@ -120,7 +121,7 @@ namespace MistsOfThelema
             string introDialog = diLo.LoadSingleDialog("..\\..\\resources\\dialog\\intro.txt");
 
             introBox.Text = introDialog;
-            introBox.Font = new Font("Courier New", 40, FontStyle.Regular);
+            introBox.Font = new Font("Courier New", 32, FontStyle.Regular);
             introBox.ForeColor = Color.White;
 
             smallerLogo.Visible = true;

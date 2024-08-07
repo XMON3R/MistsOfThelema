@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 
 namespace MistsOfThelema
 {
     public partial class Scene2 : Form
     {
-        private cPlayer cPlayer1;
         private cPlayer player_s2;
 
         /*
@@ -33,16 +33,7 @@ namespace MistsOfThelema
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene2));
-            this.cPlayer1 = new MistsOfThelema.cPlayer();
             this.SuspendLayout();
-            // 
-            // cPlayer1
-            // 
-            this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.cPlayer1.Location = new System.Drawing.Point(45, 345);
-            this.cPlayer1.Name = "cPlayer1";
-            this.cPlayer1.Size = new System.Drawing.Size(146, 116);
-            this.cPlayer1.TabIndex = 0;
             // 
             // Scene2
             // 
@@ -50,7 +41,6 @@ namespace MistsOfThelema
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.fireHome;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
-            this.Controls.Add(this.cPlayer1);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

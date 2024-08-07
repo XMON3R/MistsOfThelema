@@ -1,2 +1,5 @@
 Mists of Thelema is a free adventure videogame that takes inspiration from the work of Aleister Crowley.
 Explore the town, its mysteries and its people and uncover their deep secrets and planned mischiefs.
+
+Controls: 
+WASD for movement, I for inventory, E for interaction
