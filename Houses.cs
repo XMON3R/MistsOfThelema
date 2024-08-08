@@ -40,7 +40,6 @@ namespace MistsOfThelema
             this.Size = new System.Drawing.Size(235, 114);
             ((System.ComponentModel.ISupportInitialize)(this.housik)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         public Houses()            
