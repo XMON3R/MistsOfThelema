@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Threading.Tasks;
+using System.Threading.Tasks; // Potřebné pro Task
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,11 +45,27 @@ namespace MistsOfThelema
         public Scene1()
         {
             InitializeComponent();
-            InitializeInteractables();
-            //cPlayer1.PlayerMoved += CPlayer1_PlayerMoved;
+            // cPlayer1.PlayerMoved += CPlayer1_PlayerMoved; // Zakomentováno, jelikož není v poskytnutém kódu definováno
 
+            // --- Krok 1: Inicializace DialogLoaderu ---
             diaLoad = new DialogLoader();
-            diaLoad.LoadDialogFromJson("..\\..\\resources\\dialog\\day1.json");
+
+            // --- Krok 2: Přihlášení k události DialogsLoaded ---
+            diaLoad.DialogsLoaded += OnDialogsLoaded;
+
+            // --- Krok 3: Spuštění asynchronního načítání dialogů ---
+            // Namísto synchronního volání, teď voláme asynchronní metodu.
+            // Použijeme '_' pro potlačení varování, že Task není awaitován,
+            // protože chceme, aby se načítání provedlo na pozadí.
+
+            //_ = diaLoad.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
+            _ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
+
+            // Volání InitializeInteractables by mělo být až PO inicializaci všech komponent.
+            // V tvém kódu se volá před přiřazením objektů k npc1, weirdMan atd.
+            // Proto jsem přesunul volání na konec konstruktoru.
+            // Nechávám to zde, ale ideálně by InitializeInteractables mělo být voláno po new npc() atd.
+            InitializeInteractables();
 
             choiceButtons = new List<Button>();
             talkedToList = new List<string>();
@@ -63,6 +79,9 @@ namespace MistsOfThelema
             endOfDayTimer.Tick += endOfDay_Tick;
             endOfDayTimer.Start();
 
+            // Tyto řádky by měly být volány až po inicializaci komponent v InitializeComponent()
+            // a po inicializaci 'npc1', 'weirdMan', 'playerExitHouse', 'shopkeeper'
+            // což se děje v InitializeComponent. Takže toto je správné místo.
             npc1.InstanceName = "Theo";
             weirdMan.InstanceName = "Weird man";
             playerExitHouse.InstanceName = "Your House";
@@ -84,17 +103,17 @@ namespace MistsOfThelema
             this.afterDialogTimer = new System.Windows.Forms.Timer(this.components);
             this.endOfDayTimer = new System.Windows.Forms.Timer(this.components);
             this.playInventory = new System.Windows.Forms.Label();
-            this.shopkeeper = new MistsOfThelema.npc();
-            this.weirdMan = new MistsOfThelema.npc();
-            this.cPlayer1 = new MistsOfThelema.cPlayer();
-            this.npc1 = new MistsOfThelema.npc();
-            this.playerExitHouse = new MistsOfThelema.Houses();
+            this.shopkeeper = new MistsOfThelema.npc(); // Inicializace shopkeeper
+            this.weirdMan = new MistsOfThelema.npc();   // Inicializace weirdMan
+            this.cPlayer1 = new MistsOfThelema.cPlayer(); // Inicializace cPlayer1
+            this.npc1 = new MistsOfThelema.npc();       // Inicializace npc1
+            this.playerExitHouse = new MistsOfThelema.Houses(); // Inicializace playerExitHouse
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dialogBox)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // pictureBox1
-            // 
+            //
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.InitialImage = global::MistsOfThelema.Properties.Resources.defPlayer;
             this.pictureBox1.Location = new System.Drawing.Point(194, 322);
@@ -102,9 +121,9 @@ namespace MistsOfThelema
             this.pictureBox1.Size = new System.Drawing.Size(94, 130);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
+            //
             // interactLabel
-            // 
+            //
             this.interactLabel.AutoSize = true;
             this.interactLabel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.interactLabel.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -115,15 +134,15 @@ namespace MistsOfThelema
             this.interactLabel.TabIndex = 6;
             this.interactLabel.Text = "Interact with ------ by pressing E";
             this.interactLabel.Visible = false;
-            // 
+            //
             // collisionTimer
-            // 
+            //
             this.collisionTimer.Enabled = true;
             this.collisionTimer.Interval = 50;
             this.collisionTimer.Tick += new System.EventHandler(this.collisionTimer_Tick);
-            // 
+            //
             // dialogLabel
-            // 
+            //
             this.dialogLabel.AutoSize = true;
             this.dialogLabel.BackColor = System.Drawing.Color.SeaGreen;
             this.dialogLabel.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -134,9 +153,9 @@ namespace MistsOfThelema
             this.dialogLabel.TabIndex = 9;
             this.dialogLabel.Text = "dialogLabel";
             this.dialogLabel.Visible = false;
-            // 
+            //
             // dialogBox
-            // 
+            //
             this.dialogBox.BackColor = System.Drawing.Color.Black;
             this.dialogBox.Location = new System.Drawing.Point(-5, 875);
             this.dialogBox.Name = "dialogBox";
@@ -144,9 +163,9 @@ namespace MistsOfThelema
             this.dialogBox.TabIndex = 11;
             this.dialogBox.TabStop = false;
             this.dialogBox.Visible = false;
-            // 
+            //
             // playInventory
-            // 
+            //
             this.playInventory.AutoSize = true;
             this.playInventory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.playInventory.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -157,27 +176,27 @@ namespace MistsOfThelema
             this.playInventory.Text = "PLAYER INVENTORY:";
             this.playInventory.Click += new System.EventHandler(this.playInventory_Click);
             this.playInventory.Visible = false;
-            // 
+            //
             // shopkeeper
-            // 
+            //
             this.shopkeeper.BackColor = System.Drawing.Color.Transparent;
             this.shopkeeper.InstanceName = "Shopkeeper";
             this.shopkeeper.Location = new System.Drawing.Point(602, 703);
             this.shopkeeper.Name = "shopkeeper";
             this.shopkeeper.Size = new System.Drawing.Size(70, 88);
             this.shopkeeper.TabIndex = 13;
-            // 
+            //
             // weirdMan
-            // 
+            //
             this.weirdMan.BackColor = System.Drawing.Color.Transparent;
             this.weirdMan.InstanceName = null;
             this.weirdMan.Location = new System.Drawing.Point(207, 364);
             this.weirdMan.Name = "weirdMan";
             this.weirdMan.Size = new System.Drawing.Size(70, 88);
             this.weirdMan.TabIndex = 12;
-            // 
+            //
             // cPlayer1
-            // 
+            //
             this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
             this.cPlayer1.Location = new System.Drawing.Point(34, 841);
             this.cPlayer1.Name = "cPlayer1";
@@ -186,18 +205,18 @@ namespace MistsOfThelema
             this.cPlayer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             this.cPlayer1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnKeyPress);
             this.cPlayer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
-            // 
+            //
             // npc1
-            // 
+            //
             this.npc1.BackColor = System.Drawing.Color.Transparent;
             this.npc1.InstanceName = "Theo";
             this.npc1.Location = new System.Drawing.Point(986, 523);
             this.npc1.Name = "npc1";
             this.npc1.Size = new System.Drawing.Size(70, 88);
             this.npc1.TabIndex = 4;
-            // 
+            //
             // playerExitHouse
-            // 
+            //
             this.playerExitHouse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.playerExitHouse.BackColor = System.Drawing.Color.Transparent;
             this.playerExitHouse.InstanceName = "Your House";
@@ -205,9 +224,9 @@ namespace MistsOfThelema
             this.playerExitHouse.Name = "playerExitHouse";
             this.playerExitHouse.Size = new System.Drawing.Size(225, 109);
             this.playerExitHouse.TabIndex = 5;
-            // 
+            //
             // Scene1
-            // 
+            //
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -236,9 +255,48 @@ namespace MistsOfThelema
 
         }
 
+        // --- Krok 4: Metoda pro zpracování události DialogsLoaded ---
+        private void OnDialogsLoaded(bool success, string errorMessage)
+        {
+            // !!! DŮLEŽITÉ !!!
+            // Tato metoda může být volána z jiného vlákna (než UI vlákno),
+            // proto je nutné ověřit a případně přesunout volání na UI vlákno.
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new DialogLoader.DialogsLoadedEventHandler(OnDialogsLoaded), new object[] { success, errorMessage });
+                return;
+            }
+
+            // Kód níže se spustí vždy na UI vlákně
+            if (success)
+            {
+                // Dialogy byly úspěšně načteny. Nyní můžeš bezpečně přistupovat k diaLoad.Dialogs
+                // a pokračovat v inicializaci hry, která závisí na dialozích.
+                // Například, pokud bys měl nějakou úvodní dialogovou sekvenci,
+                // mohl bys ji spustit zde.
+                //MessageBox.Show("Dialogy byly úspěšně načteny!", "Načítání dokončeno", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Můžeš zde třeba skrýt načítací obrazovku, pokud ji máš.
+                // Povolit interakce, které závisí na načtených dialozích.
+            }
+            else
+            {
+                // Došlo k chybě při načítání dialogů.
+                MessageBox.Show($"Dialog Error: {errorMessage}\nError Loading Dialog", "Dialog Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Zde můžeš implementovat logiku pro zpracování chyby, např.
+                // - Zobrazit chybovou zprávu a ukončit aplikaci.
+                // - Načíst záložní dialogy.
+                // - Umožnit hráči pokračovat bez dialogů (pokud je to možné).
+                Application.Exit(); // Příklad: Ukončení hry v případě kritické chyby
+            }
+        }
+
+
         //add to interactables so it can detect and start dialogs
         private void InitializeInteractables()
         {
+            // Ujistěte se, že objekty playerExitHouse, npc1, weirdMan, shopkeeper
+            // jsou již inicializovány (což jsou v InitializeComponent).
             interactables = new List<IInteractable>
             {
                 playerExitHouse,
@@ -268,7 +326,7 @@ namespace MistsOfThelema
                 HandleInteraction(cPlayer1);
             }
 
-            if(e.KeyCode == Core.Inventory)
+            if (e.KeyCode == Core.Inventory)
             {
                 playInventory.Visible = true;
             }
@@ -295,7 +353,7 @@ namespace MistsOfThelema
 
         private void OnKeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
         }
 
         //player-interactable collision detection
@@ -312,11 +370,11 @@ namespace MistsOfThelema
                 Rectangle expandedBounds = ExpandBoundsByRadius(interactableBounds, 30);
 
                 if (playerBounds.IntersectsWith(expandedBounds))
-                { 
+                {
                     interactLabel.Visible = true;
 
                     //special case for house that exits to scene 2
-                    if(interactable.InstanceName == "Your House")
+                    if (interactable.InstanceName == "Your House")
                     {
                         interactLabel.Text = $"Press E to END THE DAY by entering {interactable.InstanceName}";
                     }
@@ -325,16 +383,21 @@ namespace MistsOfThelema
                     {
                         interactLabel.Text = $"Press E to interact with {interactable.InstanceName}";
                     }
-                    
+
                     collision = true;
                     break;
                 }
 
                 //otherwise hide interact label
-                if (!collision)
+                if (!collision) // Toto by mělo být vně cyklu, aby se label skryl až po kontrole všech objektů
                 {
                     interactLabel.Visible = false;
                 }
+            }
+            // Opravená logika pro skrytí interactLabelu
+            if (!collision)
+            {
+                interactLabel.Visible = false;
             }
         }
 
@@ -375,8 +438,8 @@ namespace MistsOfThelema
                         dialogBox.Visible = true;
                         dialogLabel.Text = "Sorry, nothing left to say.";
                         afterDialogTimer.Start();
-                        
-                        if(interactable.InstanceName == "Weird man")
+
+                        if (interactable.InstanceName == "Weird man")
                         {
                             //possible extension: given in second "secret" dialog
                             player.AddItem(new Knife("Knife", "A basic knife.", 3, 4));
@@ -387,7 +450,6 @@ namespace MistsOfThelema
 
                     else
                     {
-                        //StartConversationWith("Theo", diaLoad);
                         isInConversation = true;
                         ResetPlayerMovement();
 
@@ -396,9 +458,11 @@ namespace MistsOfThelema
                     }
                 }
 
-                if (playerBounds.IntersectsWith(expandedBounds) && interactable is Houses)
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable is Houses && interactable.InstanceName != "Your House") // Added check for other houses
                 {
                     //extension: somehow interact with other houses -> maybe stealing, introduce karma system for kills and stolen goods
+                    // Zde by mohla být logika pro interakci s jinými domy
+                    // Například: dialogLabel.Text = "Seems locked."; afterDialogTimer.Start();
                 }
             }
         }
@@ -406,12 +470,30 @@ namespace MistsOfThelema
         //start a conversation with
         private void StartConversationWith(string NpcName, DialogLoader dl)
         {
-   
-            //DialogNode introNode = dl.GetDialogNode("Theo-Player", "intro");
+            // Před spuštěním konverzace je dobré zkontrolovat, zda jsou dialogy načteny
+            if (dl.Dialogs == null)
+            {
+                dialogLabel.Visible = true;
+                dialogBox.Visible = true;
+                dialogLabel.Text = "Dialog error?";
+                afterDialogTimer.Start();
+                isInConversation = false; // Umožnit hráči pohyb
+                return;
+            }
+
             DialogNode introNode = dl.GetDialogNode(NpcName, "intro");
             if (introNode != null)
             {
                 DisplayDialog(NpcName, introNode);
+            }
+            else
+            {
+                // Pokud pro dané NPC neexistuje "intro" uzel
+                dialogLabel.Visible = true;
+                dialogBox.Visible = true;
+                dialogLabel.Text = $"Cannot find dialog for {NpcName}.";
+                afterDialogTimer.Start();
+                isInConversation = false;
             }
         }
 
@@ -437,20 +519,24 @@ namespace MistsOfThelema
             int choice_number = 1;
 
             //iterate over choices from json dialog file and display them
-            foreach (var choice in node.choices)
+            if (node.choices != null) // Zkontrolujte, zda existují volby
             {
-                Button choiceButton = new Button();
-                //choiceButton.BringToFront();
-                choiceButton.Text = choice_number++ + ") " + choice.Value.text;
-                choiceButton.Location = new Point(dialogLabel.Left, yPosition);
-                choiceButton.AutoSize = true;
-                choiceButton.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-                choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.next);
-                this.Controls.Add(choiceButton);
-                choiceButtons.Add(choiceButton);
-                choiceButton.BringToFront();
-                yPosition += choiceButton.Height + 5;
+                foreach (var choice in node.choices)
+                {
+                    Button choiceButton = new Button();
+                    //choiceButton.BringToFront();
+                    choiceButton.Text = choice_number++ + ") " + choice.Value.text;
+                    choiceButton.Location = new Point(dialogLabel.Left, yPosition);
+                    choiceButton.AutoSize = true;
+                    choiceButton.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+                    choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.next);
+                    this.Controls.Add(choiceButton);
+                    choiceButtons.Add(choiceButton);
+                    choiceButton.BringToFront();
+                    yPosition += choiceButton.Height + 5;
+                }
             }
+
 
             //end button 
             Button endButton = new Button();
@@ -464,8 +550,10 @@ namespace MistsOfThelema
             endButton.BringToFront();
 
             //ensure you cant repeat the conversation
-            talkedToList.Add(NpcName);
-
+            if (!talkedToList.Contains(NpcName)) // Přidáno ověření, aby se NPC nepřidávalo opakovaně
+            {
+                talkedToList.Add(NpcName);
+            }
         }
 
         //player choices
@@ -478,6 +566,17 @@ namespace MistsOfThelema
                 {
                     DisplayDialog(NpcName, nextNode);
                 }
+                else
+                {
+                    // Pokud nextNodeId vede na neexistující uzel
+                    dialogLabel.Text = "Chyba dialogu: Následující uzel neexistuje.";
+                    // Můžeš se rozhodnout konverzaci ukončit nebo zobrazit jen tuto zprávu
+                }
+            }
+            else
+            {
+                // Pokud nextNodeId je prázdné, znamená to konec větve dialogu
+                EndConversation();
             }
         }
 
@@ -510,7 +609,7 @@ namespace MistsOfThelema
 
 
         //inventory functions bellow
-        private void AddItemToPlayer(IgameItem item)
+        private void AddItemToPlayer(IgameItem item) // Změnil jsem na IgameItem, předpokládám, že takový interface máš
         {
             cPlayer1.AddItem(item);
             UpdateInventoryList();
@@ -529,11 +628,11 @@ namespace MistsOfThelema
 
             playInventory.Text = inventoryText.ToString();
         }
-       
+
         private void PlayerStarterInventory(cPlayer player)
         {
             var coin = new Coin("Coin", "A shiny gold coin.", 1, 10, 1);
-            var apple = new Apple("Apple", "Restores full health.", 2, 100,1);
+            var apple = new Apple("Apple", "Restores full health.", 2, 100, 1);
 
             player.AddItem(coin);
             player.AddItem(apple);

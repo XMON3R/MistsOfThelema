@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Threading.Tasks; // Potřebné pro Task
 
 namespace MistsOfThelema
 {
@@ -26,9 +26,17 @@ namespace MistsOfThelema
             InitializeComponent();
             this.player_s2 = player;
 
-            // Initialize DialogLoader
+            // --- Krok 1: Inicializace DialogLoaderu ---
             diaLo = new DialogLoader();
-            diaLo.LoadDialogFromJson("..\\..\\resources\\dialog\\day1.json");
+
+            // --- Krok 2: Přihlášení k události DialogsLoaded ---
+            diaLo.DialogsLoaded += OnDialogsLoaded;
+
+            // --- Krok 3: Spuštění asynchronního načítání dialogů ---
+            // Spustíme načítání na pozadí. Nechceme, aby konstruktor čekal.
+
+            //_ = diaLo.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
+            _ = diaLo.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
 
             //intro timer
             introTimer = new Timer
@@ -51,8 +59,10 @@ namespace MistsOfThelema
             };
             exitGameTimer.Tick += ExitGameTimer_Tick;
 
-            // Start the intro scenario
-            IntroScenario();
+            // !!! DŮLEŽITÉ !!!
+            // IntroScenario se nespustí ihned zde. Spustí se až poté,
+            // co se načtou dialogy v metodě OnDialogsLoaded.
+            // IntroScenario(); // Tento řádek je nyní zakomentován/odstraněn
         }
 
         private void InitializeComponent()
@@ -119,9 +129,38 @@ namespace MistsOfThelema
             this.PerformLayout();
 
         }
+        // --- Krok 4: Metoda pro zpracování události DialogsLoaded ---
+        private void OnDialogsLoaded(bool success, string errorMessage)
+        {
+            // !!! DŮLEŽITÉ !!!
+            // Tato metoda může být volána z jiného vlákna (než UI vlákno),
+            // proto je nutné ověřit a případně přesunout volání na UI vlákno.
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new DialogLoader.DialogsLoadedEventHandler(OnDialogsLoaded), new object[] { success, errorMessage });
+                return;
+            }
+
+            // Kód níže se spustí vždy na UI vlákně
+            if (success)
+            {
+                // Dialogy byly úspěšně načteny.
+                // Nyní je bezpečné spustit úvodní scénář nebo jakoukoli logiku
+                //, která závisí na načtených dialozích.
+                IntroScenario();
+            }
+            else
+            {
+                // Došlo k chybě při načítání dialogů.
+                MessageBox.Show($"Dialog Error: {errorMessage}\nError Loading Dialog", "Dialog Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit(); // Ukončení hry v případě kritické chyby
+            }
+        }
 
         private void IntroScenario()
         {
+            // Zobrazí úvodní text scénáře.
+            // Text je stejný, jen se ujistíme, že se zobrazí, až jsou dialogy načteny.
             ScenarioTextLabel.Text = "They say strange things happen here at night... What will happen tonight?";
             introTimer.Start();
         }
@@ -134,6 +173,16 @@ namespace MistsOfThelema
 
         private void StartScenario()
         {
+            // Zkontrolujeme, zda jsou dialogy načteny, než se pokusíme je použít.
+            if (diaLo.Dialogs == null)
+            {
+                ScenarioTextLabel.Text = "Dialog error?";
+                // Zde můžete zvolit, zda počkat, opakovat, nebo ukončit hru.
+                // Prozatím jen zobrazíme zprávu.
+                exitGameTimer.Start(); // Můžete zvážit okamžité ukončení, pokud dialogy nejsou k dispozici
+                return;
+            }
+
             bool hasCoin = player_s2.Inventory.Any(item => item.Name == "Coin");
             bool hasKnife = player_s2.Inventory.Any(item => item.Name == "Knife");
 
@@ -166,6 +215,13 @@ namespace MistsOfThelema
         {
             ItemButtonsPanel.Controls.Clear();
 
+            // Ujistíme se, že je diaLo.Dialogs inicializováno před voláním GetDialogNode
+            if (diaLo.Dialogs == null)
+            {
+                ScenarioTextLabel.Text = "Chyba: Dialogs not loaded.";
+                return;
+            }
+
             var scenarioNode = diaLo.GetDialogNode("dayEnd", scenario);
             if (scenarioNode == null)
             {
@@ -191,8 +247,8 @@ namespace MistsOfThelema
             }
             else
             {
+                // Pokud nejsou k dispozici žádné volby, spustíme exit timer
                 exitGameTimer.Start();
-                //ScenarioTextLabel.Text += " No choices available.";
             }
         }
 
@@ -205,9 +261,10 @@ namespace MistsOfThelema
             {
                 if (itemKey == "knife")
                 {
+                    // Abychom se ujistili, že se výsledek zobrazí správně
                     resultText = "You live... For now... ALIVE";
                     resultTimer.Start();
-                    DisplayScenario("killerResolved", diaLo);
+                    DisplayScenario("killerResolved", diaLo); // Zobrazí text řešení
                 }
                 else
                 {
@@ -219,9 +276,10 @@ namespace MistsOfThelema
             {
                 if (itemKey == "coin")
                 {
+                    // Abychom se ujistili, že se výsledek zobrazí správně
                     resultText = "You live... For now... ALIVE";
                     resultTimer.Start();
-                    DisplayScenario("payResolved", diaLo);
+                    DisplayScenario("payResolved", diaLo); // Zobrazí text řešení
                 }
                 else
                 {
@@ -231,6 +289,8 @@ namespace MistsOfThelema
             }
             else if (currentScenario == "peacefulSleep")
             {
+                // Pro "peacefulSleep" není žádná volba, takže to spadá sem rovnou
+                // po spuštění scénáře.
                 resultText = "You sleep peacefully through the night. ALIVE";
                 resultTimer.Start();
             }
@@ -239,7 +299,7 @@ namespace MistsOfThelema
         private void ResultTimer_Tick(object sender, EventArgs e)
         {
             resultTimer.Stop();
-            ScenarioTextLabel.Text = resultText;
+            ScenarioTextLabel.Text = resultText; // Zobrazí konečný výsledek
             exitGameTimer.Start();
         }
 

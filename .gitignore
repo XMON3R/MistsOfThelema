@@ -1,0 +1,40 @@
+.vs/
+*.suo
+*.user
+*.pdb
+*.obj
+*.exe
+*.dll
+*.aps
+*.bsc
+*.cscfg
+*.csdproj
+*.csproj.user
+*.dataschema
+*.dbmdl
+*.dnn
+*.dwml
+*.log
+*.mdf
+*.ndf
+*.sql
+*.vstemplate
+*.webinfo
+*.cache
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# NuGet packages
+packages/
+*.nupkg
+.nuget/NuGetScratch/
+
+# Resharper and other extensions
+*.DotSettings
+*.userprefs
+
+# Miscellaneous
+_ReSharper.*/
+[Pp]roperties/launchSettings.json 

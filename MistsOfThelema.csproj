@@ -142,7 +142,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="resources\dialog\day1.json" />
+    <Content Include="resources\dialog\day1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -153,7 +155,9 @@
   <ItemGroup>
     <Content Include="resources\basicHouse.png" />
     <Content Include="resources\basicVillager.png" />
-    <Content Include="resources\dialog\intro.txt" />
+    <Content Include="resources\dialog\intro.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\fireHome.png" />
     <Content Include="resources\shopkeeper.png" />
     <Content Include="resources\thelemaC.png" />
