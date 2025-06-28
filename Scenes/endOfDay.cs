@@ -307,7 +307,7 @@ namespace MistsOfThelema
                     resultText = "The killer laughed at you and stabbed you to death. DEAD";
                     // Show a game over message and exit the application.
                     MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit(); // Exit the application  
+                    Environment.Exit(0); //Exit
                 }
             }
             else if (currentScenario == "payOrDie")
@@ -324,7 +324,7 @@ namespace MistsOfThelema
                 {
                     resultText = "There is nothing else that the spirit wanted. DEAD";
                     MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit(); // Exit the application         
+                    Environment.Exit(0); //Exit
                 }
             }
             else if (currentScenario == "peacefulSleep")
@@ -353,7 +353,7 @@ namespace MistsOfThelema
             // Check if the player's HP is 0, indicating they died.
             if (player_s2.HP == 0)
             {
-                Application.Exit(); // Player is dead, exit the game
+                Environment.Exit(0); // Player is dead, exit the game
             }
             else
             {

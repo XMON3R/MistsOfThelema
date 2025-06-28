@@ -29,7 +29,6 @@ namespace MistsOfThelema
         // Timers for game logic, such as collision checks, dialog display, and end-of-day events.
         private Timer collisionTimer;
         private Timer afterDialogTimer;
-        private Timer endOfDayTimer;
 
         // Game entities the player can interact with.
         private Npc npc1;
@@ -102,11 +101,6 @@ namespace MistsOfThelema
             afterDialogTimer.Interval = 2000;
             afterDialogTimer.Tick += DialogTimer_Tick;
 
-            endOfDayTimer = new Timer();
-            endOfDayTimer.Interval = 300000; // 5 minutes in milliseconds
-            endOfDayTimer.Tick += EndOfDay_Tick;
-            endOfDayTimer.Start();
-
             // Set instance names for interactable objects.
             npc1.InstanceName = "Theo";
             weirdMan.InstanceName = "Weird man";
@@ -136,7 +130,6 @@ namespace MistsOfThelema
             this.dialogLabel = new System.Windows.Forms.Label();
             this.dialogBox = new System.Windows.Forms.PictureBox();
             this.afterDialogTimer = new System.Windows.Forms.Timer(this.components);
-            this.endOfDayTimer = new System.Windows.Forms.Timer(this.components);
             this.playInventory = new System.Windows.Forms.Label();
             this.shopkeeper = new MistsOfThelema.Npc();
             this.weirdMan = new MistsOfThelema.Npc();
@@ -203,12 +196,6 @@ namespace MistsOfThelema
             this.afterDialogTimer.Enabled = true;
             this.afterDialogTimer.Interval = 2000;
             this.afterDialogTimer.Tick += new System.EventHandler(this.DialogTimer_Tick);
-            //
-            // endOfDayTimer
-            //
-            this.endOfDayTimer.Enabled = true;
-            this.endOfDayTimer.Interval = 300000;
-            this.endOfDayTimer.Tick += new System.EventHandler(this.EndOfDay_Tick);
             //
             // playInventory
             //
@@ -881,14 +868,6 @@ namespace MistsOfThelema
         /// </summary>
         private void NextDay_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Stop the 5-minute end-of-day timer.
-            if (endOfDayTimer != null)
-            {
-                endOfDayTimer.Stop();
-                endOfDayTimer.Dispose();
-                endOfDayTimer = null; // Set to null to indicate it's disposed.
-            }
-
             // Stop the after-dialog timer.
             if (afterDialogTimer != null)
             {

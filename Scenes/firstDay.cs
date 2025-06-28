@@ -28,7 +28,6 @@ namespace MistsOfThelema
         // --- Timers ---
         private Timer collisionTimer;
         private Timer afterDialogTimer;
-        private Timer endOfDayTimer;
 
         // --- Game Entities (NPCs and interactables) ---
         private Npc npc1;
@@ -91,14 +90,6 @@ namespace MistsOfThelema
             };
             afterDialogTimer.Tick += DialogTimer_Tick;
 
-            // endOfDayTimer: Triggers the transition to the end-of-day scene after a set duration.
-            endOfDayTimer = new Timer
-            {
-                Interval = 300000 // 5 minutes (5 * 60 * 1000 ms)
-            };
-            endOfDayTimer.Tick += EndOfDay_Tick;
-            endOfDayTimer.Start();
-
             // Assign instance names to the interactable objects.
             npc1.InstanceName = "Theo";
             weirdMan.InstanceName = "Weird man";
@@ -125,7 +116,6 @@ namespace MistsOfThelema
             this.dialogLabel = new System.Windows.Forms.Label();
             this.dialogBox = new System.Windows.Forms.PictureBox();
             this.afterDialogTimer = new System.Windows.Forms.Timer(this.components);
-            this.endOfDayTimer = new System.Windows.Forms.Timer(this.components);
             this.playInventory = new System.Windows.Forms.Label();
             this.shopkeeper = new MistsOfThelema.Npc();     // Initialize shopkeeper
             this.weirdMan = new MistsOfThelema.Npc();      // Initialize weirdMan
@@ -790,14 +780,6 @@ namespace MistsOfThelema
         /// </summary>
         private void FirstDay_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Stop the 5-minute end-of-day timer.
-            if (endOfDayTimer != null)
-            {
-                endOfDayTimer.Stop();
-                endOfDayTimer.Dispose();
-                endOfDayTimer = null; // Set to null to indicate it's disposed.
-            }
-
             // Stop the after-dialog timer.
             if (afterDialogTimer != null)
             {
