@@ -114,7 +114,7 @@ Your inventory holds items that help you survive or affect outcomes:
 
 ### 5.5 The Day/Night Cycle and End-of-Day Scenarios
 
-Time progresses in *Mists of Thelema*. A day ends in two of two ways:
+Time progresses in *Mists of Thelema*. A day ends in one of two ways:
 
 - **Timer Expiration:** The day ends automatically after a time limit.  
 - **Manual End:** Walk into your red-labeled house on the map.
