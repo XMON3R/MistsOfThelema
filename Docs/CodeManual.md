@@ -1,86 +1,284 @@
-Programátorská dokumentace k C# zápočtovému programu
+C# Programming Documentation for `Mists of Thelema`
+===================================================
 
-2024
+**Author:** Šimon Jůza **Date:** 2024
 
-Mists of Thelema
+Table of Contents
+-----------------
 
-Šimon Jůza
+-   [1\. Introduction](https://www.google.com/search?q=%231-introduction "null")
 
-Obsah
+-   [2\. System Requirements](https://www.google.com/search?q=%232-system-requirements "null")
 
-[1 Úvod 2](#_Toc173976053)
+-   [3\. Installation Guide](https://www.google.com/search?q=%233-installation-guide "null")
 
-[2 Program a mechaniky 3](#_Toc173976054)
+-   [4\. Program and Mechanics](https://www.google.com/search?q=%234-program-and-mechanics "null")
 
-[2.1 Postup tvoření programu a popis funkcí. 4](#_Toc173976055)
+    -   [4.1 Project Structure](https://www.google.com/search?q=%2341-project-structure "null")
 
-[2.2 Možná alternativní řešení a možné postupy 4](#_Toc173976056)
+    -   [4.2 How to Run the Game](https://www.google.com/search?q=%2342-how-to-run-the-game "null")
 
-[2.2.1 Použité knihovny 4](#_Toc173976057)
+    -   [4.3 Development Process and Feature Description](https://www.google.com/search?q=%2343-development-process-and-feature-description "null")
 
-[2.3 Reprezentace vstupních a výstupních dat 4](#_Toc173976058)
+    -   [4.4 Key Classes and Modules](https://www.google.com/search?q=%2344-key-classes-and-modules "null")
 
-[2.3.1 Reprezentace vstupních a výstupních dat 4](#_Toc173976059)
+    -   [4.5 Possible Alternative Solutions and Approaches](https://www.google.com/search?q=%2345-possible-alternative-solutions-and-approaches "null")
 
-[2.4 Průběh prací 5](#_Toc173976060)
+        -   [4.5.1 Libraries Used](https://www.google.com/search?q=%23451-libraries-used "null")
 
-[2.5 Možná rozšíření (Co se nestihlo) 5](#_Toc173976061)
+    -   [4.6 Input and Output Data Representation](https://www.google.com/search?q=%2346-input-and-output-data-representation "null")
 
-[3 Závěr 5](#_Toc173976062)
+        -   [4.6.1 Input and Output Data](https://www.google.com/search?q=%23461-input-and-output-data "null")
 
-# Úvod
+    -   [4.7 Error Handling](https://www.google.com/search?q=%2347-error-handling "null")
 
-Projekt **Mists of Thelema** je videoherní adventura s prvky interakce a volby. Hra je implementována v C# a využívá Windows Forms pro grafické rozhraní. Hráč prozkoumává různé scénáře a reaguje na situace pomocí inventáře a rozhodování. Hra je spustitelná na počítačích s Windows se základním .Net Frameworkem.
+    -   [4.8 Testing](https://www.google.com/search?q=%2348-testing "null")
 
-# Program a mechaniky
+    -   [4.9 Work Progress](https://www.google.com/search?q=%2349-work-progress "null")
 
-Hra probíhá v scénách reprezentovanými Formy vycházejících z WinForms. Vstupní soubor Program.cs prvně otevře TitleScreen scénu, která obsahuje logo, textový úvod a funkční tlačítka, přes které se člověk dostane do hlavní scény, tedy „scene_1“.
+    -   [4.10 Possible Extensions (What Was Not Completed)](https://www.google.com/search?q=%23410-possible-extensions-what-was-not-completed "null")
 
-Scéna 1 obsahuje detekci kolizí mezi hráčem a herní objekty (NPCs, dům). Kontroluje i registraci klávesových úhozů, při kterých provádí další akce (např. interakce).
+-   [5\. Contribution Guidelines](https://www.google.com/search?q=%235-contribution-guidelines "null")
 
-Tato scéna zároveň využívá několik speciálně vytvořených tříd, jako je DialogLoader, cPlayer, npc, Houses, InvItem či core. Tyto třídy slouží ke zjednodušení samotné orientace programu a ulehčí práci na případných rozšířených hry. Využití interface IInteractable z třídy core.cs mi zase usnadnilo práci co se týče interakcí s objekty. Využití interface lze taktéž nalézt ve třídě InvItem.cs, kde definuje základní vlastnosti všech předmětů, které se mohu vyskytovat v inventáři.
+-   [6\. Licensing](https://www.google.com/search?q=%236-licensing "null")
 
-Pro detailní pochopení jednotlivých tříd doporučuji nahlédnout na samotného kódu s komentáři, většina konstrukcí a názvů by měla být poměrně vypovídající. Dovolil bych si však zmínit třídu DialogLoader, která dokáže přijímat buď jednoduché .txt soubory, či strukturované JSON soubory. Ty se mi na reprezentaci dialogů a scénářů následků velmi osvědčily.
+-   [7\. Conclusion](https://www.google.com/search?q=%237-conclusion "null")
 
-Nyní ještě krátce zpět ke scéně 1. Z té se buď přes vypršení globálního časovače, či interakcí s herním objektem typu Houses s názvem „Your House“ hráč přesouvá do scény 2. Tam na něho čeká náhodná událost využívající Random z knihovny System. Samotné události jsou také popsány v přiloženém JSON souboru a několik funkcí přes tyto soubory vyhodnocuje, co se má právě stát. Pro lepší pochopení si opět dovolím se odkázat na samotný kód. V této scéně hra končí.
+1\. Introduction
+----------------
 
-\--- intersect + bounds
+The **Mists of Thelema** project is a video game adventure with interactive and choice-based elements, developed in C# using the Windows Forms graphical user interface. The player explores various scenarios and responds to situations by using items from their inventory and making decisions. The game is designed to be executable on Windows computers with the standard .NET Framework.
 
-## Postup tvoření programu a popis funkcí
+2\. System Requirements
+-----------------------
 
-Práce na hře jsem započal tvorbou jednotlivých scén a pixelových textur, které jsem, herní objekty i pozadí, vytvořil v online aplikaci **_Piskel_**. Dále jsem se soustředil na pohyb hráče a pohyb v omezeném poli („boundaries“), aby nemohl vyjet mimo hrací pole. Následně jsem zapracoval na rozložení jednotlivých prvků, překrývání, zobrazování, zahalování atd.
+To run or develop `Mists of Thelema`, you will need:
 
-Z pohledu funkcí bych si dovolil vyzdvihnout načítání a zpracování JSON souborů přes třídu DialogLoader jako i samotné zobrazování dialogů a interakci s NPCs ve scéně 1.
+-   **Operating System:** Windows 7 or newer (Windows 10/11 recommended).
 
-## Možná alternativní řešení a možné postupy
+-   **.NET Framework:** .NET Framework 4.7.2 or later (or compatible .NET runtime if compiling with .NET Core/.NET 5+).
 
-Hra by šla efektivně vytvořit i v herním enginu Unity. Tento přístup jsem však nezvolil, protože jsem ve Winforms již vytvořil několik menších aplikací a her. Tudíž jsem usoudil, že se zde budu více věnovat tvoření programu než učení se nové platformy.
+-   **Processor:** Any modern x86 or x64 compatible processor.
 
-### Použité knihovny
+-   **RAM:** 4 GB or more.
 
-1. **System**: Základní třídy pro datové typy a operace.
-2. **System.Drawing**: Grafické objekty, barvy, písma.
-3. **System.Windows.Forms**: Tvorba a správa uživatelského rozhraní Windows Forms.
-4. **System.Collections.Generic**: Generické kolekce jako List a Dictionary.
-5. **System.Text**: Manipulace s textem a kódováním.
-6. **System.Text.Json**: Práce s JSON daty.
+-   **Disk Space:** Approximately 50 MB for the game files.
 
-## Reprezentace vstupních a výstupních dat
+-   **Development Environment (for contributors):** Visual Studio 2019 or newer (with .NET desktop development workload installed).
 
-### Reprezentace vstupních a výstupních dat
+3\. Installation Guide
+----------------------
 
-Vstupní data hry Mists of Thelema jsou reprezentovaná klávesovými úhozy, a to konkrétně klávesami WASD (pohyb), E (interakce), I (inventář) a kliknutí levým tlačítkem myši.
+To get a local copy of the project up and running, follow these steps:
 
-Výstupem aplikace je pak samotný vizuální aspekt hry, v případě rozšíření s ukládáním hry a rozhodnutími by výstupem programu mohl být i nějaký „savovací“ soubor.  
+1.  **Clone the repository:**
 
-## Průběh prací
+    ```
+    git clone https://github.com/your-username/MistsOfThelema.git
+    cd MistsOfThelema
 
-Samotná hra prošla mnoha přerody, kdy jsem narazil ať už na nějaké limitace, tak naopak velmi pomocné nástroje Winforms jako je široké spektrum použitelných labelů, „textboxů“ atd. Největším vývojem se stal přechod z textových souborů na soubory typu JSON pro reprezentaci dialogů či scénářů při ukončení dne.
+    ```
 
-## Možná rozšíření (Co se nestihlo)
+    (Replace `https://github.com/your-username/MistsOfThelema.git` with the actual repository URL if different).
 
-V další verzi hry bych se hodlal zaměřit na vícedenní průběh hry s rozšířenými následky a novými dialogy. Také používání předmětů v dialozích s NPCs, kupování předmětů od NPC s ID „Shopkeeper“ či výměna předmětů. Také se nabízí možnost rozšíření herní plochy o les, kde by byla možnost zabíjet zvěř a monstra, ze kterých by padaly předměty.
+2.  **Open in Visual Studio:** Open the `MistsOfThelema.sln` solution file in Visual Studio.
 
-# Závěr
+3.  **Restore NuGet Packages:** Visual Studio should automatically prompt you to restore any missing NuGet packages. If not, right-click on the solution in Solution Explorer and select "Restore NuGet Packages."
 
-Samotná tvorba aplikace mne mnohé naučila a mnoho konceptů z přednášek a cvičení jsem dle mého názoru lépe pochopil. V praxi jsem si na větším programu mohl vyzkoušet užitečnost mnoha konstrukcí, za což jsem opravdu vděčný. Zároveň jsem se rozhodl, že na hře bude pracovat i dále mimo samotný předmět.
+4.  **Build the Project:** Build the solution by going to `Build > Build Solution` in the Visual Studio menu, or by pressing `Ctrl+Shift+B`.
+
+4\. Program and Mechanics
+-------------------------
+
+The game is structured into different scenes, each represented by a `Form` derived from the WinForms library. The `Program.cs` entry point first opens the `TitleScreen` scene. This form displays the game's logo, an introductory text, and interactive buttons that allow the player to start the main game scene, referred to as "scene_1".
+
+**Scene 1** is the core gameplay loop. It includes:
+
+-   **Collision detection** between the player character and various game objects (NPCs, houses).
+
+-   **Keyboard input handling** for player movement and interactions (e.g., pressing 'E' to interact).
+
+-   **Player movement boundaries** to prevent the character from leaving the playable area.
+
+This scene makes use of several custom-created classes to simplify the program's structure and make future extensions easier.
+
+**Transitioning to Scene 2 (`EndOfDay`)**
+
+From Scene 1, the player transitions to Scene 2, the `EndOfDay` form. This transition occurs either when a global timer expires or when the player interacts with a specific `Houses` object named "Your House".
+
+In **Scene 2**, a random event is triggered using the `Random` class from the `System` library. These events are also described in an accompanying JSON file, and several functions evaluate these files to determine what should happen. For a better understanding, I again refer to the code itself. The game currently ends in this scene.
+
+### 4.1 Project Structure
+
+The project is organized into the following key directories:
+
+-   **`MistsOfThelema/`**: The root directory of the main project.
+
+    -   **`Assets/`**: Contains custom UI controls and game entities like `cPlayer.cs`, `Npc.cs`, `Houses.cs`, and `ItemPickup.cs`.
+
+    -   **`Functionality/`**: Holds core game logic and utility classes such as `DialogLoader.cs`, `GameManager.cs`, `InvItem.cs`, and `Core.cs`.
+
+    -   **`Resources/`**: Stores game assets like images (`.png`, `.jpg`) and dialogue/scenario JSON files.
+
+    -   **`Scenes/`**: Contains the different `Form` classes representing game scenes, e.g., `TitleScreen.cs`, `FirstDay.cs`, `NextDay.cs`, and `EndOfDay.cs`.
+
+    -   **`docs/`**: This documentation and any other project-related documents.
+
+    -   **`Program.cs`**: The application's entry point.
+
+    -   **`.csproj`**: The project file.
+
+    -   **`.sln`**: The solution file.
+
+### 4.2 How to Run the Game
+
+After building the project in Visual Studio:
+
+1.  **From Visual Studio:** Press `F5` or click the "Start" button (green triangle) to run the game in debug mode.
+
+2.  **From Executable:** Navigate to the `bin/Debug/` (or `bin/Release/`) folder within your project directory and double-click `MistsOfThelema.exe`.
+
+### 4.3 Development Process and Feature Description
+
+My work on the game began with the creation of individual scenes and pixel art textures for the game objects and backgrounds, which I created in the online application **Piskel**. I then focused on player movement and restricting movement within defined "boundaries" to prevent the player from moving outside the playable area. Subsequently, I worked on the layout of individual elements, including layering, display, and obscuring.
+
+From a functional perspective, I would highlight the loading and processing of JSON files via the `DialogLoader` class, as well as the display of dialogues and interaction with NPCs in Scene 1.
+
+### 4.4 Key Classes and Modules
+
+Here's a more detailed look at some of the custom classes:
+
+-   **`DialogLoader.cs`**:
+
+    -   **Purpose:** Manages the loading and retrieval of game dialogues and scenario texts.
+
+    -   **Functionality:** Can parse both simple `.txt` files (though JSON is preferred for structured data) and complex JSON structures for dialogues and end-of-day scenarios. It provides methods to fetch specific dialogue nodes based on NPC name and node ID.
+
+    -   **Key Methods:**  `LoadDialogsFromJsonAsync()`, `GetDialogNode()`.
+
+-   **`cPlayer.cs`**:
+
+    -   **Purpose:** Represents the player character.
+
+    -   **Functionality:** Handles player movement, collision detection, inventory management, and health points (HP). It encapsulates player-specific logic and data.
+
+    -   **Key Properties:**  `Inventory`, `HP`.
+
+    -   **Key Methods:**  `GetBounds()`, `AddItem()`.
+
+-   **`Npc.cs`**:
+
+    -   **Purpose:** Represents non-player characters in the game world.
+
+    -   **Functionality:** Inherits from `PictureBox` and includes properties for interaction, such as `InstanceName`. Designed to be interactable by the player.
+
+-   **`Houses.cs`**:
+
+    -   **Purpose:** Represents interactive house objects on the map.
+
+    -   **Functionality:** Similar to `Npc.cs`, it's a visual control that can be interacted with, specifically used for the "Your House" object to trigger the end-of-day sequence.
+
+-   **`InvItem.cs`**:
+
+    -   **Purpose:** Base class for all inventory items.
+
+    -   **Functionality:** Defines common properties for items (e.g., `Name`, `Description`, `Value`). Implements `IInteractable` to allow items to be picked up.
+
+-   **`Core.cs`**:
+
+    -   **Purpose:** Contains core game utilities and interfaces.
+
+    -   **Functionality:** Defines the `IInteractable` interface, which standardizes interaction behavior across different game objects, ensuring consistent handling of player interactions.
+
+    -   **Key Properties:**  `Core.KeyUp`, `Core.KeyDown`, `Core.KeyLeft`, `Core.KeyRight`, `Core.Interact`, `Core.Inventory` (keyboard mappings).
+
+-   **`GameManager.cs`**:
+
+    -   **Purpose:** Manages global game state variables.
+
+    -   **Functionality:** Holds static properties like `CurrentDay` to track the game's progression.
+
+### 4.5 Possible Alternative Solutions and Approaches
+
+The game could have been effectively created in the Unity game engine. However, I did not choose this approach because I had already developed several smaller applications and games in WinForms. Therefore, I decided that I would focus more on programming here than on learning a new platform.
+
+### 4.5.1 Libraries Used
+
+1.  **System**: Fundamental classes for data types and operations.
+
+2.  **System.Drawing**: Graphical objects, colors, fonts.
+
+3.  **System.Windows.Forms**: Creation and management of the Windows Forms user interface.
+
+4.  **System.Collections.Generic**: Generic collections such as `List` and `Dictionary`.
+
+5.  **System.Text**: Text and encoding manipulation.
+
+6.  **System.Text.Json**: Working with JSON data.
+
+### 4.6 Input and Output Data Representation
+
+### 4.6.1 Input and Output Data
+
+The **input data** for the game Mists of Thelema is represented by keyboard presses, specifically WASD keys (movement), E (interaction), I (inventory), and left mouse button clicks.
+
+The **application's output** is the visual aspect of the game itself. In the case of an extension with game saving and decisions, the program's output could also include a "save" file.
+
+### 4.7 Error Handling
+
+The application includes basic error handling, primarily for:
+
+-   **Dialog Loading:** If JSON dialogue files fail to load, a `MessageBox` is displayed, and the application exits gracefully to prevent runtime errors.
+
+-   **Item Placement:** Attempts to place random items on the map include a maximum number of attempts and a warning `MessageBox` if a suitable non-colliding spot cannot be found.
+
+-   **Thread Safety:**  `InvokeRequired` checks are used when updating UI elements from non-UI threads (e.g., after asynchronous dialog loading) to prevent cross-thread operation exceptions.
+
+Further robust error logging and more specific exception handling could be implemented in future iterations.
+
+### 4.8 Testing
+
+During development, testing was primarily manual, focusing on:
+
+-   **Functional Testing:** Verifying that player movement, interactions, dialogue flows, and scenario outcomes work as intended.
+
+-   **Collision Detection:** Ensuring player and item collisions are accurate.
+
+-   **UI Responsiveness:** Checking that the UI updates correctly and timers behave as expected.
+
+No automated unit or integration tests were implemented for this version.
+
+### 4.9 Work Progress
+
+The game itself underwent many transformations, where I encountered both limitations and, conversely, very helpful WinForms tools such as the wide range of usable labels, "textboxes," etc. The biggest development was the transition from text files to JSON files for representing dialogues or scenarios at the end of the day.
+
+### 4.10 Possible Extensions (What Was Not Completed)
+
+In the next version of the game, I intend to focus on a multi-day game progression with extended consequences and new dialogues. Also, using items in dialogues with NPCs, buying items from an NPC with the ID "Shopkeeper," or exchanging items. There is also the possibility of expanding the game area to include a forest, where it would be possible to kill animals and monsters from which items would drop.
+
+5\. Contribution Guidelines
+---------------------------
+
+Contributions are welcome! If you wish to contribute to `Mists of Thelema`, please follow these guidelines:
+
+1.  **Fork the repository.**
+
+2.  **Create a new branch** for your feature or bug fix: `git checkout -b feature/your-feature-name` or `bugfix/issue-description`.
+
+3.  **Make your changes** and ensure they adhere to the existing coding style.
+
+4.  **Write clear, concise commit messages.**
+
+5.  **Test your changes** thoroughly.
+
+6.  **Submit a Pull Request** to the `main` branch, describing your changes and their purpose.
+
+6\. Licensing
+-------------
+
+This project is licensed under the **MIT License**. See the `LICENSE` file in the repository root for full details.
+
+7\. Conclusion
+--------------
+
+The creation of this application itself taught me a lot, and I believe I better understood many concepts from lectures and exercises. In practice, I was able to test the usefulness of many constructs on a larger program, for which I am truly grateful. At the same time, I decided that I would continue to work on the game even outside the scope of this subject.
