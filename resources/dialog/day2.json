@@ -1,147 +1,126 @@
 {
-    "Theo": {
-        "intro": {
-            "text": "DAY TWO MOTHERTRUCKER !",
-            "choices": {
-                "1": {
-                    "text": "Eh",
-                    "next": "response1"
-                },
-                "2": {
-                    "text": "AH.",
-                    "next": "response2"
-                },
-                "3": {
-                    "text": "None of your business.",
-                    "next": "response3"
+        "Theo": {
+            "intro": {
+                "Text": "Good morning! Did you settle in well after your first day in town?",
+                "Choices": {
+                    "1": {
+                        "Text": "Yes, I did. Thanks for the welcome.",
+                        "Next": "response1"
+                    },
+                    "2": {
+                        "Text": "I heard about the thief from yesterday. Was that culprit caught?",
+                        "Next": "response2"
+                    },
+                    "3": {
+                        "Text": "I have some business ideas. Can I ask for some advice?",
+                        "Next": "response3"
+                    }
                 }
+            },
+            "response1": {
+                "Text": "That's great to hear! It's important to feel at home here.",
+                "Choices": {}
+            },
+            "response2": {
+                "Text": "Ah, yes. The culprit was apprehended by the guard, a local scoundrel. The town is safe again, for now.",
+                "Choices": {}
+            },
+            "response3": {
+                "Text": "This town thrives on trade with travelers and merchants. There are many opportunities...",
+                "Choices": {}
             }
         },
-        "response1": {
-            "text": "Nice to have a new friendly face around here!",
-            "choices": {}
+        "Shopkeeper": {
+            "intro": {
+                "Text": "Welcome! We are open for business today. Please, take a look around.",
+                "Choices": {
+                    "1": {
+                        "Text": "I'd like to browse your wares.",
+                        "Next": "browse"
+                    },
+                    "2": {
+                        "Text": "I heard your shop was robbed yesterday.",
+                        "Next": "thiefInquiry"
+                    },
+                    "3": {
+                        "Text": "I am looking for something specific.",
+                        "Next": "specificItem"
+                    }
+                }
+            },
+            "browse": {
+                "Text": "Wonderful! We have everything from enchanted potions to rare artifacts.",
+                "Choices": {}
+            },
+            "thiefInquiry": {
+                "Text": "It was a frightful night, but the culprit has been dealt with. We're all a bit more vigilant now.",
+                "Choices": {}
+            },
+            "specificItem": {
+                "Text": "Tell me what you are looking for, and I will see if I can assist you.",
+                "Choices": {}
+            }
         },
-        "response2": {
-            "text": "There are many things to do, but you better settle in and check tommorow...",
-            "choices": {}
+        "Weird man": {
+            "intro": {
+                "Text": "Every man and every woman is a star... a universe of potential waiting to be unlocked.",
+                "Choices": {
+                    "1": {
+                        "Text": "You said something about the 'True Will' yesterday. What is it?",
+                        "Next": "trueWillExplanation"
+                    },
+                    "2": {
+                        "Text": "What secrets are you talking about?",
+                        "Next": "secrets"
+                    },
+                    "3": {
+                        "Text": "Is that a quote from The Book of the Law?",
+                        "Next": "quoteInquiry"
+                    }
+                }
+            },
+            "trueWillExplanation": {
+                "Text": "It is the ultimate purpose of your being, independent of all desires and cravings. Find it, and you will find your path.",
+                "Choices": {}
+            },
+            "secrets": {
+                "Text": "The secrets are not hidden. They are simply waiting to be seen by those with the eyes to see them.",
+                "Choices": {}
+            },
+            "quoteInquiry": {
+                "Text": "Indeed. A fundamental truth for those on the path of Thelema. You are more knowledgeable than you let on.",
+                "Choices": {}
+            }
         },
-        "response3": {
-            "text": "No need to be rude. Watch your back though.",
-            "choices": {}
+        "dayEnd": {
+            "intro": {
+                "Text": "Another day ends. You head to bed, wondering what the night will bring.",
+                "Choices": {
+                    "1": {
+                        "Text": "You hear a faint melody.",
+                        "Next": "faintMelody"
+                    },
+                    "2": {
+                        "Text": "A mysterious gift appears at your doorstep.",
+                        "Next": "mysteriousGift"
+                    },
+                    "3": {
+                        "Text": "You sleep peacefully.",
+                        "Next": "peacefulSleep"
+                    }
+                }
+            },
+            "faintMelody": {
+                "Text": "You can't place the tune, but it seems to be coming from outside the window...",
+                "Choices": {}
+            },
+            "mysteriousGift": {
+                "Text": "You find a small, beautifully carved wooden box. What is inside?",
+                "Choices": {}
+            },
+            "peacefulSleep": {
+                "Text": "You fall into a deep, dreamless sleep, ready for tomorrow.",
+                "Choices": {}
+            }
         }
-    },
-
-    "Shopkeeper": {
-        "intro": {
-            "text": "Greetings, welcome to my humble shop. Sadly, we are closed today.",
-            "choices": {
-                "1": {
-                    "text": "Why is the shop closed?",
-                    "next": "response1"
-                },
-                "2": {
-                    "text": "Go to hell.",
-                    "next": "response2"
-                },
-                "3": {
-                    "text": "I love your shop!",
-                    "next": "response3"
-                }
-            }
-        },
-        "response1": {
-            "text": "Sadly, there was a thief around today, better watch out! Come tommorow.",
-            "choices": {}
-        },
-        "response2": {
-            "text": "Nice to meet you too, barbarian.",
-            "choices": {}
-        },
-        "response3": {
-            "text": "Thanks! Come tommorow to check our wares...",
-            "choices": {}
-        }
-    },
-
-    "Weird man": {
-        "intro": {
-            "text": "The True Will is the key to unlocking the deepest secrets of the cosmos...",
-            "choices": {
-                "1": {
-                    "text": "...",
-                    "next": "response1"
-                },
-                "2": {
-                    "text": "Thelema?",
-                    "next": "response2"
-                },
-                "3": {
-                    "text": "What is your opinion of The Book of the Law?",
-                    "next": "response3"
-                }
-            }
-        },
-        "response1": {
-            "text": "it�s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
-            "choices": {}
-        },
-        "response2": {
-            "text": "What a pleasant surprise.",
-            "choices": {}
-        },
-        "response3": {
-            "text": "The Book of the Law is the ultimate revelation...",
-            "choices": {}
-        }
-    },
-
-    "dayEnd": {
-        "intro": {
-            "text": "You wake up at the end of the day. What will happen tonight?",
-            "choices": {
-                "1": {
-                    "text": "Killer in the house",
-                    "next": "killerInHouse"
-                },
-                "2": {
-                    "text": "Peaceful sleep",
-                    "next": "peacefulSleep"
-                },
-                "3": {
-                    "text": "Pay or die",
-                    "next": "payOrDie"
-                }
-            }
-        },
-        "killerInHouse": {
-            "text": "You wake up to the sound of footsteps. There's a killer in the house!",
-            "choices": {
-                "knife": {
-                    "text": "KNIFE",
-                    "next": "killerResolved"
-                }
-            }
-        },
-        "peacefulSleep": {
-            "text": "You sleep peacefully through the night.",
-            "choices": {}
-        },
-        "payOrDie": {
-            "text": "A menacing voice demands that you pay up or face the consequences!",
-            "choices": {
-                "coin": {
-                    "text": "COIN",
-                    "next": "payResolved"
-                }
-            }
-        },
-        "killerResolved": {
-            "text": "You overpowered the killer and became victorious. He did not expect you to resist.",
-            "choices": {}
-        },
-        "payResolved": {
-            "text": "You paid and avoided the threat. The spirit, satisfied, disappeared swiftly.",
-            "choices": {}
-        }
-    }
 }

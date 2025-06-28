@@ -59,7 +59,10 @@ namespace MistsOfThelema
             // protože chceme, aby se načítání provedlo na pozadí.
 
             //_ = diaLoad.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
-            _ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
+            //_ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
+
+            string dialogFile = $"resources\\dialog\\day{GameManager.CurrentDay}.json";
+            _ = diaLoad.LoadDialogsFromJsonAsync(dialogFile);
 
             // Volání InitializeInteractables by mělo být až PO inicializaci všech komponent.
             // V tvém kódu se volá před přiřazením objektů k npc1, weirdMan atd.

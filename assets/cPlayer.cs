@@ -23,7 +23,7 @@ namespace MistsOfThelema
         //public event EventHandler PlayerMoved;
 
         public static int Speed { get; set; } = 5;
-        public int HP { get; set; } = 100;
+        public int HP { get; set; }
         public List<IIgameItem> Inventory {  get; private set; } 
 
         //int[] borderCoord = {-40,1322,204,914};

@@ -1,147 +1,147 @@
 {
     "Theo": {
         "intro": {
-            "text": "Hello, traveler! What brings you to these parts?",
-            "choices": {
+            "Text": "Hello, traveler! What brings you to these parts?",
+            "Choices": {
                 "1": {
-                    "text": "Bought a house here. I am Simel",
-                    "next": "response1"
+                    "Text": "Bought a house here. I am Simel",
+                    "Next": "response1"
                 },
                 "2": {
-                    "text": "Looking for bussiness.",
-                    "next": "response2"
+                    "Text": "Looking for bussiness.",
+                    "Next": "response2"
                 },
                 "3": {
-                    "text": "None of your business.",
-                    "next": "response3"
+                    "Text": "None of your business.",
+                    "Next": "response3"
                 }
             }
         },
         "response1": {
-            "text": "Nice to have a new friendly face around here!",
-            "choices": {}
+            "Text": "Nice to have a new friendly face around here!",
+            "Choices": {}
         },
         "response2": {
-            "text": "There are many things to do, but you better settle in and check tommorow...",
-            "choices": {}
+            "Text": "There are many things to do, but you better settle in and check tommorow...",
+            "Choices": {}
         },
         "response3": {
-            "text": "No need to be rude. Watch your back though.",
-            "choices": {}
+            "Text": "No need to be rude. Watch your back though.",
+            "Choices": {}
         }
     },
 
     "Shopkeeper": {
         "intro": {
-            "text": "Greetings, welcome to my humble shop. Sadly, we are closed today.",
-            "choices": {
+            "Text": "Greetings, welcome to my humble shop. Sadly, we are closed today.",
+            "Choices": {
                 "1": {
-                    "text": "Why is the shop closed?",
-                    "next": "response1"
+                    "Text": "Why is the shop closed?",
+                    "Next": "response1"
                 },
                 "2": {
-                    "text": "Go to hell.",
-                    "next": "response2"
+                    "Text": "Go to hell.",
+                    "Next": "response2"
                 },
                 "3": {
-                    "text": "I love your shop!",
-                    "next": "response3"
+                    "Text": "I love your shop!",
+                    "Next": "response3"
                 }
             }
         },
         "response1": {
-            "text": "Sadly, there was a thief around today, better watch out! Come tommorow.",
-            "choices": {}
+            "Text": "Sadly, there was a thief around today, better watch out! Come tommorow.",
+            "Choices": {}
         },
         "response2": {
-            "text": "Nice to meet you too, barbarian.",
-            "choices": {}
+            "Text": "Nice to meet you too, barbarian.",
+            "Choices": {}
         },
         "response3": {
-            "text": "Thanks! Come tommorow to check our wares...",
-            "choices": {}
+            "Text": "Thanks! Come tommorow to check our wares...",
+            "Choices": {}
         }
     },
 
     "Weird man": {
         "intro": {
-            "text": "The True Will is the key to unlocking the deepest secrets of the cosmos...",
-            "choices": {
+            "Text": "The True Will is the key to unlocking the deepest secrets of the cosmos...",
+            "Choices": {
                 "1": {
-                    "text": "...",
-                    "next": "response1"
+                    "Text": "...",
+                    "Next": "response1"
                 },
                 "2": {
-                    "text": "Thelema?",
-                    "next": "response2"
+                    "Text": "Thelema?",
+                    "Next": "response2"
                 },
                 "3": {
-                    "text": "What is your opinion of The Book of the Law?",
-                    "next": "response3"
+                    "Text": "What is your opinion of The Book of the Law?",
+                    "Next": "response3"
                 }
             }
         },
         "response1": {
-            "text": "it’s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
-            "choices": {}
+            "Text": "it’s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
+            "Choices": {}
         },
         "response2": {
-            "text": "What a pleasant surprise.",
-            "choices": {}
+            "Text": "What a pleasant surprise.",
+            "Choices": {}
         },
         "response3": {
-            "text": "The Book of the Law is the ultimate revelation...",
-            "choices": {}
+            "Text": "The Book of the Law is the ultimate revelation...",
+            "Choices": {}
         }
     },
 
     "dayEnd": {
         "intro": {
-            "text": "You wake up at the end of the day. What will happen tonight?",
-            "choices": {
+            "Text": "You wake up at the end of the day. What will happen tonight?",
+            "Choices": {
                 "1": {
-                    "text": "Killer in the house",
-                    "next": "killerInHouse"
+                    "Text": "Killer in the house",
+                    "Next": "killerInHouse"
                 },
                 "2": {
-                    "text": "Peaceful sleep",
-                    "next": "peacefulSleep"
+                    "Text": "Peaceful sleep",
+                    "Next": "peacefulSleep"
                 },
                 "3": {
-                    "text": "Pay or die",
-                    "next": "payOrDie"
+                    "Text": "Pay or die",
+                    "Next": "payOrDie"
                 }
             }
         },
         "killerInHouse": {
-            "text": "You wake up to the sound of footsteps. There's a killer in the house!",
-            "choices": {
+            "Text": "You wake up to the sound of footsteps. There's a killer in the house!",
+            "Choices": {
                 "knife": {
-                    "text": "KNIFE",
-                    "next": "killerResolved"
+                    "Text": "KNIFE",
+                    "Next": "killerResolved"
                 }
             }
         },
         "peacefulSleep": {
-            "text": "You sleep peacefully through the night.",
-            "choices": {}
+            "Text": "You sleep peacefully through the night.",
+            "Choices": {}
         },
         "payOrDie": {
-            "text": "A menacing voice demands that you pay up or face the consequences!",
-            "choices": {
+            "Text": "A menacing voice demands that you pay up or face the consequences!",
+            "Choices": {
                 "coin": {
-                    "text": "COIN",
-                    "next": "payResolved"
+                    "Text": "COIN",
+                    "Next": "payResolved"
                 }
             }
         },
         "killerResolved": {
-            "text": "You overpowered the killer and became victorious. He did not expect you to resist.",
-            "choices": {}
+            "Text": "You overpowered the killer and became victorious. He did not expect you to resist.",
+            "Choices": {}
         },
         "payResolved": {
-            "text": "You paid and avoided the threat. The spirit, satisfied, disappeared swiftly.",
-            "choices": {}
+            "Text": "You paid and avoided the threat. The spirit, satisfied, disappeared swiftly.",
+            "Choices": {}
         }
     }
 }

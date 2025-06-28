@@ -78,53 +78,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="functionality\core.cs" />
-    <Compile Include="functionality\DialogLoader.cs" />
-    <Compile Include="functionality\GameManager.cs" />
-    <Compile Include="assets\Houses.cs">
+    <Compile Include="Functionality\Core.cs" />
+    <Compile Include="Functionality\DialogLoader.cs" />
+    <Compile Include="Functionality\GameManager.cs" />
+    <Compile Include="Assets\Houses.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="functionality\InvItem.cs" />
-    <Compile Include="scenes\secondDay.cs">
+    <Compile Include="Functionality\InvItem.cs" />
+    <Compile Include="Scenes\NextDay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="scenes\endOfDay.cs">
+    <Compile Include="Scenes\EndOfDay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="scenes\TitleScreen.cs">
+    <Compile Include="Scenes\TitleScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="scenes\TitleScreen.Designer.cs">
+    <Compile Include="Scenes\TitleScreen.Designer.cs">
       <DependentUpon>TitleScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="assets\cPlayer.cs">
+    <Compile Include="Assets\CPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="assets\npc.cs">
+    <Compile Include="Assets\Npc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="scenes\firstDay.cs">
+    <Compile Include="Scenes\FirstDay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="assets\cPlayer.resx">
-      <DependentUpon>cPlayer.cs</DependentUpon>
+    <EmbeddedResource Include="Assets\CPlayer.resx">
+      <DependentUpon>CPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="assets\Houses.resx">
+    <EmbeddedResource Include="Assets\Houses.resx">
       <DependentUpon>Houses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="scenes\secondDay.resx">
-      <DependentUpon>secondDay.cs</DependentUpon>
+    <EmbeddedResource Include="Scenes\NextDay.resx">
+      <DependentUpon>NextDay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="scenes\endOfDay.resx">
-      <DependentUpon>endOfDay.cs</DependentUpon>
+    <EmbeddedResource Include="Scenes\EndOfDay.resx">
+      <DependentUpon>EndOfDay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="scenes\TitleScreen.resx">
+    <EmbeddedResource Include="Scenes\TitleScreen.resx">
       <DependentUpon>TitleScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="assets\npc.resx">
-      <DependentUpon>npc.cs</DependentUpon>
+    <EmbeddedResource Include="Assets\Npc.resx">
+      <DependentUpon>Npc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,8 +136,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="scenes\firstDay.resx">
-      <DependentUpon>firstDay.cs</DependentUpon>
+    <EmbeddedResource Include="Scenes\FirstDay.resx">
+      <DependentUpon>FirstDay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -149,10 +149,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="resources\dialog\day1.json">
+    <Content Include="Resources\Dialog\day1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\dialog\day2.json">
+    <Content Include="Resources\Dialog\day2.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -160,21 +160,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\defPlayer.png" />
+    <None Include="Resources\defPlayer.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\basicHouse.png" />
-    <Content Include="resources\basicVillager.png" />
-    <Content Include="resources\dialog\intro.txt">
+    <Content Include="Resources\basicHouse.png" />
+    <Content Include="Resources\basicVillager.png" />
+    <Content Include="Resources\Dialog\intro.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\fireHome.png" />
-    <Content Include="resources\shopkeeper.png" />
-    <Content Include="resources\thelemaC.png" />
-    <Content Include="resources\thelemac_qbY_icon.ico" />
-    <Content Include="resources\thelemaW.png" />
-    <Content Include="resources\townbase.png" />
-    <Content Include="resources\townProto.png" />
+    <Content Include="Resources\fireHome.png" />
+    <Content Include="Resources\shopkeeper.png" />
+    <Content Include="Resources\thelemaC.png" />
+    <Content Include="Resources\thelemac_qbY_icon.ico" />
+    <Content Include="Resources\thelemaW.png" />
+    <Content Include="Resources\townbase.png" />
+    <Content Include="Resources\townProto.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

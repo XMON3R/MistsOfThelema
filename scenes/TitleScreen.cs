@@ -118,7 +118,7 @@ namespace MistsOfThelema
             go.Visible = true;
 
             DialogLoader diLo = new DialogLoader();
-            string introDialog = diLo.LoadSingleDialog("resources\\dialog\\intro.txt");
+            string introDialog = diLo.LoadSingleDialog("Resources\\Dialog\\intro.txt");
 
             introBox.Text = introDialog;
             introBox.Font = new Font("Courier New", 32, FontStyle.Regular);

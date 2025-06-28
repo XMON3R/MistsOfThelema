@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks; // Potřebné pro Task
+using System.IO;
 
 namespace MistsOfThelema
 {
@@ -269,8 +270,8 @@ namespace MistsOfThelema
                 else
                 {
                     resultText = "The killer laughed at you and stabbed you to death. DEAD";
-                    resultTimer.Start();
-                    player_s2.HP = 0;           // Set player HEALTH to zero so that the game does not progress 
+                    MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit(); // Exit the application  
                 }
             }
             else if (currentScenario == "payOrDie")
@@ -285,8 +286,8 @@ namespace MistsOfThelema
                 else
                 {
                     resultText = "There is nothing else that the spirit wanted. DEAD";
-                    resultTimer.Start();
-                    player_s2.HP = 0;           // Set player HEALTH to zero so that the game does not progress 
+                    MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit(); // Exit the application         
                 }
             }
             else if (currentScenario == "peacefulSleep")
@@ -309,15 +310,32 @@ namespace MistsOfThelema
         {
             exitGameTimer.Stop();
 
-            if(player_s2.HP == 0)
+            if (player_s2.HP == 0)
             {
-                Application.Exit();
+                Application.Exit(); // Player is dead, exit the game
             }
-
             else
             {
-                SecondDay sd = new SecondDay();
-                sd.Show();
+                // Increment the global day counter for the next day
+                GameManager.CurrentDay++;
+
+                // Construct the path for the next day's dialog file
+                string nextDayDialogPath = Path.Combine(Application.StartupPath, $"resources\\dialog\\day{GameManager.CurrentDay}.json");
+
+                // Check if the JSON file for the next day exists
+                if (File.Exists(nextDayDialogPath))
+                {
+                    // If it exists, proceed to the next day
+                    NextDay nextDayScene = new NextDay(player_s2); // Pass the player object to the next scene
+                    nextDayScene.Show();
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    // If the file does not exist, it means there are no more days defined
+                    MessageBox.Show($"You did it! You survived all {GameManager.CurrentDay - 1} days.", "Win", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit(); // Exit the application
+                }
             }
         }
     }

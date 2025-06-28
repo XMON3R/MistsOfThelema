@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Numerics;
+using System.Drawing.Text;
 
 
 namespace MistsOfThelema
 {
-    public partial class SecondDay : Form
+    public partial class NextDay : Form
     {
         private Label interactLabel;
         private Label dialogLabel;
@@ -42,8 +43,10 @@ namespace MistsOfThelema
 
         private bool isInConversation = false;
 
-        public SecondDay()
+        public NextDay(CPlayer player)
         {
+            this.cPlayer1 = player;
+
             InitializeComponent();
             // cPlayer1.PlayerMoved += CPlayer1_PlayerMoved; // Zakomentováno, jelikož není v poskytnutém kódu definováno
 
@@ -59,7 +62,11 @@ namespace MistsOfThelema
             // protože chceme, aby se načítání provedlo na pozadí.
 
             //_ = diaLoad.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
-            _ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day2.json");
+            
+            //_ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day2.json");
+
+            string dialogFile = $"resources\\dialog\\day{GameManager.CurrentDay}.json";
+            _ = diaLoad.LoadDialogsFromJsonAsync(dialogFile);
 
             // Volání InitializeInteractables by mělo být až PO inicializaci všech komponent.
             // V tvém kódu se volá před přiřazením objektů k npc1, weirdMan atd.
@@ -70,16 +77,12 @@ namespace MistsOfThelema
             choiceButtons = new List<Button>();
             talkedToList = new List<string>();
 
-            afterDialogTimer = new Timer
-            {
-                Interval = 2000
-            };
+            afterDialogTimer = new Timer();
+            afterDialogTimer.Interval = 2000;
             afterDialogTimer.Tick += DialogTimer_Tick;
 
-            endOfDayTimer = new Timer
-            {
-                Interval = 300000
-            };
+            endOfDayTimer = new Timer();
+            endOfDayTimer.Interval = 300000;
             endOfDayTimer.Tick += EndOfDay_Tick;
             endOfDayTimer.Start();
 
@@ -91,14 +94,16 @@ namespace MistsOfThelema
             playerExitHouse.InstanceName = "Your House";
             shopkeeper.InstanceName = "Shopkeeper";
 
-            PlayerStarterInventory(cPlayer1);
+            //only for first day
+            //PlayerStarterInventory(cPlayer1);
+            
             UpdateInventoryList();
         }
 
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecondDay));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NextDay));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.interactLabel = new System.Windows.Forms.Label();
             this.collisionTimer = new System.Windows.Forms.Timer(this.components);
@@ -107,11 +112,13 @@ namespace MistsOfThelema
             this.afterDialogTimer = new System.Windows.Forms.Timer(this.components);
             this.endOfDayTimer = new System.Windows.Forms.Timer(this.components);
             this.playInventory = new System.Windows.Forms.Label();
-            this.shopkeeper = new MistsOfThelema.Npc(); // Inicializace shopkeeper
-            this.weirdMan = new MistsOfThelema.Npc();   // Inicializace weirdMan
-            this.cPlayer1 = new MistsOfThelema.CPlayer(); // Inicializace cPlayer1
-            this.npc1 = new MistsOfThelema.Npc();       // Inicializace npc1
-            this.playerExitHouse = new MistsOfThelema.Houses(); // Inicializace playerExitHouse
+            this.shopkeeper = new MistsOfThelema.Npc();
+            this.weirdMan = new MistsOfThelema.Npc();
+            
+            //this.cPlayer1 = new MistsOfThelema.CPlayer();
+            
+            this.npc1 = new MistsOfThelema.Npc();
+            this.playerExitHouse = new MistsOfThelema.Houses();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dialogBox)).BeginInit();
             this.SuspendLayout();
@@ -168,6 +175,18 @@ namespace MistsOfThelema
             this.dialogBox.TabStop = false;
             this.dialogBox.Visible = false;
             //
+            // afterDialogTimer
+            //
+            this.afterDialogTimer.Enabled = true;
+            this.afterDialogTimer.Interval = 2000;
+            this.afterDialogTimer.Tick += new System.EventHandler(this.DialogTimer_Tick);
+            //
+            // endOfDayTimer
+            //
+            this.endOfDayTimer.Enabled = true;
+            this.endOfDayTimer.Interval = 300000;
+            this.endOfDayTimer.Tick += new System.EventHandler(this.EndOfDay_Tick);
+            //
             // playInventory
             //
             this.playInventory.AutoSize = true;
@@ -202,7 +221,8 @@ namespace MistsOfThelema
             // cPlayer1
             //
             this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
-            this.cPlayer1.Location = new System.Drawing.Point(34, 841);
+            // CHANGED THIS LINE
+            this.cPlayer1.Location = new System.Drawing.Point(1180, 400);
             this.cPlayer1.Name = "cPlayer1";
             this.cPlayer1.Size = new System.Drawing.Size(61, 86);
             this.cPlayer1.TabIndex = 0;
@@ -256,7 +276,6 @@ namespace MistsOfThelema
             ((System.ComponentModel.ISupportInitialize)(this.dialogBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         // --- Krok 4: Metoda pro zpracování události DialogsLoaded ---
@@ -527,14 +546,12 @@ namespace MistsOfThelema
             {
                 foreach (var choice in node.Choices)
                 {
-                    Button choiceButton = new Button
-                    {
-                        //choiceButton.BringToFront();
-                        Text = choice_number++ + ") " + choice.Value.Text,
-                        Location = new Point(dialogLabel.Left, yPosition),
-                        AutoSize = true,
-                        Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)))
-                    };
+                    Button choiceButton = new Button();
+                    //choiceButton.BringToFront();
+                    choiceButton.Text = choice_number++ + ") " + choice.Value.Text;
+                    choiceButton.Location = new Point(dialogLabel.Left, yPosition);
+                    choiceButton.AutoSize = true;
+                    choiceButton.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
                     choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.Next);
                     this.Controls.Add(choiceButton);
                     choiceButtons.Add(choiceButton);
@@ -545,13 +562,11 @@ namespace MistsOfThelema
 
 
             //end button 
-            Button endButton = new Button
-            {
-                Text = "---- End Conversation",
-                Location = new Point(dialogLabel.Left, yPosition),
-                AutoSize = true,
-                Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)))
-            };
+            Button endButton = new Button();
+            endButton.Text = "---- End Conversation";
+            endButton.Location = new Point(dialogLabel.Left, yPosition);
+            endButton.AutoSize = true;
+            endButton.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             endButton.Click += (sender, args) => EndConversation();
             this.Controls.Add(endButton);
             choiceButtons.Add(endButton);

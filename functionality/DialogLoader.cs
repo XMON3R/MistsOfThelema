@@ -26,10 +26,10 @@ namespace MistsOfThelema
 
         public string LoadSingleDialog(string filePath)
         {
+            string dialogContent = "";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string endPath = Path.Combine(basePath, filePath);
 
-            string dialogContent;
             try
             {
                 dialogContent = File.ReadAllText(endPath);
