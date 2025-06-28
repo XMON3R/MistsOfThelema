@@ -114,7 +114,7 @@ Your inventory holds items that help you survive or affect outcomes:
 
 ### 5.5 The Day/Night Cycle and End-of-Day Scenarios
 
-Time progresses in *Mists of Thelema*. A day ends in one of two ways:
+Time progresses in *Mists of Thelema*. A day ends in two of two ways:
 
 - **Timer Expiration:** The day ends automatically after a time limit.  
 - **Manual End:** Walk into your red-labeled house on the map.
@@ -146,7 +146,7 @@ If you encounter issues:
 A: Check system requirements, extract all files from the `.zip`, and try running `MistsOfThelema.exe` as administrator.
 
 **Q: Why does the game end so quickly?**  
-A: The current version is a demo with one playable day.
+A: The current version is a demo with two playable day.
 
 **Q: Can I save my game progress?**  
 A: Not yet. Saving will be introduced in future updates.
@@ -158,7 +158,7 @@ A: No. This is a design choice to make each interaction meaningful.
 
 ## 8. Current Version Extensions & Future Updates
 
-Currently, the game features one playable day. Planned features include:
+Currently, the game features two playable day. Planned features include:
 
 - **Multi-day Gameplay** – Extended story and progression  
 - **Expanded Dialogues** – More NPCs and branches  
