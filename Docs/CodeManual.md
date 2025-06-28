@@ -90,9 +90,9 @@ To get a local copy of the project up and running, follow these steps:
 4\. Program and Mechanics
 -------------------------
 
-The game is structured into different scenes, each represented by a `Form` derived from the WinForms library. The `Program.cs` entry point first opens the `TitleScreen` scene. This form displays the game's logo, an introductory text, and interactive buttons that allow the player to start the main game scene, referred to as "scene_1".
+The game is structured into different scenes, each represented by a `Form` derived from the WinForms library. The `Program.cs` entry point first opens the `TitleScreen` scene. This form displays the game's logo, an introductory text, and interactive buttons that allow the player to start the main game scene, referred to as "FirstDay". 
 
-**Scene 1** is the core gameplay loop. It includes:
+**FirstDay + NextDay** is the core gameplay loop. It includes:
 
 -   **Collision detection** between the player character and various game objects (NPCs, houses).
 
@@ -100,13 +100,15 @@ The game is structured into different scenes, each represented by a `Form` deriv
 
 -   **Player movement boundaries** to prevent the character from leaving the playable area.
 
+-   **Item pickups** for Day 2.
+
 This scene makes use of several custom-created classes to simplify the program's structure and make future extensions easier.
 
 **Transitioning to Scene 2 (`EndOfDay`)**
 
-From Scene 1, the player transitions to Scene 2, the `EndOfDay` form. This transition occurs either when a global timer expires or when the player interacts with a specific `Houses` object named "Your House".
+From FirstDay or NextDay, the player transitions to Scene 2, the `EndOfDay` form. This transition occurs when the player interacts with a specific `Houses` object named "Your House".
 
-In **Scene 2**, a random event is triggered using the `Random` class from the `System` library. These events are also described in an accompanying JSON file, and several functions evaluate these files to determine what should happen. For a better understanding, I again refer to the code itself. The game currently ends in this scene.
+In **Scene 2**, a random event is triggered using the `Random` class from the `System` library. These events are also described in an accompanying JSON file, and several functions evaluate these files to determine what should happen. The game currently ends as a soon as not json file with the next day number exists.
 
 ### 4.1 Project Structure
 
@@ -114,7 +116,7 @@ The project is organized into the following key directories:
 
 -   **`MistsOfThelema/`**: The root directory of the main project.
 
-    -   **`Assets/`**: Contains custom UI controls and game entities like `cPlayer.cs`, `Npc.cs`, `Houses.cs`, and `ItemPickup.cs`.
+    -   **`Assets/`**: Contains custom UI controls and game entities like `CPlayer.cs`, `Npc.cs`, `Houses.cs`, and `ItemPickup.cs`.
 
     -   **`Functionality/`**: Holds core game logic and utility classes such as `DialogLoader.cs`, `GameManager.cs`, `InvItem.cs`, and `Core.cs`.
 
@@ -122,7 +124,7 @@ The project is organized into the following key directories:
 
     -   **`Scenes/`**: Contains the different `Form` classes representing game scenes, e.g., `TitleScreen.cs`, `FirstDay.cs`, `NextDay.cs`, and `EndOfDay.cs`.
 
-    -   **`docs/`**: This documentation and any other project-related documents.
+    -   **`Docs/`**: This documentation and user documentation.
 
     -   **`Program.cs`**: The application's entry point.
 
@@ -142,7 +144,7 @@ After building the project in Visual Studio:
 
 My work on the game began with the creation of individual scenes and pixel art textures for the game objects and backgrounds, which I created in the online application **Piskel**. I then focused on player movement and restricting movement within defined "boundaries" to prevent the player from moving outside the playable area. Subsequently, I worked on the layout of individual elements, including layering, display, and obscuring.
 
-From a functional perspective, I would highlight the loading and processing of JSON files via the `DialogLoader` class, as well as the display of dialogues and interaction with NPCs in Scene 1.
+From a functional perspective, I would highlight the loading and processing of JSON files via the `DialogLoader` class, as well as the display of dialogues and interaction with NPCs in FirstDay / NextDay scene.
 
 ### 4.4 Key Classes and Modules
 
@@ -273,12 +275,7 @@ Contributions are welcome! If you wish to contribute to `Mists of Thelema`, plea
 
 6.  **Submit a Pull Request** to the `main` branch, describing your changes and their purpose.
 
-6\. Licensing
--------------
-
-This project is licensed under the **MIT License**. See the `LICENSE` file in the repository root for full details.
-
-7\. Conclusion
+6\. Conclusion
 --------------
 
 The creation of this application itself taught me a lot, and I believe I better understood many concepts from lectures and exercises. In practice, I was able to test the usefulness of many constructs on a larger program, for which I am truly grateful. At the same time, I decided that I would continue to work on the game even outside the scope of this subject.
