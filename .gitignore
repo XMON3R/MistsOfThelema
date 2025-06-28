@@ -1,40 +1,46 @@
+.# Visual Studio
 .vs/
 *.suo
 *.user
-*.pdb
-*.obj
+*.bak
+*.orig
+*.~*
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+[Dd]ist/
+
+# Visual Studio 2017 and newer
+.vs/
+.vs/bin/
+.vs/obj/
+.vs/MistsOfThelema/
+
+# Compiled files and binaries
 *.exe
 *.dll
-*.aps
-*.bsc
-*.cscfg
-*.csdproj
-*.csproj.user
-*.dataschema
-*.dbmdl
-*.dnn
-*.dwml
-*.log
-*.mdf
-*.ndf
-*.sql
-*.vstemplate
-*.webinfo
+*.pdb
+*.xml
 *.cache
-
-# Build artifacts
-[Bb]in/
-[Oo]bj/
+*.resources
 
 # NuGet packages
 packages/
-*.nupkg
-.nuget/NuGetScratch/
 
-# Resharper and other extensions
-*.DotSettings
+# Rider
+.idea/
+*.sln.DotSettings
 *.userprefs
 
-# Miscellaneous
-_ReSharper.*/
-[Pp]roperties/launchSettings.json 
+# Unity
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Assets/Plugins/Editor/
+Assets/Plugins/External/

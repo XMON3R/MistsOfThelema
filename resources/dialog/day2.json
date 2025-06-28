@@ -1,100 +1,97 @@
 {
     "Theo": {
         "intro": {
-            "Text": "Hello, traveler! What brings you to these parts?",
+            "Text": "Good morning! Did you settle in well after your first day in town?",
             "Choices": {
                 "1": {
-                    "Text": "Bought a house here. I am Simel",
+                    "Text": "Yes, I did. Thanks for the welcome.",
                     "Next": "response1"
                 },
                 "2": {
-                    "Text": "Looking for bussiness.",
+                    "Text": "I heard about the thief from yesterday. Was that culprit caught?",
                     "Next": "response2"
                 },
                 "3": {
-                    "Text": "None of your business.",
+                    "Text": "I have some business ideas. Can I ask for some advice?",
                     "Next": "response3"
                 }
             }
         },
         "response1": {
-            "Text": "Nice to have a new friendly face around here!",
+            "Text": "That's great to hear! It's important to feel at home here.",
             "Choices": {}
         },
         "response2": {
-            "Text": "There are many things to do, but you better settle in and check tommorow...",
+            "Text": "Ah, yes. The culprit was apprehended by the guard, a local scoundrel. The town is safe again, for now.",
             "Choices": {}
         },
         "response3": {
-            "Text": "No need to be rude. Watch your back though.",
+            "Text": "This town thrives on trade with travelers and merchants. There are many opportunities...",
             "Choices": {}
         }
     },
-
     "Shopkeeper": {
         "intro": {
-            "Text": "Greetings, welcome to my humble shop. Sadly, we are closed today.",
+            "Text": "Welcome! We are open for business today. Please, take a look around.",
             "Choices": {
                 "1": {
-                    "Text": "Why is the shop closed?",
-                    "Next": "response1"
+                    "Text": "I'd like to browse your wares.",
+                    "Next": "browse"
                 },
                 "2": {
-                    "Text": "Go to hell.",
-                    "Next": "response2"
+                    "Text": "I heard your shop was robbed yesterday.",
+                    "Next": "thiefInquiry"
                 },
                 "3": {
-                    "Text": "I love your shop!",
-                    "Next": "response3"
+                    "Text": "I am looking for something specific.",
+                    "Next": "specificItem"
                 }
             }
         },
-        "response1": {
-            "Text": "Sadly, there was a thief around today, better watch out! Come tommorow.",
+        "browse": {
+            "Text": "Wonderful! We have everything from enchanted potions to rare artifacts.",
             "Choices": {}
         },
-        "response2": {
-            "Text": "Nice to meet you too, barbarian.",
+        "thiefInquiry": {
+            "Text": "It was a frightful night, but the culprit has been dealt with. We're all a bit more vigilant now.",
             "Choices": {}
         },
-        "response3": {
-            "Text": "Thanks! Come tommorow to check our wares...",
+        "specificItem": {
+            "Text": "Tell me what you are looking for, and I will see if I can assist you.",
             "Choices": {}
         }
     },
-
     "Weird man": {
         "intro": {
-            "Text": "The True Will is the key to unlocking the deepest secrets of the cosmos...",
+            "Text": "Every man and every woman is a star... a universe of potential waiting to be unlocked.",
             "Choices": {
                 "1": {
-                    "Text": "...",
-                    "Next": "response1"
+                    "Text": "You said something about the 'True Will' yesterday. What is it?",
+                    "Next": "trueWillExplanation"
                 },
                 "2": {
-                    "Text": "Thelema?",
-                    "Next": "response2"
+                    "Text": "What secrets are you talking about?",
+                    "Next": "secrets"
                 },
                 "3": {
-                    "Text": "What is your opinion of The Book of the Law?",
-                    "Next": "response3"
+                    "Text": "Is that a quote from The Book of the Law?",
+                    "Next": "quoteInquiry"
                 }
             }
         },
-        "response1": {
-            "Text": "it’s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
+        "trueWillExplanation": {
+            "Text": "It is the ultimate purpose of your being, independent of all desires and cravings. Find it, and you will find your path.",
             "Choices": {}
         },
-        "response2": {
-            "Text": "What a pleasant surprise.",
+        "secrets": {
+            "Text": "The secrets are not hidden. They are simply waiting to be seen by those with the eyes to see them.",
             "Choices": {}
         },
-        "response3": {
-            "Text": "The Book of the Law is the ultimate revelation...",
+        "quoteInquiry": {
+            "Text": "Indeed. A fundamental truth for those on the path of Thelema. You are more knowledgeable than you let on.",
             "Choices": {}
         }
     },
-
     "dayEnd": {
         "intro": {
             "Text": "You wake up at the end of the day. What will happen tonight?",
@@ -123,7 +120,7 @@
             }
         },
         "peacefulSleep": {
-            "Text": "You sleep peacefully through the night.",
+            "Text": "You sleep peacefully through the next night.",
             "Choices": {}
         },
         "payOrDie": {
