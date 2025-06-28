@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MistsOfThelema
 {
-    public interface IgameItem
+    public interface IIgameItem
     {
         string Name { get; }
         int Id { get; }
@@ -16,7 +16,7 @@ namespace MistsOfThelema
     }
 
 
-    public class Coin : IgameItem
+    public class Coin : IIgameItem
     {
         public string Name { get; private set; }
         public int Id { get; private set; }
@@ -39,7 +39,7 @@ namespace MistsOfThelema
         }
     }
 
-    public class Apple : IgameItem
+    public class Apple : IIgameItem
     {
         public string Name { get; private set; }
         public int Id { get; private set; }
@@ -56,17 +56,19 @@ namespace MistsOfThelema
             UsableTimes = usableTimes;
         }
 
+        
         public void Use() //extension
         {
+            /*
             cPlayer.HP += HealAmount;
             if (cPlayer.HP > 100)
             {
                 cPlayer.HP = 100;
-            }
+            }*/
         }
     }
 
-    public class Knife : IgameItem
+    public class Knife : IIgameItem
     {
         public string Name { get; private set; }
         public int Id { get; private set; }
@@ -88,7 +90,7 @@ namespace MistsOfThelema
     }
 
 
-    public class InvItem : IgameItem
+    public class InvItem : IIgameItem
     {
         public string Name { get; }
         public int Id { get; }

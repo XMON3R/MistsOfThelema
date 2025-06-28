@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace MistsOfThelema
 {
-    public partial class Scene1 : Form
+    public partial class SecondDay : Form
     {
         private Label interactLabel;
         private Label dialogLabel;
@@ -42,7 +42,7 @@ namespace MistsOfThelema
 
         private bool isInConversation = false;
 
-        public Scene1()
+        public SecondDay()
         {
             InitializeComponent();
             // cPlayer1.PlayerMoved += CPlayer1_PlayerMoved; // Zakomentováno, jelikož není v poskytnutém kódu definováno
@@ -59,7 +59,7 @@ namespace MistsOfThelema
             // protože chceme, aby se načítání provedlo na pozadí.
 
             //_ = diaLoad.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
-            _ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
+            _ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day2.json");
 
             // Volání InitializeInteractables by mělo být až PO inicializaci všech komponent.
             // V tvém kódu se volá před přiřazením objektů k npc1, weirdMan atd.
@@ -94,7 +94,7 @@ namespace MistsOfThelema
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecondDay));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.interactLabel = new System.Windows.Forms.Label();
             this.collisionTimer = new System.Windows.Forms.Timer(this.components);
@@ -225,7 +225,7 @@ namespace MistsOfThelema
             this.playerExitHouse.Size = new System.Drawing.Size(225, 109);
             this.playerExitHouse.TabIndex = 5;
             //
-            // Scene1
+            // SecondDay
             //
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.townProto;
@@ -247,7 +247,7 @@ namespace MistsOfThelema
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1440, 1080);
             this.MinimumSize = new System.Drawing.Size(1440, 1038);
-            this.Name = "Scene1";
+            this.Name = "SecondDay";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dialogBox)).EndInit();
             this.ResumeLayout(false);
@@ -424,7 +424,7 @@ namespace MistsOfThelema
                 //your house scenario
                 if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Your House")
                 {
-                    TransitionToScene2();
+                    TransitionToEndOfDay();
                     break;
                 }
 
@@ -609,7 +609,7 @@ namespace MistsOfThelema
 
 
         //inventory functions bellow
-        private void AddItemToPlayer(IgameItem item) // Změnil jsem na IgameItem, předpokládám, že takový interface máš
+        private void AddItemToPlayer(IIgameItem item) // Změnil jsem na IgameItem, předpokládám, že takový interface máš
         {
             cPlayer1.AddItem(item);
             UpdateInventoryList();
@@ -638,10 +638,10 @@ namespace MistsOfThelema
             player.AddItem(apple);
         }
 
-        private void TransitionToScene2()
+        private void TransitionToEndOfDay()
         {
             this.Hide();
-            Scene2 newScene = new Scene2(cPlayer1);
+            EndOfDay newScene = new EndOfDay(cPlayer1);
             newScene.Show();
             /*
             newScene.ShowDialog();
@@ -662,7 +662,7 @@ namespace MistsOfThelema
 
         private void endOfDay_Tick(object sender, EventArgs e)
         {
-            TransitionToScene2();
+            TransitionToEndOfDay();
         }
 
         private void label1_Click_1(object sender, EventArgs e)

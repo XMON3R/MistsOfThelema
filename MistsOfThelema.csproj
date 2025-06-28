@@ -84,7 +84,10 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="InvItem.cs" />
-    <Compile Include="scenes\scene_2.cs">
+    <Compile Include="scenes\secondDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="scenes\endOfDay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="scenes\TitleScreen.cs">
@@ -99,7 +102,7 @@
     <Compile Include="npc.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="scenes\scene_1.cs">
+    <Compile Include="scenes\firstDay.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -110,8 +113,11 @@
     <EmbeddedResource Include="Houses.resx">
       <DependentUpon>Houses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="scenes\scene_2.resx">
-      <DependentUpon>scene_2.cs</DependentUpon>
+    <EmbeddedResource Include="scenes\secondDay.resx">
+      <DependentUpon>secondDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="scenes\endOfDay.resx">
+      <DependentUpon>endOfDay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="scenes\TitleScreen.resx">
       <DependentUpon>TitleScreen.cs</DependentUpon>
@@ -129,8 +135,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="scenes\scene_1.resx">
-      <DependentUpon>scene_1.cs</DependentUpon>
+    <EmbeddedResource Include="scenes\firstDay.resx">
+      <DependentUpon>firstDay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -144,6 +150,9 @@
     </Compile>
     <Content Include="resources\dialog\day1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\dialog\day2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

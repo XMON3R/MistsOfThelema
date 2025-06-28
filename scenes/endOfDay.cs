@@ -8,7 +8,7 @@ using System.Threading.Tasks; // Potřebné pro Task
 
 namespace MistsOfThelema
 {
-    public partial class Scene2 : Form
+    public partial class EndOfDay : Form
     {
         private cPlayer player_s2;
         private Panel ItemButtonsPanel;
@@ -21,7 +21,7 @@ namespace MistsOfThelema
         private Timer introTimer;
         private string resultText;
 
-        public Scene2(cPlayer player)
+        public EndOfDay(cPlayer player)
         {
             InitializeComponent();
             this.player_s2 = player;
@@ -68,7 +68,7 @@ namespace MistsOfThelema
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Scene2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EndOfDay));
             this.ItemButtonsPanel = new System.Windows.Forms.Panel();
             this.ScenarioTextLabel = new System.Windows.Forms.Label();
             this.resultTimer = new System.Windows.Forms.Timer(this.components);
@@ -109,7 +109,7 @@ namespace MistsOfThelema
             // 
             this.introTimer.Interval = 5000;
             // 
-            // Scene2
+            // EndOfDay
             // 
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.fireHome;
@@ -123,8 +123,8 @@ namespace MistsOfThelema
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1440, 1080);
             this.MinimumSize = new System.Drawing.Size(1440, 1038);
-            this.Name = "Scene2";
-            this.Text = "Scene2";
+            this.Name = "EndOfDay";
+            this.Text = "EndOfDay";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +270,7 @@ namespace MistsOfThelema
                 {
                     resultText = "The killer laughed at you and stabbed you to death. DEAD";
                     resultTimer.Start();
+                    player_s2.HP = 0;           // Set player HEALTH to zero so that the game does not progress 
                 }
             }
             else if (currentScenario == "payOrDie")
@@ -285,6 +286,7 @@ namespace MistsOfThelema
                 {
                     resultText = "There is nothing else that the spirit wanted. DEAD";
                     resultTimer.Start();
+                    player_s2.HP = 0;           // Set player HEALTH to zero so that the game does not progress 
                 }
             }
             else if (currentScenario == "peacefulSleep")
@@ -306,7 +308,17 @@ namespace MistsOfThelema
         private void ExitGameTimer_Tick(object sender, EventArgs e)
         {
             exitGameTimer.Stop();
-            Application.Exit();
+
+            if(player_s2.HP == 0)
+            {
+                Application.Exit();
+            }
+
+            else
+            {
+                SecondDay sd = new SecondDay();
+                sd.Show();
+            }
         }
     }
 }

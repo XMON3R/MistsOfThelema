@@ -23,8 +23,8 @@ namespace MistsOfThelema
         //public event EventHandler PlayerMoved;
 
         public static int speed { get; set; } = 5;
-        public static int HP { get; set; } = 100;
-        public List<IgameItem> Inventory {  get; private set; } 
+        public int HP { get; set; } = 100;
+        public List<IIgameItem> Inventory {  get; private set; } 
 
         //int[] borderCoord = {-40,1322,204,914};
         int[] borderCoord = { 5, 1365, 224, 965 };
@@ -98,10 +98,10 @@ namespace MistsOfThelema
         {
             InitializeComponent();
             HP = 100;
-            Inventory = new List<IgameItem>();
+            Inventory = new List<IIgameItem>();
         }
 
-        public void AddItem(IgameItem item1)
+        public void AddItem(IIgameItem item1)
         {
             Inventory.Add(item1);
         }
@@ -123,7 +123,6 @@ namespace MistsOfThelema
         {
             return this.Bounds;
         }
-
 
         private void playerClick(object sender, EventArgs e)
         {

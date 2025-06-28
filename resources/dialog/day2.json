@@ -1,14 +1,14 @@
 {
     "Theo": {
         "intro": {
-            "text": "DAY 2 ! HOW YOU FEELING ?",
+            "text": "DAY TWO MOTHERTRUCKER !",
             "choices": {
                 "1": {
-                    "text": "Bought a house here. I am Simel",
+                    "text": "Eh",
                     "next": "response1"
                 },
                 "2": {
-                    "text": "Looking for bussiness.",
+                    "text": "AH.",
                     "next": "response2"
                 },
                 "3": {
@@ -82,7 +82,7 @@
             }
         },
         "response1": {
-            "text": "it’s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
+            "text": "itï¿½s not just a philosophical concept but a living, breathing force that guides us beyond the mundane.",
             "choices": {}
         },
         "response2": {

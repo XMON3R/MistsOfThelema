@@ -132,7 +132,7 @@ namespace MistsOfThelema
             introBox.Hide();
             go.Hide();
 
-            Scene1 s1 = new Scene1();
+            FirstDay s1 = new FirstDay();
             s1.Show();
 
             this.Hide();
