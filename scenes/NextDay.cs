@@ -115,8 +115,6 @@ namespace MistsOfThelema
             this.shopkeeper = new MistsOfThelema.Npc();
             this.weirdMan = new MistsOfThelema.Npc();
             
-            //this.cPlayer1 = new MistsOfThelema.CPlayer();
-            
             this.npc1 = new MistsOfThelema.Npc();
             this.playerExitHouse = new MistsOfThelema.Houses();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
