@@ -1,17 +1,21 @@
-﻿using System;
+﻿// Import necessary libraries for the Windows Forms application.
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks; // Potřebné pro Task
+using System.Threading.Tasks; // Necessary for Task
 using System.IO;
 
+// Define the namespace for the application.
 namespace MistsOfThelema
 {
-    public partial class EndOfDay : Form
+    // Define the partial class for the EndOfDay form, inheriting from Form.
+    public partial class EndOfDay : Form
     {
-        private CPlayer player_s2;
+        // Private fields to hold references to game objects and UI components.
+        private CPlayer player_s2;
         private Panel ItemButtonsPanel;
         private Label ScenarioTextLabel;
         private DialogLoader diaLo;
@@ -22,74 +26,72 @@ namespace MistsOfThelema
         private Timer introTimer;
         private string resultText;
 
-        public EndOfDay(CPlayer player)
+        // Constructor for the EndOfDay form. It takes a CPlayer object as an argument.
+        public EndOfDay(CPlayer player)
         {
-            InitializeComponent();
-            this.player_s2 = player;
+            InitializeComponent();
+            // Store the player object passed into the constructor.
+            this.player_s2 = player;
 
-            // --- Krok 1: Inicializace DialogLoaderu ---
-            diaLo = new DialogLoader();
+            // --- Step 1: Initialize DialogLoader ---
+            diaLo = new DialogLoader();
 
-            // --- Krok 2: Přihlášení k události DialogsLoaded ---
-            diaLo.DialogsLoaded += OnDialogsLoaded;
+            // --- Step 2: Subscribe to the DialogsLoaded event ---
+            // Subscribe to the DialogsLoaded event. The OnDialogsLoaded method will be called when the event is triggered.
+            diaLo.DialogsLoaded += OnDialogsLoaded;
 
-            // --- Krok 3: Spuštění asynchronního načítání dialogů ---
-            // Spustíme načítání na pozadí. Nechceme, aby konstruktor čekal.
+            // --- Step 3: Start asynchronous dialog loading ---
+            // Start loading in the background. We don't want the constructor to wait.
+            // Asynchronously load dialogs from the JSON file. Using `_ =` discards the Task, so the constructor doesn't wait for it to complete.
+            _ = diaLo.LoadDialogsFromJsonAsync($"resources\\dialog\\day{GameManager.CurrentDay}.json");
 
-            //_ = diaLo.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
-            _ = diaLo.LoadDialogsFromJsonAsync("resources\\dialog\\day1.json");
-
-            //intro timer
-            introTimer = new Timer
+            // Initialize the intro timer.
+            introTimer = new Timer
             {
-                Interval = 5000
-            };
-            introTimer.Tick += IntroTimer_Tick;
+                Interval = 5000 
+            };
+            introTimer.Tick += IntroTimer_Tick; 
 
-            //story timer
-            resultTimer = new Timer
+            // Initialize the story timer (resultTimer).
+            resultTimer = new Timer
             {
                 Interval = 7000
-            };
-            resultTimer.Tick += ResultTimer_Tick;
+            };
+            resultTimer.Tick += ResultTimer_Tick; 
 
-            //exit timer
-            exitGameTimer = new Timer
+            // Initialize the exit game timer.
+            exitGameTimer = new Timer
             {
                 Interval = 8000
-            };
-            exitGameTimer.Tick += ExitGameTimer_Tick;
+            };
+            exitGameTimer.Tick += ExitGameTimer_Tick; 
+        }
 
-            // !!! DŮLEŽITÉ !!!
-            // IntroScenario se nespustí ihned zde. Spustí se až poté,
-            // co se načtou dialogy v metodě OnDialogsLoaded.
-            // IntroScenario(); // Tento řádek je nyní zakomentován/odstraněn
-        }
-
-        private void InitializeComponent()
+        // Auto-generated method for component initialization.
+        private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EndOfDay));
-            this.ItemButtonsPanel = new System.Windows.Forms.Panel();
-            this.ScenarioTextLabel = new System.Windows.Forms.Label();
-            this.resultTimer = new System.Windows.Forms.Timer(this.components);
-            this.exitGameTimer = new System.Windows.Forms.Timer(this.components);
-            this.introTimer = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
-            // 
-            // ItemButtonsPanel
-            // 
-            this.ItemButtonsPanel.BackColor = System.Drawing.Color.Black;
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EndOfDay));
+            this.ItemButtonsPanel = new System.Windows.Forms.Panel();
+            this.ScenarioTextLabel = new System.Windows.Forms.Label();
+            this.resultTimer = new System.Windows.Forms.Timer(this.components);
+            this.exitGameTimer = new System.Windows.Forms.Timer(this.components);
+            this.introTimer = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // ItemButtonsPanel
+            // 
+            this.ItemButtonsPanel.BackColor = System.Drawing.Color.Black;
             this.ItemButtonsPanel.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ItemButtonsPanel.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.ItemButtonsPanel.Location = new System.Drawing.Point(570, 851);
             this.ItemButtonsPanel.Name = "ItemButtonsPanel";
             this.ItemButtonsPanel.Size = new System.Drawing.Size(380, 100);
             this.ItemButtonsPanel.TabIndex = 0;
-            // 
-            // ScenarioTextLabel
-            // 
-            this.ScenarioTextLabel.AutoSize = true;
+            // 
+            // ScenarioTextLabel
+            // 
+            this.ScenarioTextLabel.AutoSize = true;
             this.ScenarioTextLabel.BackColor = System.Drawing.Color.IndianRed;
             this.ScenarioTextLabel.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ScenarioTextLabel.Location = new System.Drawing.Point(147, 675);
@@ -97,22 +99,22 @@ namespace MistsOfThelema
             this.ScenarioTextLabel.Size = new System.Drawing.Size(1181, 30);
             this.ScenarioTextLabel.TabIndex = 1;
             this.ScenarioTextLabel.Text = "They say strange things happen here at night... What will happen tonight?";
-            // 
-            // resultTimer
-            // 
-            this.resultTimer.Interval = 7000;
-            // 
-            // exitGameTimer
-            // 
-            this.exitGameTimer.Interval = 8000;
-            // 
-            // introTimer
-            // 
-            this.introTimer.Interval = 5000;
-            // 
-            // EndOfDay
-            // 
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            // 
+            // resultTimer
+            // 
+            this.resultTimer.Interval = 7000;
+            // 
+            // exitGameTimer
+            // 
+            this.exitGameTimer.Interval = 8000;
+            // 
+            // introTimer
+            // 
+            this.introTimer.Interval = 5000;
+            // 
+            // EndOfDay
+            // 
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::MistsOfThelema.Properties.Resources.fireHome;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1424, 1041);
@@ -130,212 +132,249 @@ namespace MistsOfThelema
             this.PerformLayout();
 
         }
-        // --- Krok 4: Metoda pro zpracování události DialogsLoaded ---
-        private void OnDialogsLoaded(bool success, string errorMessage)
+        // --- Step 4: Method to handle the DialogsLoaded event ---
+        // This method is an event handler for when dialogs are successfully loaded.
+        private void OnDialogsLoaded(bool success, string errorMessage)
         {
-            // !!! DŮLEŽITÉ !!!
-            // Tato metoda může být volána z jiného vlákna (než UI vlákno),
-            // proto je nutné ověřit a případně přesunout volání na UI vlákno.
-            if (this.InvokeRequired)
+            // This method can be called from a thread other than the UI thread,
+            // so it is necessary to check and, if necessary, move the call to the UI thread.
+            // Check if the method is being called from a different thread than the UI thread.
+            if (this.InvokeRequired)
             {
-                this.Invoke(new DialogLoader.DialogsLoadedEventHandler(OnDialogsLoaded), new object[] { success, errorMessage });
-                return;
-            }
+                // If so, marshal the call to the UI thread using Invoke.
+                this.Invoke(new DialogLoader.DialogsLoadedEventHandler(OnDialogsLoaded), new object[] { success, errorMessage });
+                return; // Exit the method after invoking.
+            }
 
-            // Kód níže se spustí vždy na UI vlákně
-            if (success)
+            // The code below will always run on the UI thread
+            if (success)
             {
-                // Dialogy byly úspěšně načteny.
-                // Nyní je bezpečné spustit úvodní scénář nebo jakoukoli logiku
-                //, která závisí na načtených dialozích.
-                IntroScenario();
+                // If dialogs loaded successfully, start the intro scenario.
+                IntroScenario();
             }
             else
             {
-                // Došlo k chybě při načítání dialogů.
-                MessageBox.Show($"Dialog Error: {errorMessage}\nError Loading Dialog", "Dialog Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit(); // Ukončení hry v případě kritické chyby
-            }
+                // An error occurred while loading the dialogs.
+                // If there was an error, show a message box and exit the application.
+                MessageBox.Show($"Dialog Error: {errorMessage}\nError Loading Dialog", "Dialog Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit(); // Exit the game
+            }
         }
 
-        private void IntroScenario()
+        // Method to start the introductory scenario.
+        private void IntroScenario()
         {
-            // Zobrazí úvodní text scénáře.
-            // Text je stejný, jen se ujistíme, že se zobrazí, až jsou dialogy načteny.
-            ScenarioTextLabel.Text = "They say strange things happen here at night... What will happen tonight?";
-            introTimer.Start();
-        }
+            // Displays the introductory scenario text.
+            // The text is the same, we just make sure it displays after the dialogs are loaded.
+            // Display the introductory text for the scenario.
+            ScenarioTextLabel.Text = "They say strange things happen here at night... What will happen tonight?";
+            introTimer.Start(); // Start the intro timer.
+        }
 
-        private void IntroTimer_Tick(object sender, EventArgs e)
+        // Event handler for the intro timer's Tick event.
+        private void IntroTimer_Tick(object sender, EventArgs e)
         {
-            introTimer.Stop();
-            StartScenario();
-        }
+            introTimer.Stop(); 
+            StartScenario(); 
+        }
 
-        private void StartScenario()
+        // Method to start the main scenario for the end of the day.
+        private void StartScenario()
         {
-            // Zkontrolujeme, zda jsou dialogy načteny, než se pokusíme je použít.
-            if (diaLo.Dialogs == null)
+            // We check if the dialogs are loaded before trying to use them.
+            // Check if dialogs have been loaded before trying to use them.
+            if (diaLo.Dialogs == null)
             {
-                ScenarioTextLabel.Text = "Dialog error?";
-                // Zde můžete zvolit, zda počkat, opakovat, nebo ukončit hru.
-                // Prozatím jen zobrazíme zprávu.
-                exitGameTimer.Start(); // Můžete zvážit okamžité ukončení, pokud dialogy nejsou k dispozici
-                return;
+                // If not, display an error message and start the exit timer.
+                ScenarioTextLabel.Text = "Dialog error?";
+                // Here you can choose whether to wait, repeat, or end the game.
+                // For now, we will just display a message.
+                exitGameTimer.Start(); // You might consider an immediate exit if dialogs are not available
+                return;
             }
 
-            bool hasCoin = player_s2.Inventory.Any(item => item.Name == "Coin");
+            // Check the player's inventory for specific items.
+            bool hasCoin = player_s2.Inventory.Any(item => item.Name == "Coin");
             bool hasKnife = player_s2.Inventory.Any(item => item.Name == "Knife");
 
-            string[] scenarios = { "killerInHouse", "peacefulSleep", "payOrDie" };
+            // Define a list of possible scenarios.
+            string[] scenarios = { "killerInHouse", "peacefulSleep", "payOrDie" };
 
-            Random random = new Random();
+            // Select a random scenario from the list.
+            Random random = new Random();
             int index = random.Next(scenarios.Length);
             currentScenario = scenarios[index];
 
-            if (currentScenario == "killerInHouse" && !(hasKnife))
+            // Handle the "killerInHouse" scenario if the player doesn't have a knife.
+            if (currentScenario == "killerInHouse" && !(hasKnife))
             {
-                ScenarioTextLabel.Text = "You don't have anything to defend yourself. The killer is drawing near.";
+                // Display the text for the death scenario.
+                ScenarioTextLabel.Text = "You don't have anything to defend yourself. The killer is drawing near.";
                 resultText = "The killer mercilessly watched the life drift from your eyes. DEAD";
-                resultTimer.Start();
-                return;
-            }
+                resultTimer.Start(); // Start the result timer to show the outcome.
+                return; // Exit the method.
+            }
 
-            if (currentScenario == "payOrDie" && !hasCoin)
+            // Handle the "payOrDie" scenario if the player doesn't have a coin.
+            if (currentScenario == "payOrDie" && !hasCoin)
             {
-                ScenarioTextLabel.Text = "You don't even have a dime. You failed to satisfy the spirit.";
+                // Display the text for the death scenario.
+                ScenarioTextLabel.Text = "You don't even have a dime. You failed to satisfy the spirit.";
                 resultText = "The spirits tears your body apart until only dust remains. DEAD";
-                resultTimer.Start();
-                return;
-            }
+                resultTimer.Start(); // Start the result timer to show the outcome.
+                return; // Exit the method.
+            }
 
-            DisplayScenario(currentScenario, diaLo);
+            // Display the selected scenario.
+            DisplayScenario(currentScenario, diaLo);
         }
 
-        private void DisplayScenario(string scenario, DialogLoader diaLo)
+        // Method to display a specific scenario from the loaded dialogs.
+        private void DisplayScenario(string scenario, DialogLoader diaLo)
         {
-            ItemButtonsPanel.Controls.Clear();
+            ItemButtonsPanel.Controls.Clear(); // Clear any existing buttons from the panel.
 
-            // Ujistíme se, že je diaLo.Dialogs inicializováno před voláním GetDialogNode
-            if (diaLo.Dialogs == null)
+            // We make sure that diaLo.Dialogs is initialized before calling GetDialogNode.
+            // Ensure that diaLo.Dialogs is initialized before calling GetDialogNode.
+            if (diaLo.Dialogs == null)
             {
-                ScenarioTextLabel.Text = "Chyba: Dialogs not loaded.";
+                // If not, display an error message and return.
+                ScenarioTextLabel.Text = "Error: Dialogs not loaded.";
                 return;
             }
 
-            var scenarioNode = diaLo.GetDialogNode("dayEnd", scenario);
+            // Get the dialog node for the specified scenario.
+            var scenarioNode = diaLo.GetDialogNode("dayEnd", scenario);
             if (scenarioNode == null)
             {
-                ScenarioTextLabel.Text = "Scenario not found.";
+                // If the scenario node is not found, display an error message and return.
+                ScenarioTextLabel.Text = "Scenario not found.";
                 return;
             }
 
-            ScenarioTextLabel.Text = scenarioNode.Text;
+            // Set the scenario text label to the text from the dialog node.
+            ScenarioTextLabel.Text = scenarioNode.Text;
 
-            if (scenarioNode.Choices != null && scenarioNode.Choices.Any())
+            // Check if there are any choices for this scenario.
+            if (scenarioNode.Choices != null && scenarioNode.Choices.Any())
             {
-                foreach (var choice in scenarioNode.Choices)
+                // If there are choices, create a button for each one.
+                foreach (var choice in scenarioNode.Choices)
                 {
-                    Button itemButton = new Button
+                    // Create a new Button instance.
+                    Button itemButton = new Button
                     {
-                        Text = choice.Value.Text,
-                        Tag = choice.Key,
-                        Size = new Size(100, 30)
-                    };
-                    itemButton.Click += ItemButton_Click;
-                    ItemButtonsPanel.Controls.Add(itemButton);
-                }
+                        Text = choice.Value.Text, // Set the button's text to the choice's text.
+                        Tag = choice.Key, // Store the choice's key in the Tag property for later use.
+                        Size = new Size(100, 30) // Set the button's size.
+                    };
+                    itemButton.Click += ItemButton_Click; // Subscribe to the Click event.
+                    ItemButtonsPanel.Controls.Add(itemButton); // Add the button to the panel.
+                }
             }
             else
             {
-                // Pokud nejsou k dispozici žádné volby, spustíme exit timer
-                exitGameTimer.Start();
+                // If no options are available, we start the exit timer
+                // If there are no choices, start the exit timer to end the day.
+                exitGameTimer.Start();
             }
         }
 
-        private void ItemButton_Click(object sender, EventArgs e)
+        // Event handler for the button clicks in the ItemButtonsPanel.
+        private void ItemButton_Click(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-            string itemKey = (string)button.Tag;
+            // Cast the sender object back to a Button.
+            Button button = (Button)sender;
+            // Get the item key from the button's Tag property.
+            string itemKey = (string)button.Tag;
 
-            if (currentScenario == "killerInHouse")
+            // Check the current scenario to handle the choice.
+            if (currentScenario == "killerInHouse")
             {
                 if (itemKey == "knife")
                 {
-                    // Abychom se ujistili, že se výsledek zobrazí správně
-                    resultText = "You live... For now... ALIVE";
-                    resultTimer.Start();
-                    DisplayScenario("killerResolved", diaLo); // Zobrazí text řešení
-                }
+                    // To make sure the result is displayed correctly
+                    // If the player uses the knife, they survive.
+                    resultText = "You live... For now... ALIVE";
+                    resultTimer.Start(); // Start the timer to show the result.
+                    DisplayScenario("killerResolved", diaLo); // Displays the resolution text
+                }
                 else
                 {
-                    resultText = "The killer laughed at you and stabbed you to death. DEAD";
-                    MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit(); // Exit the application  
-                }
+                    // If another item is used, the player dies.
+                    resultText = "The killer laughed at you and stabbed you to death. DEAD";
+                    // Show a game over message and exit the application.
+                    MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit(); // Exit the application  
+                }
             }
             else if (currentScenario == "payOrDie")
             {
                 if (itemKey == "coin")
                 {
-                    // Abychom se ujistili, že se výsledek zobrazí správně
-                    resultText = "You live... For now... ALIVE";
+                    // To make sure the result is displayed correctly
+                    // If the player uses the coin, they survive.
+                    resultText = "You live... For now... ALIVE";
                     resultTimer.Start();
-                    DisplayScenario("payResolved", diaLo); // Zobrazí text řešení
-                }
+                    DisplayScenario("payResolved", diaLo); // Displays the resolution text
+                }
                 else
                 {
                     resultText = "There is nothing else that the spirit wanted. DEAD";
                     MessageBox.Show($"You survived for {GameManager.CurrentDay - 1} days.", "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit(); // Exit the application         
-                }
+                    Application.Exit(); // Exit the application         
+                }
             }
             else if (currentScenario == "peacefulSleep")
             {
-                // Pro "peacefulSleep" není žádná volba, takže to spadá sem rovnou
-                // po spuštění scénáře.
-                resultText = "You sleep peacefully through the night. ALIVE";
+                // For "peacefulSleep" there is no choice, so it falls here directly
+                // after the scenario starts.
+                // For "peacefulSleep" there is no choice, so it falls here directly after starting the scenario.
+                resultText = "You sleep peacefully through the night. ALIVE";
                 resultTimer.Start();
             }
         }
 
-        private void ResultTimer_Tick(object sender, EventArgs e)
+        // Event handler for the result timer's Tick event.
+        private void ResultTimer_Tick(object sender, EventArgs e)
         {
-            resultTimer.Stop();
-            ScenarioTextLabel.Text = resultText; // Zobrazí konečný výsledek
-            exitGameTimer.Start();
-        }
+            resultTimer.Stop(); // Stop the timer.
+            ScenarioTextLabel.Text = resultText; // Display the final result
+            exitGameTimer.Start(); // Start the exit timer to either close the game or proceed to the next day.
+        }
 
-        private void ExitGameTimer_Tick(object sender, EventArgs e)
+        // Event handler for the exit game timer's Tick event.
+        private void ExitGameTimer_Tick(object sender, EventArgs e)
         {
-            exitGameTimer.Stop();
+            exitGameTimer.Stop(); // Stop the timer.
 
-            if (player_s2.HP == 0)
+            // Check if the player's HP is 0, indicating they died.
+            if (player_s2.HP == 0)
             {
                 Application.Exit(); // Player is dead, exit the game
-            }
+            }
             else
             {
-                // Increment the global day counter for the next day
-                GameManager.CurrentDay++;
+                // Increment the global day counter for the next day.
+                GameManager.CurrentDay++;
 
-                // Construct the path for the next day's dialog file
-                string nextDayDialogPath = Path.Combine(Application.StartupPath, $"resources\\dialog\\day{GameManager.CurrentDay}.json");
+                // Construct the path for the next day's dialog file.
+                string nextDayDialogPath = Path.Combine(Application.StartupPath, $"resources\\dialog\\day{GameManager.CurrentDay}.json");
 
-                // Check if the JSON file for the next day exists
-                if (File.Exists(nextDayDialogPath))
+                // Check if the JSON file for the next day exists.
+                if (File.Exists(nextDayDialogPath))
                 {
-                    // If it exists, proceed to the next day
-                    NextDay nextDayScene = new NextDay(player_s2); // Pass the player object to the next scene
-                    nextDayScene.Show();
-                    this.Close(); // Close the current form
-                }
+                    // If it exists, proceed to the next day.
+                    NextDay nextDayScene = new NextDay(player_s2); // Pass the player object to the next scene.
+                    nextDayScene.Show(); // Show the next day's form.
+                    this.Close(); // Close the current form.
+                }
                 else
                 {
-                    // If the file does not exist, it means there are no more days defined
-                    MessageBox.Show($"You did it! You survived all {GameManager.CurrentDay - 1} days.", "Win", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit(); // Exit the application
-                }
+                    // If the file does not exist, it means there are no more days defined.
+                    MessageBox.Show($"You did it! You survived all {GameManager.CurrentDay - 1} days.", "Win", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit(); // Exit the application.
+                }
             }
         }
     }

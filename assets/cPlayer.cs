@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
+    // Represents the player character and handles its logic, including movement, inventory, and health.
     public class CPlayer : UserControl
     {
         private Timer timerUpdate;
@@ -19,16 +20,20 @@ namespace MistsOfThelema
         private PictureBox player;
         private Timer timer1;
 
-        //new for intersect
-        //public event EventHandler PlayerMoved;
-
+        // Player's movement speed.
         public static int Speed { get; set; } = 5;
+        // Player's current health points.
         public int HP { get; set; }
-        public List<IIgameItem> Inventory {  get; private set; } 
+        // The list of items the player is carrying.
+        public List<IIgameItem> Inventory { get; private set; }
 
-        //int[] borderCoord = {-40,1322,204,914};
-        int[] borderCoord = { 5, 1365, 224, 965 };
+        // Defines the boundaries for player movement [left, right, top, bottom].
+        public int[] borderCoord = { 5, 1365, 224, 965 };
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -94,6 +99,7 @@ namespace MistsOfThelema
 
         }
 
+        // Constructor that initializes the player's health and inventory.
         public CPlayer()
         {
             InitializeComponent();
@@ -101,17 +107,26 @@ namespace MistsOfThelema
             Inventory = new List<IIgameItem>();
         }
 
+        /// <summary>
+        /// Adds an item to the player's inventory.
+        /// </summary>
+        /// <param name="item1">The item to add.</param>
         public void AddItem(IIgameItem item1)
         {
             Inventory.Add(item1);
         }
 
+        /// <summary>
+        /// Uses an item from the inventory based on its ID.
+        /// </summary>
+        /// <param name="itemId">The unique ID of the item to use.</param>
         public void UseItem(int itemId)
         {
             var item = Inventory.FirstOrDefault(i => i.Id == itemId);
             if (item != null)
             {
                 item.Use();
+                // If the item has a limited number of uses, remove it when it runs out.
                 if (item.UsableTimes <= 0)
                 {
                     Inventory.Remove(item);
@@ -119,11 +134,15 @@ namespace MistsOfThelema
             }
         }
 
+        // Returns the bounding rectangle of the player for collision detection.
         public Rectangle GetBounds()
         {
             return this.Bounds;
         }
 
+        /// <summary>
+        /// Toggles the visibility of the HP info text box when the player is clicked.
+        /// </summary>
         private void PlayerClick(object sender, EventArgs e)
         {
             if (hpInfo.Visible == false)
@@ -137,31 +156,27 @@ namespace MistsOfThelema
         }
 
 
+        // This timer tick event is used to update the player's position and HP information.
         private void Timer1_Tick(object sender, EventArgs e)
         {
             MoveOnlyWithingBorders();
             UpdateHP();
-            UpdateLoc();
         }
 
+        // Updates the text in the HP info box with the current HP value.
         private void UpdateHP()
         {
             hpInfo.Text = HP.ToString();
         }
 
-        private void UpdateLoc()
-        {
-            //locationInfo.Text = GetBounds().ToString();
-            //locationInfo.Text = $"X: {Left}, Y: {Top}";
-        }
-
+        // Handles player movement and ensures they stay within the defined screen borders.
         private void MoveOnlyWithingBorders()
         {
 
             int newTop = Top;
             int newLeft = Left;
 
-            //vertical
+            // Vertical movement
             if (Core.IsUp && Top > borderCoord[2])
             {
                 newTop -= Speed;
@@ -180,7 +195,7 @@ namespace MistsOfThelema
                 }
             }
 
-            //horizontal
+            // Horizontal movement
             if (Core.IsLeft && Left > borderCoord[0])
             {
                 newLeft -= Speed;

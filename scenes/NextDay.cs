@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Threading.Tasks; // Potřebné pro Task
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,97 +9,120 @@ using System.Text.Json;
 using System.Numerics;
 using System.Drawing.Text;
 
-
 namespace MistsOfThelema
 {
+    /// <summary>
+    /// Represents the main game form for a single day's gameplay.
+    /// It manages player movement, collisions, interactions, dialogs, and item pickups.
+    /// </summary>
     public partial class NextDay : Form
     {
+        // UI controls for displaying information to the player.
         private Label interactLabel;
         private Label dialogLabel;
         private Label playInventory;
 
+        // Picture boxes for visual elements like the background and dialog box.
         private PictureBox pictureBox1;
         private PictureBox dialogBox;
 
+        // Timers for game logic, such as collision checks, dialog display, and end-of-day events.
         private Timer collisionTimer;
         private Timer afterDialogTimer;
         private Timer endOfDayTimer;
 
+        // Game entities the player can interact with.
         private Npc npc1;
         private Npc weirdMan;
         private Npc shopkeeper;
 
+        // An interactable object representing the player's house, which ends the day.
         private Houses playerExitHouse;
 
+        // The player character object.
         private CPlayer cPlayer1;
 
+        // Lists to manage game state and interactive elements.
         private List<string> talkedToList = new List<string>();
         private List<Button> choiceButtons = new List<Button>();
         private List<IInteractable> interactables;
 
+        // List to hold all interactive/blocking assets for collision checks.
+        private List<Control> allAssets;
+
+        // An instance of the DialogLoader to handle dialog data.
         private DialogLoader diaLoad;
 
+        // A container for components, required by the designer.
         private System.ComponentModel.IContainer components;
 
+        // A flag to indicate if the player is currently in a conversation.
         private bool isInConversation = false;
 
+        /// <summary>
+        /// Initializes a new instance of the NextDay form.
+        /// </summary>
+        /// <param name="player">The CPlayer object representing the player, passed from a previous scene.</param>
         public NextDay(CPlayer player)
         {
+            
             this.cPlayer1 = player;
 
+            // InitializeComponent() will now set properties on the EXISTING cPlayer1 object,
+            // instead of creating a new one.
             InitializeComponent();
-            // cPlayer1.PlayerMoved += CPlayer1_PlayerMoved; // Zakomentováno, jelikož není v poskytnutém kódu definováno
 
-            // --- Krok 1: Inicializace DialogLoaderu ---
+            // --- Step 1: Initialize the DialogLoader. ---
             diaLoad = new DialogLoader();
 
-            // --- Krok 2: Přihlášení k události DialogsLoaded ---
+            // --- Step 2: Subscribe to the DialogsLoaded event. ---
+            // This sets up a callback to handle the result of the asynchronous loading.
             diaLoad.DialogsLoaded += OnDialogsLoaded;
 
-            // --- Krok 3: Spuštění asynchronního načítání dialogů ---
-            // Namísto synchronního volání, teď voláme asynchronní metodu.
-            // Použijeme '_' pro potlačení varování, že Task není awaitován,
-            // protože chceme, aby se načítání provedlo na pozadí.
-
-            //_ = diaLoad.LoadDialogsFromJsonAsync("..\\..\\resources\\dialog\\day1.json");
-            
-            //_ = diaLoad.LoadDialogsFromJsonAsync("resources\\dialog\\day2.json");
-
+            // --- Step 3: Start the asynchronous loading of dialogs. ---
+            // The method is awaited by a discard variable ('_') to run it in the background without blocking the constructor.
             string dialogFile = $"resources\\dialog\\day{GameManager.CurrentDay}.json";
             _ = diaLoad.LoadDialogsFromJsonAsync(dialogFile);
 
-            // Volání InitializeInteractables by mělo být až PO inicializaci všech komponent.
-            // V tvém kódu se volá před přiřazením objektů k npc1, weirdMan atd.
-            // Proto jsem přesunul volání na konec konstruktoru.
-            // Nechávám to zde, ale ideálně by InitializeInteractables mělo být voláno po new npc() atd.
+            // Initialize the list of interactable objects.
             InitializeInteractables();
 
+            // Initialize the list of all assets for placement and collision checks.
+            allAssets = new List<Control>
+            {
+                cPlayer1, npc1, weirdMan, shopkeeper, playerExitHouse
+            };
+
+            // Initialize lists for dialog choices and tracking NPCs already talked to.
             choiceButtons = new List<Button>();
             talkedToList = new List<string>();
 
+            // Initialize and configure timers.
             afterDialogTimer = new Timer();
             afterDialogTimer.Interval = 2000;
             afterDialogTimer.Tick += DialogTimer_Tick;
 
             endOfDayTimer = new Timer();
-            endOfDayTimer.Interval = 300000;
+            endOfDayTimer.Interval = 300000; // 5 minutes in milliseconds
             endOfDayTimer.Tick += EndOfDay_Tick;
             endOfDayTimer.Start();
 
-            // Tyto řádky by měly být volány až po inicializaci komponent v InitializeComponent()
-            // a po inicializaci 'npc1', 'weirdMan', 'playerExitHouse', 'shopkeeper'
-            // což se děje v InitializeComponent. Takže toto je správné místo.
+            // Set instance names for interactable objects.
             npc1.InstanceName = "Theo";
             weirdMan.InstanceName = "Weird man";
             playerExitHouse.InstanceName = "Your House";
             shopkeeper.InstanceName = "Shopkeeper";
 
-            //only for first day
-            //PlayerStarterInventory(cPlayer1);
-            
+            // Place a random item on the map at the start of the day.
+            PlaceRandomItem();
+
+            // Update the inventory display.
             UpdateInventoryList();
         }
 
+        /// <summary>
+        /// A method generated by the Windows Forms designer to initialize the form's controls.
+        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -114,7 +137,6 @@ namespace MistsOfThelema
             this.playInventory = new System.Windows.Forms.Label();
             this.shopkeeper = new MistsOfThelema.Npc();
             this.weirdMan = new MistsOfThelema.Npc();
-            
             this.npc1 = new MistsOfThelema.Npc();
             this.playerExitHouse = new MistsOfThelema.Houses();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -219,7 +241,6 @@ namespace MistsOfThelema
             // cPlayer1
             //
             this.cPlayer1.BackColor = System.Drawing.Color.Transparent;
-            // CHANGED THIS LINE
             this.cPlayer1.Location = new System.Drawing.Point(1180, 400);
             this.cPlayer1.Name = "cPlayer1";
             this.cPlayer1.Size = new System.Drawing.Size(61, 86);
@@ -276,48 +297,42 @@ namespace MistsOfThelema
             this.PerformLayout();
         }
 
-        // --- Krok 4: Metoda pro zpracování události DialogsLoaded ---
+        // --- Step 4: Method to handle the DialogsLoaded event. ---
+        /// <summary>
+        /// This callback method is executed when the dialog loading is complete.
+        /// It handles the result (success or failure) and updates the UI accordingly.
+        /// </summary>
+        /// <param name="success">True if dialogs were loaded successfully, false otherwise.</param>
+        /// <param name="errorMessage">An error message if loading failed.</param>
         private void OnDialogsLoaded(bool success, string errorMessage)
         {
-            // !!! DŮLEŽITÉ !!!
-            // Tato metoda může být volána z jiného vlákna (než UI vlákno),
-            // proto je nutné ověřit a případně přesunout volání na UI vlákno.
+            // Check if this method is being called from a different thread (e.g., the ThreadPool).
+            // If so, it uses Invoke to marshal the call back to the UI thread, which is necessary
+            // for updating UI components safely.
             if (this.InvokeRequired)
             {
                 this.Invoke(new DialogLoader.DialogsLoadedEventHandler(OnDialogsLoaded), new object[] { success, errorMessage });
                 return;
             }
 
-            // Kód níže se spustí vždy na UI vlákně
             if (success)
             {
-                // Dialogy byly úspěšně načteny. Nyní můžeš bezpečně přistupovat k diaLoad.Dialogs
-                // a pokračovat v inicializaci hry, která závisí na dialozích.
-                // Například, pokud bys měl nějakou úvodní dialogovou sekvenci,
-                // mohl bys ji spustit zde.
-                //MessageBox.Show("Dialogy byly úspěšně načteny!", "Načítání dokončeno", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Můžeš zde třeba skrýt načítací obrazovku, pokud ji máš.
-                // Povolit interakce, které závisí na načtených dialozích.
+                // You can show a success message if needed, but it's commented out to keep the UI clean.
+                // MessageBox.Show("Dialogs were successfully loaded!", "Loading Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                // Došlo k chybě při načítání dialogů.
+                // Display an error message and exit the application if dialog loading fails.
                 MessageBox.Show($"Dialog Error: {errorMessage}\nError Loading Dialog", "Dialog Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Zde můžeš implementovat logiku pro zpracování chyby, např.
-                // - Zobrazit chybovou zprávu a ukončit aplikaci.
-                // - Načíst záložní dialogy.
-                // - Umožnit hráči pokračovat bez dialogů (pokud je to možné).
-                Application.Exit(); // Příklad: Ukončení hry v případě kritické chyby
+                Application.Exit();
             }
         }
 
-
-        //add to interactables so it can detect and start dialogs
+        /// <summary>
+        /// Initializes the list of interactable game objects.
+        /// </summary>
         private void InitializeInteractables()
         {
-            // Ujistěte se, že objekty playerExitHouse, npc1, weirdMan, shopkeeper
-            // jsou již inicializovány (což jsou v InitializeComponent).
             interactables = new List<IInteractable>
             {
                 playerExitHouse,
@@ -327,11 +342,116 @@ namespace MistsOfThelema
             };
         }
 
+        /// <summary>
+        /// Places a random pickup item on the map in a location that doesn't collide with existing assets.
+        /// </summary>
+        private void PlaceRandomItem()
+        {
+            Random rand = new Random();
+            int maxAttempts = 100;
+            int currentAttempt = 0;
+
+            // Define the boundaries for random placement based on the form's client area.
+            int minX = cPlayer1.borderCoord[0];
+            int maxX = cPlayer1.borderCoord[1];
+            int minY = cPlayer1.borderCoord[2];
+            int maxY = cPlayer1.borderCoord[3];
+
+            while (currentAttempt < maxAttempts)
+            {
+                // Generate random coordinates within the defined bounds.
+                int randomX = rand.Next(minX, maxX - 50); // Subtract size to prevent going off-screen
+                int randomY = rand.Next(minY, maxY - 50); // Subtract size to prevent going off-screen
+
+                // Create a temporary rectangle for the item at the proposed random position.
+                Rectangle proposedBounds = new Rectangle(randomX, randomY, 50, 50); // You can adjust the size
+
+                // Check for collision with all existing assets.
+                if (!CheckCollisionForPlacement(proposedBounds, allAssets))
+                {
+                    // A safe position was found!
+                    ItemPickup newItemPickup = new ItemPickup();
+
+
+                    newItemPickup.Item = new Coin("Coin", "A shiny gold coin.", 1, 10, 1);
+                    newItemPickup.Image = Properties.Resources.coin; // Assign image for coin
+                    
+
+                    // Set the item's location and properties, then add it to the form's controls.
+                    newItemPickup.Location = new Point(randomX, randomY);
+                    newItemPickup.Size = new Size(50, 50); // Set a consistent size
+                    newItemPickup.Name = "ItemPickup";
+                    newItemPickup.Click += ItemPickup_Click; // Subscribe to the Click event
+                    this.Controls.Add(newItemPickup);
+                    interactables.Add(newItemPickup); // Add the new item to interactables list
+                    newItemPickup.BringToFront();
+                    return; // Exit the method after placing the item.
+                }
+
+                currentAttempt++;
+            }
+
+            // If the loop finishes, no safe spot was found after max attempts.
+            MessageBox.Show("Could not find a place for the item.", "Placement Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        /// <summary>
+        /// Checks if a proposed rectangle for a new asset intersects with any existing controls.
+        /// </summary>
+        /// <param name="proposedBounds">The bounding rectangle of the new asset.</param>
+        /// <param name="assets">A list of existing controls on the form.</param>
+        /// <returns>True if a collision is detected, otherwise false.</returns>
+        private bool CheckCollisionForPlacement(Rectangle proposedBounds, List<Control> assets)
+        {
+            foreach (Control asset in assets)
+            {
+                // Expanded bounds for assets to give some clearance space.
+                Rectangle expandedAssetBounds = ExpandBoundsByRadius(asset.Bounds, 50);
+                if (proposedBounds.IntersectsWith(expandedAssetBounds))
+                {
+                    return true; // Collision detected.
+                }
+            }
+            return false; // No collision.
+        }
+
+        /// <summary>
+        /// Handles the event when an item pickup is clicked by the player.
+        /// </summary>
+        private void ItemPickup_Click(object sender, EventArgs e)
+        {
+            ItemPickup clickedItem = sender as ItemPickup;
+            if (clickedItem != null)
+            {
+                // You can add logic to only pick up the item if the player is close.
+                // For now, it adds it directly on click.
+                AddItemToPlayer(clickedItem.Item);
+
+                // Show a message to the player.
+                dialogLabel.Visible = true;
+                dialogBox.Visible = true;
+                dialogLabel.Text = $"You picked up a {clickedItem.Item.Name}!";
+                afterDialogTimer.Start();
+
+                // Remove the item from the form and the interactables list.
+                this.Controls.Remove(clickedItem);
+                interactables.Remove(clickedItem);
+
+                // Dispose of the control to free up resources.
+                clickedItem.Dispose();
+            }
+        }
+
         //player movement and interaction
+        /// <summary>
+        /// Handles key presses for player movement and interaction.
+        /// </summary>
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            // Ignore input if the player is in a conversation.
             if (isInConversation) return;
 
+            // Set movement flags based on the key pressed.
             if (e.KeyCode == Core.KeyUp)
                 Core.IsUp = true;
             if (e.KeyCode == Core.KeyDown)
@@ -341,22 +461,29 @@ namespace MistsOfThelema
             if (e.KeyCode == Core.KeyRight)
                 Core.IsRight = true;
 
+            // Handle the 'Interact' key press.
             if (e.KeyCode == Core.Interact)
             {
                 Core.IsInteracting = true;
                 HandleInteraction(cPlayer1);
             }
 
+            // Handle the 'Inventory' key press.
             if (e.KeyCode == Core.Inventory)
             {
                 playInventory.Visible = true;
             }
         }
 
+        /// <summary>
+        /// Handles key releases to stop player movement.
+        /// </summary>
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
+            // Ignore input if the player is in a conversation.
             if (isInConversation) return;
 
+            // Reset movement flags when keys are released.
             if (e.KeyCode == Core.KeyUp)
                 Core.IsUp = false;
             if (e.KeyCode == Core.KeyDown)
@@ -366,62 +493,73 @@ namespace MistsOfThelema
             if (e.KeyCode == Core.KeyRight)
                 Core.IsRight = false;
 
+            // Reset the interaction flag.
             if (e.KeyCode == Core.Interact)
             {
                 Core.IsInteracting = false;
             }
         }
 
+        // This method is available but not used in the provided code.
         private void OnKeyPress(object sender, KeyPressEventArgs e)
         {
-
         }
 
-        //player-interactable collision detection
+        /// <summary>
+        /// Checks for collisions between the player and interactable objects.
+        /// It updates the on-screen interaction prompt if a collision is detected.
+        /// </summary>
         private void CheckCollision()
         {
             bool collision = false;
 
+            // Iterate through all interactable objects to check for proximity with the player.
             foreach (var interactable in interactables)
             {
                 Rectangle playerBounds = cPlayer1.GetBounds();
                 Rectangle interactableBounds = interactable.GetBounds();
 
-                //ensures that player does not need to get inside objects in order to interact
+                // Expands the interactable's bounds to create a "trigger radius" so the player doesn't
+                // have to be directly on top of the object to interact.
                 Rectangle expandedBounds = ExpandBoundsByRadius(interactableBounds, 30);
 
                 if (playerBounds.IntersectsWith(expandedBounds))
                 {
                     interactLabel.Visible = true;
 
-                    //special case for house that exits to scene 2
+                    // Display a specific message for the player's house.
                     if (interactable.InstanceName == "Your House")
                     {
                         interactLabel.Text = $"Press E to END THE DAY by entering {interactable.InstanceName}";
                     }
-
+                    // Display a message for a pickup item.
+                    else if (interactable is ItemPickup)
+                    {
+                        interactLabel.Text = $"Press E to pick up {((ItemPickup)interactable).Item.Name}";
+                    }
+                    // Display a generic message for other interactables.
                     else
                     {
                         interactLabel.Text = $"Press E to interact with {interactable.InstanceName}";
                     }
 
                     collision = true;
-                    break;
-                }
-
-                //otherwise hide interact label
-                if (!collision) // Toto by mělo být vně cyklu, aby se label skryl až po kontrole všech objektů
-                {
-                    interactLabel.Visible = false;
+                    break; // Exit the loop as soon as a collision is found.
                 }
             }
-            // Opravená logika pro skrytí interactLabelu
             if (!collision)
             {
+                // Hide the label if no collision is detected.
                 interactLabel.Visible = false;
             }
         }
 
+        /// <summary>
+        /// Expands a rectangle's bounds by a specified radius.
+        /// </summary>
+        /// <param name="bounds">The original rectangle.</param>
+        /// <param name="radius">The amount to expand the bounds by on all sides.</param>
+        /// <returns>A new, expanded rectangle.</returns>
         private Rectangle ExpandBoundsByRadius(Rectangle bounds, int radius)
         {
             return new Rectangle(
@@ -432,84 +570,109 @@ namespace MistsOfThelema
             );
         }
 
-        //for interaction (E is clicked)
+        /// <summary>
+        /// Handles the logic when the player presses the 'Interact' key (E).
+        /// </summary>
+        /// <param name="player">The player character.</param>
         private void HandleInteraction(CPlayer player)
         {
-            foreach (var interactable in interactables)
+            // Use .ToList() to iterate over a copy of the list, preventing errors if items are removed.
+            foreach (var interactable in interactables.ToList())
             {
                 Rectangle playerBounds = cPlayer1.GetBounds();
                 Rectangle interactableBounds = interactable.GetBounds();
 
                 Rectangle expandedBounds = ExpandBoundsByRadius(interactableBounds, 50);
 
-                //your house scenario
+                // Check for pickup items first.
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable is ItemPickup)
+                {
+                    ItemPickup itemPickup = (ItemPickup)interactable;
+                    AddItemToPlayer(itemPickup.Item);
+
+                    dialogLabel.Visible = true;
+                    dialogBox.Visible = true;
+                    dialogLabel.Text = $"You picked up a {itemPickup.Item.Name}!";
+                    afterDialogTimer.Start();
+
+                    // Remove the item from the form and the interactables list.
+                    this.Controls.Remove(itemPickup);
+                    interactables.Remove(itemPickup);
+                    itemPickup.Dispose();
+                    return; // Exit the method to prevent further interaction.
+                }
+
+                // Handle interaction with the player's house.
                 if (playerBounds.IntersectsWith(expandedBounds) && interactable.InstanceName == "Your House")
                 {
                     TransitionToEndOfDay();
                     break;
                 }
 
-                //check if intersected object is npc (whether to start conversation or not)
+                // Check if the intersected object is an NPC to start a conversation.
                 if (playerBounds.IntersectsWith(expandedBounds) && interactable is Npc)
                 {
-                    //do not repeat conversations on the same day
+                    // Check if the player has already talked to this NPC.
                     if (talkedToList.Contains(interactable.InstanceName))
                     {
                         dialogLabel.Visible = true;
                         dialogBox.Visible = true;
                         dialogLabel.Text = "Sorry, nothing left to say.";
                         afterDialogTimer.Start();
-
+                        // Special case for the "Weird man" after the first talk.
                         if (interactable.InstanceName == "Weird man")
                         {
-                            //possible extension: given in second "secret" dialog
                             player.AddItem(new Knife("Knife", "A basic knife.", 3, 4));
                             UpdateInventoryList();
                         }
                         return;
                     }
-
                     else
                     {
+                        // Start a new conversation.
                         isInConversation = true;
                         ResetPlayerMovement();
-
                         StartConversationWith(interactable.InstanceName, diaLoad);
                         break;
                     }
                 }
 
-                if (playerBounds.IntersectsWith(expandedBounds) && interactable is Houses && interactable.InstanceName != "Your House") // Added check for other houses
+                // Handle interaction with other houses (an extension point for future features).
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable is Houses && interactable.InstanceName != "Your House")
                 {
                     //extension: somehow interact with other houses -> maybe stealing, introduce karma system for kills and stolen goods
-                    // Zde by mohla být logika pro interakci s jinými domy
-                    // Například: dialogLabel.Text = "Seems locked."; afterDialogTimer.Start();
                 }
             }
         }
 
-        //start a conversation with
+        /// <summary>
+        /// Starts a conversation with a specified NPC.
+        /// </summary>
+        /// <param name="NpcName">The instance name of the NPC to talk to.</param>
+        /// <param name="dl">The DialogLoader instance containing dialog data.</param>
         private void StartConversationWith(string NpcName, DialogLoader dl)
         {
-            // Před spuštěním konverzace je dobré zkontrolovat, zda jsou dialogy načteny
             if (dl.Dialogs == null)
             {
+                // Handle the case where dialogs haven't loaded yet.
                 dialogLabel.Visible = true;
                 dialogBox.Visible = true;
-                dialogLabel.Text = "Dialog error?";
+                dialogLabel.Text = "Dialog error: Dialogs are not loaded.";
                 afterDialogTimer.Start();
-                isInConversation = false; // Umožnit hráči pohyb
+                isInConversation = false;
                 return;
             }
 
+            // Get the first dialog node (the "intro" node) for the NPC.
             DialogNode introNode = dl.GetDialogNode(NpcName, "intro");
             if (introNode != null)
             {
+                // Display the introductory dialog.
                 DisplayDialog(NpcName, introNode);
             }
             else
             {
-                // Pokud pro dané NPC neexistuje "intro" uzel
+                // Handle the case where no intro dialog is found.
                 dialogLabel.Visible = true;
                 dialogBox.Visible = true;
                 dialogLabel.Text = $"Cannot find dialog for {NpcName}.";
@@ -518,38 +681,38 @@ namespace MistsOfThelema
             }
         }
 
-        // Method to display a dialog node
+        /// <summary>
+        /// Displays a specific dialog node and its choices in the UI.
+        /// </summary>
+        /// <param name="NpcName">The name of the NPC for context.</param>
+        /// <param name="node">The DialogNode to display.</param>
         private void DisplayDialog(string NpcName, DialogNode node)
         {
             dialogBox.Visible = true;
-
             dialogLabel.Visible = true;
             dialogLabel.Text = node.Text;
 
-            //resets buttons for dialog choices
+            // Clear any old choice buttons from the form.
             foreach (var button in choiceButtons)
             {
                 this.Controls.Remove(button);
             }
             choiceButtons.Clear();
 
-            //ensures easier spacing
             int yPosition = dialogLabel.Bottom + 10;
-
-            //numbers for choices
             int choice_number = 1;
 
-            //iterate over choices from json dialog file and display them
-            if (node.Choices != null) // Zkontrolujte, zda existují volby
+            // Create buttons for each dialog choice.
+            if (node.Choices != null)
             {
                 foreach (var choice in node.Choices)
                 {
                     Button choiceButton = new Button();
-                    //choiceButton.BringToFront();
                     choiceButton.Text = choice_number++ + ") " + choice.Value.Text;
                     choiceButton.Location = new Point(dialogLabel.Left, yPosition);
                     choiceButton.AutoSize = true;
                     choiceButton.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+                    // Use a lambda expression to handle the button click and pass the next node's ID.
                     choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.Next);
                     this.Controls.Add(choiceButton);
                     choiceButtons.Add(choiceButton);
@@ -558,8 +721,7 @@ namespace MistsOfThelema
                 }
             }
 
-
-            //end button 
+            // Add an "End Conversation" button.
             Button endButton = new Button();
             endButton.Text = "---- End Conversation";
             endButton.Location = new Point(dialogLabel.Left, yPosition);
@@ -570,14 +732,18 @@ namespace MistsOfThelema
             choiceButtons.Add(endButton);
             endButton.BringToFront();
 
-            //ensure you cant repeat the conversation
-            if (!talkedToList.Contains(NpcName)) // Přidáno ověření, aby se NPC nepřidávalo opakovaně
+            // Add the NPC to the list of talked-to NPCs if they aren't already there.
+            if (!talkedToList.Contains(NpcName))
             {
                 talkedToList.Add(NpcName);
             }
         }
 
-        //player choices
+        /// <summary>
+        /// Handles the event when a dialog choice button is selected.
+        /// </summary>
+        /// <param name="NpcName">The name of the NPC.</param>
+        /// <param name="nextNodeId">The ID of the next dialog node to display.</param>
         private void OnChoiceSelected(string NpcName, string nextNodeId)
         {
             if (!string.IsNullOrEmpty(nextNodeId))
@@ -585,41 +751,47 @@ namespace MistsOfThelema
                 DialogNode nextNode = diaLoad.GetDialogNode(NpcName, nextNodeId);
                 if (nextNode != null)
                 {
+                    // If a valid next node exists, display it.
                     DisplayDialog(NpcName, nextNode);
                 }
                 else
                 {
-                    // Pokud nextNodeId vede na neexistující uzel
-                    dialogLabel.Text = "Chyba dialogu: Následující uzel neexistuje.";
-                    // Můžeš se rozhodnout konverzaci ukončit nebo zobrazit jen tuto zprávu
+                    // Handle a missing dialog node.
+                    dialogLabel.Text = "Dialog error: The next node does not exist.";
                 }
             }
             else
             {
-                // Pokud nextNodeId je prázdné, znamená to konec větve dialogu
+                // If there is no next node, end the conversation.
                 EndConversation();
             }
         }
 
+        /// <summary>
+        /// Ends the current conversation and hides all dialog-related UI elements.
+        /// </summary>
         private void EndConversation()
         {
             dialogLabel.Visible = false;
+            // Remove all choice buttons from the form.
             foreach (var button in choiceButtons)
             {
                 this.Controls.Remove(button);
             }
             choiceButtons.Clear();
 
-            //ensures movement and interaction resets as it shoulds
+            // Reset the conversation state flags.
             isInConversation = false;
             Core.IsInteracting = false;
 
-            //clears dialog window
+            // Clear the dialog text and hide the dialog box.
             dialogLabel.Text = "";
             dialogBox.Visible = false;
         }
 
-        //ensures player does not move during dialog
+        /// <summary>
+        /// Resets the player's movement flags to ensure they stop moving during a dialog.
+        /// </summary>
         private void ResetPlayerMovement()
         {
             Core.IsUp = false;
@@ -628,20 +800,27 @@ namespace MistsOfThelema
             Core.IsRight = false;
         }
 
-
         //inventory functions bellow
-        private void AddItemToPlayer(IIgameItem item) // Změnil jsem na IgameItem, předpokládám, že takový interface máš
+        /// <summary>
+        /// Adds a game item to the player's inventory and updates the UI.
+        /// </summary>
+        /// <param name="item1">The item to add.</param>
+        private void AddItemToPlayer(IIgameItem item1)
         {
-            cPlayer1.AddItem(item);
+            cPlayer1.AddItem(item1);
             UpdateInventoryList();
         }
 
+        /// <summary>
+        /// Updates the text displayed in the inventory label based on the player's current inventory.
+        /// </summary>
         private void UpdateInventoryList()
         {
             StringBuilder inventoryText = new StringBuilder();
 
             inventoryText.AppendLine("Your inventory: (click to close)");
 
+            // Append each item's name and description to the display text.
             foreach (var item in cPlayer1.Inventory)
             {
                 inventoryText.AppendLine($"{item.Name} - {item.Description}");
@@ -650,30 +829,27 @@ namespace MistsOfThelema
             playInventory.Text = inventoryText.ToString();
         }
 
-        private void PlayerStarterInventory(CPlayer player)
-        {
-            var coin = new Coin("Coin", "A shiny gold coin.", 1, 10, 1);
-            var apple = new Apple("Apple", "Restores full health.", 2, 100, 1);
-
-            player.AddItem(coin);
-            player.AddItem(apple);
-        }
-
+        /// <summary>
+        /// Handles the transition to the next scene (the EndOfDay form).
+        /// </summary>
         private void TransitionToEndOfDay()
         {
             this.Hide();
             EndOfDay newScene = new EndOfDay(cPlayer1);
             newScene.Show();
-            /*
-            newScene.ShowDialog();
-            this.Show(); */
         }
 
+        /// <summary>
+        /// Event handler for the collision timer's tick event.
+        /// </summary>
         private void CollisionTimer_Tick(object sender, EventArgs e)
         {
             CheckCollision();
         }
 
+        /// <summary>
+        /// Event handler for the after-dialog timer, which hides the dialog box after a delay.
+        /// </summary>
         private void DialogTimer_Tick(object sender, EventArgs e)
         {
             dialogLabel.Visible = false;
@@ -681,16 +857,17 @@ namespace MistsOfThelema
             afterDialogTimer.Stop();
         }
 
+        /// <summary>
+        /// Event handler for the end-of-day timer, which automatically transitions to the next scene.
+        /// </summary>
         private void EndOfDay_Tick(object sender, EventArgs e)
         {
             TransitionToEndOfDay();
         }
 
-        private void Label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Handles the event when the inventory label is clicked, hiding it.
+        /// </summary>
         private void PlayInventory_Click(object sender, EventArgs e)
         {
             playInventory.Visible = false;
