@@ -26,10 +26,10 @@ namespace MistsOfThelema
 
         public string LoadSingleDialog(string filePath)
         {
-            string dialogContent = "";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string endPath = Path.Combine(basePath, filePath);
 
+            string dialogContent;
             try
             {
                 dialogContent = File.ReadAllText(endPath);
@@ -75,13 +75,13 @@ namespace MistsOfThelema
 
     public class DialogNode
     {
-        public string text { get; set; }
-        public Dictionary<string, DialogChoice> choices { get; set; }
+        public string Text { get; set; }
+        public Dictionary<string, DialogChoice> Choices { get; set; }
     }
 
     public class DialogChoice
     {
-        public string text { get; set; }
-        public string next { get; set; }
+        public string Text { get; set; }
+        public string Next { get; set; }
     }
 }

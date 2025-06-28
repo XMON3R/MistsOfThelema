@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
-    internal class npc : UserControl, IInteractable
+    internal class Npc : UserControl, IInteractable
     {
         private PictureBox pictureBox1;
         public string InstanceName { get; set; }
@@ -29,7 +29,7 @@ namespace MistsOfThelema
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // npc
             // 
@@ -40,7 +40,7 @@ namespace MistsOfThelema
             this.ResumeLayout(false);
         }
 
-        public npc()
+        public Npc()
         {
             InitializeComponent();
         }
@@ -50,7 +50,7 @@ namespace MistsOfThelema
             return this.Bounds;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PictureBox1_Click(object sender, EventArgs e)
         {
 
         }

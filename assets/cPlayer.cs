@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MistsOfThelema
 {
-    public class cPlayer : UserControl
+    public class CPlayer : UserControl
     {
         private Timer timerUpdate;
         private System.ComponentModel.IContainer components;
@@ -22,7 +22,7 @@ namespace MistsOfThelema
         //new for intersect
         //public event EventHandler PlayerMoved;
 
-        public static int speed { get; set; } = 5;
+        public static int Speed { get; set; } = 5;
         public int HP { get; set; } = 100;
         public List<IIgameItem> Inventory {  get; private set; } 
 
@@ -50,13 +50,13 @@ namespace MistsOfThelema
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.player.TabIndex = 0;
             this.player.TabStop = false;
-            this.player.Click += new System.EventHandler(this.playerClick);
+            this.player.Click += new System.EventHandler(this.PlayerClick);
             // 
             // timerUpdate
             // 
             this.timerUpdate.Enabled = true;
             this.timerUpdate.Interval = 10;
-            this.timerUpdate.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerUpdate.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // hpInfo
             // 
@@ -94,7 +94,7 @@ namespace MistsOfThelema
 
         }
 
-        public cPlayer()
+        public CPlayer()
         {
             InitializeComponent();
             HP = 100;
@@ -124,7 +124,7 @@ namespace MistsOfThelema
             return this.Bounds;
         }
 
-        private void playerClick(object sender, EventArgs e)
+        private void PlayerClick(object sender, EventArgs e)
         {
             if (hpInfo.Visible == false)
             {
@@ -137,7 +137,7 @@ namespace MistsOfThelema
         }
 
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             MoveOnlyWithingBorders();
             UpdateHP();
@@ -164,7 +164,7 @@ namespace MistsOfThelema
             //vertical
             if (Core.IsUp && Top > borderCoord[2])
             {
-                newTop -= speed;
+                newTop -= Speed;
                 if (newTop < borderCoord[2])
                 {
                     newTop = borderCoord[2];
@@ -173,7 +173,7 @@ namespace MistsOfThelema
 
             if (Core.IsDown && Top < borderCoord[3])
             {
-                newTop += speed;
+                newTop += Speed;
                 if (newTop > borderCoord[3])
                 {
                     newTop = borderCoord[3];
@@ -183,7 +183,7 @@ namespace MistsOfThelema
             //horizontal
             if (Core.IsLeft && Left > borderCoord[0])
             {
-                newLeft -= speed;
+                newLeft -= Speed;
                 if (newLeft < borderCoord[0])
                 {
                     newLeft = borderCoord[0];
@@ -192,7 +192,7 @@ namespace MistsOfThelema
 
             if (Core.IsRight && Left < borderCoord[1])
             {
-                newLeft += speed;
+                newLeft += Speed;
                 if (newLeft > borderCoord[1])
                 {
                     newLeft = borderCoord[1];
@@ -203,7 +203,7 @@ namespace MistsOfThelema
             Left = newLeft;
         }
 
-        private void locationInfo_TextChanged(object sender, EventArgs e)
+        private void LocationInfo_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -29,7 +29,7 @@ namespace MistsOfThelema
             this.housik.TabIndex = 0;
             this.housik.TabStop = false;
             this.housik.WaitOnLoad = true;
-            this.housik.Click += new System.EventHandler(this.housik_Click);
+            this.housik.Click += new System.EventHandler(this.Housik_Click);
             // 
             // Houses
             // 
@@ -52,7 +52,7 @@ namespace MistsOfThelema
             return this.Bounds;
         }
 
-        private void housik_Click(object sender, EventArgs e)
+        private void Housik_Click(object sender, EventArgs e)
         {
 
         }

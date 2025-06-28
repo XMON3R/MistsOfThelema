@@ -24,13 +24,13 @@ namespace MistsOfThelema
         private Timer afterDialogTimer;
         private Timer endOfDayTimer;
 
-        private npc npc1;
-        private npc weirdMan;
-        private npc shopkeeper;
+        private Npc npc1;
+        private Npc weirdMan;
+        private Npc shopkeeper;
 
         private Houses playerExitHouse;
 
-        private cPlayer cPlayer1;
+        private CPlayer cPlayer1;
 
         private List<string> talkedToList = new List<string>();
         private List<Button> choiceButtons = new List<Button>();
@@ -107,10 +107,10 @@ namespace MistsOfThelema
             this.afterDialogTimer = new System.Windows.Forms.Timer(this.components);
             this.endOfDayTimer = new System.Windows.Forms.Timer(this.components);
             this.playInventory = new System.Windows.Forms.Label();
-            this.shopkeeper = new MistsOfThelema.npc(); // Inicializace shopkeeper
-            this.weirdMan = new MistsOfThelema.npc();   // Inicializace weirdMan
-            this.cPlayer1 = new MistsOfThelema.cPlayer(); // Inicializace cPlayer1
-            this.npc1 = new MistsOfThelema.npc();       // Inicializace npc1
+            this.shopkeeper = new MistsOfThelema.Npc(); // Inicializace shopkeeper
+            this.weirdMan = new MistsOfThelema.Npc();   // Inicializace weirdMan
+            this.cPlayer1 = new MistsOfThelema.CPlayer(); // Inicializace cPlayer1
+            this.npc1 = new MistsOfThelema.Npc();       // Inicializace npc1
             this.playerExitHouse = new MistsOfThelema.Houses(); // Inicializace playerExitHouse
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dialogBox)).BeginInit();
@@ -416,7 +416,7 @@ namespace MistsOfThelema
         }
 
         //for interaction (E is clicked)
-        private void HandleInteraction(cPlayer player)
+        private void HandleInteraction(CPlayer player)
         {
             foreach (var interactable in interactables)
             {
@@ -433,7 +433,7 @@ namespace MistsOfThelema
                 }
 
                 //check if intersected object is npc (whether to start conversation or not)
-                if (playerBounds.IntersectsWith(expandedBounds) && interactable is npc)
+                if (playerBounds.IntersectsWith(expandedBounds) && interactable is Npc)
                 {
                     //do not repeat conversations on the same day
                     if (talkedToList.Contains(interactable.InstanceName))
@@ -507,7 +507,7 @@ namespace MistsOfThelema
             dialogBox.Visible = true;
 
             dialogLabel.Visible = true;
-            dialogLabel.Text = node.text;
+            dialogLabel.Text = node.Text;
 
             //resets buttons for dialog choices
             foreach (var button in choiceButtons)
@@ -523,19 +523,19 @@ namespace MistsOfThelema
             int choice_number = 1;
 
             //iterate over choices from json dialog file and display them
-            if (node.choices != null) // Zkontrolujte, zda existují volby
+            if (node.Choices != null) // Zkontrolujte, zda existují volby
             {
-                foreach (var choice in node.choices)
+                foreach (var choice in node.Choices)
                 {
                     Button choiceButton = new Button
                     {
                         //choiceButton.BringToFront();
-                        Text = choice_number++ + ") " + choice.Value.text,
+                        Text = choice_number++ + ") " + choice.Value.Text,
                         Location = new Point(dialogLabel.Left, yPosition),
                         AutoSize = true,
                         Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)))
                     };
-                    choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.next);
+                    choiceButton.Click += (sender, args) => OnChoiceSelected(NpcName, choice.Value.Next);
                     this.Controls.Add(choiceButton);
                     choiceButtons.Add(choiceButton);
                     choiceButton.BringToFront();
@@ -637,7 +637,7 @@ namespace MistsOfThelema
             playInventory.Text = inventoryText.ToString();
         }
 
-        private void PlayerStarterInventory(cPlayer player)
+        private void PlayerStarterInventory(CPlayer player)
         {
             var coin = new Coin("Coin", "A shiny gold coin.", 1, 10, 1);
             var apple = new Apple("Apple", "Restores full health.", 2, 100, 1);

@@ -10,7 +10,7 @@ namespace MistsOfThelema
 {
     public partial class EndOfDay : Form
     {
-        private cPlayer player_s2;
+        private CPlayer player_s2;
         private Panel ItemButtonsPanel;
         private Label ScenarioTextLabel;
         private DialogLoader diaLo;
@@ -21,7 +21,7 @@ namespace MistsOfThelema
         private Timer introTimer;
         private string resultText;
 
-        public EndOfDay(cPlayer player)
+        public EndOfDay(CPlayer player)
         {
             InitializeComponent();
             this.player_s2 = player;
@@ -229,15 +229,15 @@ namespace MistsOfThelema
                 return;
             }
 
-            ScenarioTextLabel.Text = scenarioNode.text;
+            ScenarioTextLabel.Text = scenarioNode.Text;
 
-            if (scenarioNode.choices != null && scenarioNode.choices.Any())
+            if (scenarioNode.Choices != null && scenarioNode.Choices.Any())
             {
-                foreach (var choice in scenarioNode.choices)
+                foreach (var choice in scenarioNode.Choices)
                 {
                     Button itemButton = new Button
                     {
-                        Text = choice.Value.text,
+                        Text = choice.Value.Text,
                         Tag = choice.Key,
                         Size = new Size(100, 30)
                     };
