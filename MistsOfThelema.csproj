@@ -78,12 +78,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core.cs" />
-    <Compile Include="DialogLoader.cs" />
-    <Compile Include="Houses.cs">
+    <Compile Include="functionality\core.cs" />
+    <Compile Include="functionality\DialogLoader.cs" />
+    <Compile Include="functionality\GameManager.cs" />
+    <Compile Include="assets\Houses.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InvItem.cs" />
+    <Compile Include="functionality\InvItem.cs" />
     <Compile Include="scenes\secondDay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,10 +97,10 @@
     <Compile Include="scenes\TitleScreen.Designer.cs">
       <DependentUpon>TitleScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="cPlayer.cs">
+    <Compile Include="assets\cPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="npc.cs">
+    <Compile Include="assets\npc.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="scenes\firstDay.cs">
@@ -107,10 +108,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="cPlayer.resx">
+    <EmbeddedResource Include="assets\cPlayer.resx">
       <DependentUpon>cPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Houses.resx">
+    <EmbeddedResource Include="assets\Houses.resx">
       <DependentUpon>Houses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="scenes\secondDay.resx">
@@ -122,7 +123,7 @@
     <EmbeddedResource Include="scenes\TitleScreen.resx">
       <DependentUpon>TitleScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="npc.resx">
+    <EmbeddedResource Include="assets\npc.resx">
       <DependentUpon>npc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
