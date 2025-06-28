@@ -64,8 +64,10 @@ namespace MistsOfThelema
             {
                 Interval = 8000
             };
-            exitGameTimer.Tick += ExitGameTimer_Tick; 
-        }
+            exitGameTimer.Tick += ExitGameTimer_Tick;
+
+            this.FormClosing += EndOfDay_FormClosing;
+        }
 
         // Auto-generated method for component initialization.
         private void InitializeComponent()
@@ -375,6 +377,37 @@ namespace MistsOfThelema
                     MessageBox.Show($"You did it! You survived all {GameManager.CurrentDay - 1} days.", "Win", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Application.Exit(); // Exit the application.
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event to stop and dispose of all timers used in this form.
+        /// </summary>
+        private void EndOfDay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // It's good practice to check if the timer objects exist before trying to stop them.
+            // Stop the intro timer.
+            if (introTimer != null)
+            {
+                introTimer.Stop();
+                introTimer.Dispose();
+                introTimer = null; // Set to null to indicate it's been disposed.
+            }
+
+            // Stop the result timer.
+            if (resultTimer != null)
+            {
+                resultTimer.Stop();
+                resultTimer.Dispose();
+                resultTimer = null;
+            }
+
+            // Stop the exit game timer.
+            if (exitGameTimer != null)
+            {
+                exitGameTimer.Stop();
+                exitGameTimer.Dispose();
+                exitGameTimer = null;
             }
         }
     }

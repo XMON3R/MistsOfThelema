@@ -118,6 +118,9 @@ namespace MistsOfThelema
 
             // Update the inventory display.
             UpdateInventoryList();
+
+            // Subscribe to the FormClosing event to stop timers.
+            this.FormClosing += NextDay_FormClosing;
         }
 
         /// <summary>
@@ -871,6 +874,36 @@ namespace MistsOfThelema
         private void PlayInventory_Click(object sender, EventArgs e)
         {
             playInventory.Visible = false;
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event to stop all timers and clean up resources.
+        /// </summary>
+        private void NextDay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Stop the 5-minute end-of-day timer.
+            if (endOfDayTimer != null)
+            {
+                endOfDayTimer.Stop();
+                endOfDayTimer.Dispose();
+                endOfDayTimer = null; // Set to null to indicate it's disposed.
+            }
+
+            // Stop the after-dialog timer.
+            if (afterDialogTimer != null)
+            {
+                afterDialogTimer.Stop();
+                afterDialogTimer.Dispose();
+                afterDialogTimer = null;
+            }
+
+            // Stop the collision timer.
+            if (collisionTimer != null)
+            {
+                collisionTimer.Stop();
+                collisionTimer.Dispose();
+                collisionTimer = null;
+            }
         }
     }
 }
