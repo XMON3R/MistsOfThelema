@@ -6,43 +6,25 @@ C# Programming Documentation for `Mists of Thelema`
 Table of Contents
 -----------------
 
--   [1\. Introduction](https://www.google.com/search?q=%231-introduction "null")
-
--   [2\. System Requirements](https://www.google.com/search?q=%232-system-requirements "null")
-
--   [3\. Installation Guide](https://www.google.com/search?q=%233-installation-guide "null")
-
--   [4\. Program and Mechanics](https://www.google.com/search?q=%234-program-and-mechanics "null")
-
-    -   [4.1 Project Structure](https://www.google.com/search?q=%2341-project-structure "null")
-
-    -   [4.2 How to Run the Game](https://www.google.com/search?q=%2342-how-to-run-the-game "null")
-
-    -   [4.3 Development Process and Feature Description](https://www.google.com/search?q=%2343-development-process-and-feature-description "null")
-
-    -   [4.4 Key Classes and Modules](https://www.google.com/search?q=%2344-key-classes-and-modules "null")
-
-    -   [4.5 Possible Alternative Solutions and Approaches](https://www.google.com/search?q=%2345-possible-alternative-solutions-and-approaches "null")
-
-        -   [4.5.1 Libraries Used](https://www.google.com/search?q=%23451-libraries-used "null")
-
-    -   [4.6 Input and Output Data Representation](https://www.google.com/search?q=%2346-input-and-output-data-representation "null")
-
-        -   [4.6.1 Input and Output Data](https://www.google.com/search?q=%23461-input-and-output-data "null")
-
-    -   [4.7 Error Handling](https://www.google.com/search?q=%2347-error-handling "null")
-
-    -   [4.8 Testing](https://www.google.com/search?q=%2348-testing "null")
-
-    -   [4.9 Work Progress](https://www.google.com/search?q=%2349-work-progress "null")
-
-    -   [4.10 Possible Extensions (What Was Not Completed)](https://www.google.com/search?q=%23410-possible-extensions-what-was-not-completed "null")
-
--   [5\. Contribution Guidelines](https://www.google.com/search?q=%235-contribution-guidelines "null")
-
--   [6\. Licensing](https://www.google.com/search?q=%236-licensing "null")
-
--   [7\. Conclusion](https://www.google.com/search?q=%237-conclusion "null")
+1. [Introduction](#1-introduction)  
+2. [System Requirements](#2-system-requirements)  
+3. [Installation Guide](#3-installation-guide)  
+4. [Program and Mechanics](#4-program-and-mechanics)  
+    - [4.1 Project Structure](#41-project-structure)  
+    - [4.2 How to Run the Game](#42-how-to-run-the-game)  
+    - [4.3 Development Process and Feature Description](#43-development-process-and-feature-description)  
+    - [4.4 Key Classes and Modules](#44-key-classes-and-modules)  
+    - [4.5 Alternative Solutions and Approaches](#45-alternative-solutions-and-approaches)  
+        - [4.5.1 Libraries Used](#451-libraries-used)  
+    - [4.6 Input and Output Data Representation](#46-input-and-output-data-representation)  
+        - [4.6.1 Input and Output Data](#461-input-and-output-data)  
+    - [4.7 Error Handling](#47-error-handling)  
+    - [4.8 Testing](#48-testing)  
+    - [4.9 Work Progress](#49-work-progress)  
+    - [4.10 Possible Extensions](#410-possible-extensions)  
+5. [Contribution Guidelines](#5-contribution-guidelines)  
+6. [Licensing](#6-licensing)  
+7. [Conclusion](#7-conclusion)  
 
 1\. Introduction
 ----------------
